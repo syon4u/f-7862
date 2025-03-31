@@ -9,12 +9,18 @@ const Navbar: React.FC = () => {
     <header className="border-b sticky top-0 bg-background z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-12">
-          <a href="/" className="text-2xl font-serif font-bold">ModernShop</a>
+          <a href="/" className="flex items-center">
+            <img 
+              src="/lovable-uploads/de2a3b1d-d4d3-4fc3-b978-d8912e563d38.png" 
+              alt="Happy Kids Box Logo" 
+              className="h-10 sm:h-12"
+            />
+          </a>
           <nav className="hidden md:flex space-x-8">
             <a href="#" className="text-sm font-medium hover:text-primary transition-colors">New Arrivals</a>
-            <a href="#" className="text-sm font-medium hover:text-primary transition-colors">Shop</a>
-            <a href="#" className="text-sm font-medium hover:text-primary transition-colors">Collections</a>
-            <a href="#" className="text-sm font-medium hover:text-primary transition-colors">About</a>
+            <a href="#" className="text-sm font-medium hover:text-primary transition-colors">Girls</a>
+            <a href="#" className="text-sm font-medium hover:text-primary transition-colors">Boys</a>
+            <a href="#" className="text-sm font-medium hover:text-primary transition-colors">Baby</a>
           </nav>
         </div>
         
@@ -22,7 +28,7 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex relative">
             <Input 
               type="text" 
-              placeholder="Search products" 
+              placeholder="Search for kids clothing" 
               className="w-64 pr-10"
             />
             <Search className="absolute right-3 top-2.5 h-4 w-4 text-muted-foreground" />

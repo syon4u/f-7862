@@ -7,9 +7,9 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-serif text-lg font-semibold mb-4">ModernShop</h3>
+            <h3 className="font-serif text-lg font-semibold mb-4">Happy Kids Box</h3>
             <p className="text-sm text-muted-foreground">
-              Curating premium products for the modern lifestyle. Quality design for everyday living.
+              Quality children's clothing that combines comfort, durability, and fun designs for your little ones.
             </p>
           </div>
           
@@ -17,26 +17,27 @@ const Footer: React.FC = () => {
             <h4 className="font-medium mb-4">Shop</h4>
             <ul className="space-y-2 text-sm">
               <li><a href="#" className="hover:underline">New Arrivals</a></li>
-              <li><a href="#" className="hover:underline">Best Sellers</a></li>
+              <li><a href="#" className="hover:underline">Girls</a></li>
+              <li><a href="#" className="hover:underline">Boys</a></li>
+              <li><a href="#" className="hover:underline">Baby</a></li>
               <li><a href="#" className="hover:underline">Sale</a></li>
-              <li><a href="#" className="hover:underline">Collections</a></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="font-medium mb-4">Support</h4>
+            <h4 className="font-medium mb-4">Customer Service</h4>
             <ul className="space-y-2 text-sm">
               <li><a href="#" className="hover:underline">Contact Us</a></li>
               <li><a href="#" className="hover:underline">FAQs</a></li>
               <li><a href="#" className="hover:underline">Shipping & Returns</a></li>
-              <li><a href="#" className="hover:underline">Product Care</a></li>
+              <li><a href="#" className="hover:underline">Size Guide</a></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="font-medium mb-4">Company</h4>
+            <h4 className="font-medium mb-4">About Us</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:underline">About Us</a></li>
+              <li><a href="#" className="hover:underline">Our Story</a></li>
               <li><a href="#" className="hover:underline">Sustainability</a></li>
               <li><a href="#" className="hover:underline">Terms & Conditions</a></li>
               <li><a href="#" className="hover:underline">Privacy Policy</a></li>
@@ -46,7 +47,7 @@ const Footer: React.FC = () => {
         
         <div className="border-t mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} ModernShop. All rights reserved.
+            &copy; {new Date().getFullYear()} Happy Kids Box. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
