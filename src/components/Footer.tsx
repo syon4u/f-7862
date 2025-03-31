@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   return (
@@ -7,40 +8,40 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-serif text-lg font-semibold mb-4">Happy Kids Box</h3>
+            <h3 className="font-league-spartan text-lg font-semibold mb-4">Happy Kids Box</h3>
             <p className="text-sm text-muted-foreground">
-              Quality children's clothing that combines comfort, durability, and fun designs for your little ones.
+              Quality children's clothing subscription boxes that combine comfort, durability, and fun designs for your little ones.
             </p>
           </div>
           
           <div>
-            <h4 className="font-medium mb-4">Shop</h4>
+            <h4 className="font-montserrat font-medium mb-4">Shop</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:underline">New Arrivals</a></li>
-              <li><a href="#" className="hover:underline">Girls</a></li>
-              <li><a href="#" className="hover:underline">Boys</a></li>
-              <li><a href="#" className="hover:underline">Baby</a></li>
-              <li><a href="#" className="hover:underline">Sale</a></li>
+              <li><Link to="/shop-now" className="hover:underline">HK Baby Box</Link></li>
+              <li><Link to="/shop-now" className="hover:underline">HK Mini Box</Link></li>
+              <li><Link to="/shop-now" className="hover:underline">HK Classic Box</Link></li>
+              <li><Link to="/shop-now" className="hover:underline">HK Deluxe Box</Link></li>
+              <li><Link to="/shop-now" className="hover:underline">HK Grand Box</Link></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="font-medium mb-4">Customer Service</h4>
+            <h4 className="font-montserrat font-medium mb-4">Customer Service</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:underline">Contact Us</a></li>
-              <li><a href="#" className="hover:underline">FAQs</a></li>
-              <li><a href="#" className="hover:underline">Shipping & Returns</a></li>
-              <li><a href="#" className="hover:underline">Size Guide</a></li>
+              <li><Link to="/contact" className="hover:underline">Contact Us</Link></li>
+              <li><Link to="/faq" className="hover:underline">FAQs</Link></li>
+              <li><Link to="/shipping" className="hover:underline">Shipping & Returns</Link></li>
+              <li><Link to="/size-guide" className="hover:underline">Size Guide</Link></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="font-medium mb-4">About Us</h4>
+            <h4 className="font-montserrat font-medium mb-4">About Us</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:underline">Our Story</a></li>
-              <li><a href="#" className="hover:underline">Sustainability</a></li>
-              <li><a href="#" className="hover:underline">Terms & Conditions</a></li>
-              <li><a href="#" className="hover:underline">Privacy Policy</a></li>
+              <li><Link to="/social-purpose" className="hover:underline">Our Story</Link></li>
+              <li><Link to="/social-purpose" className="hover:underline">Sustainability</Link></li>
+              <li><Link to="/terms" className="hover:underline">Terms & Conditions</Link></li>
+              <li><Link to="/privacy" className="hover:underline">Privacy Policy</Link></li>
             </ul>
           </div>
         </div>
