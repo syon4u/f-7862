@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,19 +36,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -79,6 +73,7 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+    
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -97,5 +92,45 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+  
+  .product-image-container {
+    @apply aspect-square overflow-hidden relative;
+  }
+  
+  .thumbnail-active {
+    @apply border-2 border-primary opacity-100;
+  }
+  
+  .thumbnail {
+    @apply border border-border opacity-70 transition-all hover:opacity-100;
+  }
+  
+  .color-option {
+    @apply w-8 h-8 rounded-full border-2 cursor-pointer transition-all;
+  }
+  
+  .color-active {
+    @apply ring-2 ring-offset-2 ring-primary;
+  }
+  
+  .size-option {
+    @apply px-4 py-2 border rounded-md text-sm font-medium cursor-pointer transition-all hover:bg-secondary;
+  }
+  
+  .size-active {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+  
+  .star-rating {
+    @apply flex items-center;
+  }
+  
+  .review-progress {
+    @apply h-2 rounded-full bg-gray-200;
+  }
+  
+  .review-progress-bar {
+    @apply h-full rounded-full bg-primary;
   }
 }
