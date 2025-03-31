@@ -13,6 +13,7 @@ import Contact from "./pages/Contact";
 import StyleQuiz from "./pages/StyleQuiz";
 import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
+import AdminInventory from "./pages/AdminInventory";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/style-quiz" element={<StyleQuiz />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/admin/inventory" element={<AdminInventory />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
