@@ -42,6 +42,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
+import { Checkbox } from "@/components/ui/checkbox";
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import BannerManager from '../components/admin/BannerManager';
@@ -69,6 +70,7 @@ const AdminInventory: React.FC = () => {
       material: 'Cotton',
       tags: ['baby', 'box', 'subscription'],
       seasonality: 'All Season',
+      isBox: true,
     },
     {
       id: '2',
@@ -89,6 +91,7 @@ const AdminInventory: React.FC = () => {
       material: 'Mixed Materials',
       tags: ['kids', 'box', 'subscription'],
       seasonality: 'All Season',
+      isBox: true,
     },
     {
       id: '3',
@@ -109,6 +112,7 @@ const AdminInventory: React.FC = () => {
       material: 'Mixed Materials',
       tags: ['kids', 'box', 'subscription'],
       seasonality: 'All Season',
+      isBox: true,
     },
     {
       id: '4',
@@ -129,6 +133,7 @@ const AdminInventory: React.FC = () => {
       material: 'Mixed Materials',
       tags: ['kids', 'box', 'subscription'],
       seasonality: 'All Season',
+      isBox: true,
     },
     {
       id: '5',
@@ -149,6 +154,7 @@ const AdminInventory: React.FC = () => {
       material: 'Mixed Materials',
       tags: ['kids', 'box', 'subscription'],
       seasonality: 'All Season',
+      isBox: true,
     },
   ]);
   
@@ -181,8 +187,25 @@ const AdminInventory: React.FC = () => {
       material: '',
       tags: [],
       seasonality: 'All Season',
+      isBox: false,
     }
   });
+
+  const detectIfBox = () => {
+    const productName = form.getValues().name.toLowerCase();
+    const productDescription = form.getValues().description.toLowerCase();
+    
+    const boxKeywords = ['box', 'kit', 'bundle', 'collection', 'package', 'set'];
+    
+    const hasBoxKeyword = boxKeywords.some(keyword => 
+      productName.includes(keyword) || productDescription.includes(keyword)
+    );
+    
+    if (hasBoxKeyword && !form.getValues().isBox) {
+      form.setValue('isBox', true);
+      toast.info("This product was automatically identified as a box/bundle product.");
+    }
+  };
 
   const handleEditProduct = (product: Product) => {
     setEditingProduct(product);
@@ -210,6 +233,7 @@ const AdminInventory: React.FC = () => {
       material: '',
       tags: [],
       seasonality: 'All Season',
+      isBox: false,
     });
   };
 
@@ -248,6 +272,10 @@ const AdminInventory: React.FC = () => {
   };
 
   const onSubmit = (data: Product) => {
+    if (data.name && !form.getValues().isBox) {
+      detectIfBox();
+    }
+    
     let updatedProducts;
     
     if (editingProduct) {
@@ -359,7 +387,13 @@ const AdminInventory: React.FC = () => {
               <FormItem>
                 <FormLabel>Product Name</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input 
+                    {...field} 
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setTimeout(detectIfBox, 500);
+                    }}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -411,7 +445,13 @@ const AdminInventory: React.FC = () => {
               <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input 
+                    {...field} 
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setTimeout(detectIfBox, 500);
+                    }}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -746,6 +786,29 @@ const AdminInventory: React.FC = () => {
             )}
           />
           
+          <FormField
+            control={form.control}
+            name="isBox"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel>
+                    This is a box/bundle product
+                  </FormLabel>
+                  <FormDescription>
+                    Check this if the product is a subscription box or contains multiple items bundled together
+                  </FormDescription>
+                </div>
+              </FormItem>
+            )}
+          />
+          
           <div className="flex justify-end space-x-4 pt-4">
             <Button 
               type="button" 
@@ -877,7 +940,14 @@ const AdminInventory: React.FC = () => {
                           </TableCell>
                           <TableCell className="font-medium">
                             <div>
-                              <p className="font-semibold">{product.name}</p>
+                              <div className="flex items-center gap-2">
+                                <p className="font-semibold">{product.name}</p>
+                                {product.isBox && (
+                                  <span className="inline-flex">
+                                    <Package className="h-4 w-4 text-amber-600" />
+                                  </span>
+                                )}
+                              </div>
                               <p className="text-xs text-muted-foreground truncate max-w-[200px]">{product.description}</p>
                               <div className="flex flex-wrap gap-1 mt-1">
                                 {product.category && (

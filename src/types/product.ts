@@ -26,6 +26,8 @@ export interface Product {
   culturalSignificance?: string;
   localDesigner?: boolean;
   sustainablySourced?: boolean;
+  // Box-specific field
+  isBox?: boolean;
 }
 
 export interface ProductColor {
