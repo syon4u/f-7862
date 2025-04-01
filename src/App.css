@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -51,6 +52,16 @@
   }
 }
 
+/* Animation for product image shine effect */
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(30deg);
+  }
+  100% {
+    transform: translateX(200%) rotate(30deg);
+  }
+}
+
 .float {
   animation: float 6s ease-in-out infinite;
 }
@@ -86,11 +97,13 @@
   border-radius: 9999px;
   font-weight: 600;
   transition: all 0.3s ease;
+  background: linear-gradient(135deg, #ff7170, #ffe57f);
 }
 
 .kid-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #ff5e7d, #ffbe0b);
 }
 
 .colorful-heading {
@@ -177,12 +190,8 @@
     rgba(255, 255, 255, 0) 100%
   );
   transform: rotate(30deg);
-  transition: transform 0.7s;
+  animation: shine 4s infinite alternate;
   pointer-events: none;
-}
-
-.product-image-shine:hover::after {
-  transform: rotate(30deg) translate(50%, 50%);
 }
 
 .ribbon {
@@ -279,4 +288,124 @@
     linear-gradient(to right, #a545ff 1px, transparent 1px);
   background-size: 20px 20px;
   opacity: 0.07;
+}
+
+/* Category-specific colors */
+.bg-kid-blue {
+  background-color: #45b8ff;
+}
+
+.text-kid-blue {
+  color: #45b8ff;
+}
+
+.bg-kid-pink {
+  background-color: #ff5e7d;
+}
+
+.text-kid-pink {
+  color: #ff5e7d;
+}
+
+.bg-kid-purple {
+  background-color: #a545ff;
+}
+
+.text-kid-purple {
+  color: #a545ff;
+}
+
+.bg-kid-green {
+  background-color: #4ade80;
+}
+
+.text-kid-green {
+  color: #4ade80;
+}
+
+.bg-kid-yellow {
+  background-color: #ffbe0b;
+}
+
+.text-kid-yellow {
+  color: #ffbe0b;
+}
+
+.bg-kid-orange {
+  background-color: #ff9f0a;
+}
+
+.text-kid-orange {
+  color: #ff9f0a;
+}
+
+/* Gradients for category banners */
+.bg-kid-gradient-1 {
+  background: linear-gradient(135deg, #ff7170, #ffe57f);
+}
+
+.bg-kid-gradient-2 {
+  background: linear-gradient(135deg, #45b8ff, #a545ff);
+}
+
+.bg-kid-gradient-3 {
+  background: linear-gradient(135deg, #ffde7d, #f1f5ff);
+}
+
+.bg-kid-gradient-4 {
+  background: linear-gradient(135deg, #a545ff, #ff7170);
+}
+
+/* Color swatch styles */
+.bg-multi {
+  background: linear-gradient(to right, #ff5e7d, #a545ff, #45b8ff);
+}
+
+.bg-black {
+  background-color: #333333;
+}
+
+.bg-white {
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+}
+
+.bg-blue {
+  background-color: #45b8ff;
+}
+
+.bg-pink {
+  background-color: #ff5e7d;
+}
+
+.bg-green {
+  background-color: #4ade80;
+}
+
+.bg-brown {
+  background-color: #a05a2c;
+}
+
+.bg-purple {
+  background-color: #a545ff;
+}
+
+/* Images with hover zoom effect */
+.zoom-hover-container {
+  overflow: hidden;
+}
+
+.zoom-hover {
+  transition: transform 0.7s ease;
+}
+
+.zoom-hover:hover {
+  transform: scale(1.08);
+}
+
+/* Category tab styles */
+.category-tabs .active {
+  color: #ff5e7d;
+  border-bottom: 3px solid #ff5e7d;
+  font-weight: 600;
 }
