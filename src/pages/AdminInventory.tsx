@@ -1,6 +1,7 @@
+
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Plus, Trash, Package, ShoppingBag, Box, Upload, Image } from 'lucide-react';
+import { Plus, Trash, Package, ShoppingBag, Box, Upload, Image, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { 
@@ -23,6 +24,7 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
