@@ -1,8 +1,9 @@
+
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
-import { Box, Palette, Package, Truck } from 'lucide-react';
+import { Box, Palette, Package, Truck, Book, Gift, Calendar, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardContent } from '@/components/ui/card';
