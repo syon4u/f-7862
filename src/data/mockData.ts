@@ -1,4 +1,3 @@
-
 import { Product, Review, RatingDistribution } from '../types/product';
 
 export const product: Product = {
@@ -30,7 +29,138 @@ export const product: Product = {
     'Snug fit for safety',
   ],
   inStock: true,
+  brand: 'Organic Dreams'
 };
+
+export const pumaProducts: Product[] = [
+  {
+    id: 'puma1',
+    name: "Puma Red Sport T-Shirt & Socks Set",
+    description: "Sporty and stylish red Puma t-shirt with matching black and red socks. Perfect for active kids who love to play and look cool.",
+    price: 34.99,
+    rating: 4.7,
+    reviewCount: 42,
+    images: ['/lovable-uploads/5754ea2e-950a-497b-8481-99499b62e764.png'],
+    colors: [
+      { name: 'Red', value: '#FF0000' },
+    ],
+    sizes: ['4', '5', '6', '7', '8'],
+    features: [
+      'Moisture-wicking fabric',
+      'Breathable material',
+      'Matching socks included',
+      'Machine washable',
+      'Official Puma merchandise'
+    ],
+    inStock: true,
+    brand: 'Puma',
+    category: 'Set',
+    ageRange: '4-8 years',
+    tags: ['sports', 'active', 'red', 'set']
+  },
+  {
+    id: 'puma2',
+    name: "Puma Classic Raglan T-Shirt",
+    description: "Classic white and gray raglan sleeve t-shirt with the iconic Puma logo. A timeless piece for everyday wear.",
+    price: 29.99,
+    rating: 4.6,
+    reviewCount: 38,
+    images: ['/lovable-uploads/761ea3ff-40e2-457d-84f2-d1bb82065633.png'],
+    colors: [
+      { name: 'White/Gray', value: '#EEEEEE' },
+    ],
+    sizes: ['4', '5', '6', '7', '8'],
+    features: [
+      'Cotton-blend fabric',
+      'Raglan sleeve design',
+      'Comfortable fit',
+      'Machine washable',
+      'Official Puma merchandise'
+    ],
+    inStock: true,
+    brand: 'Puma',
+    category: 'Tops',
+    ageRange: '4-8 years',
+    tags: ['casual', 'everyday', 'raglan']
+  },
+  {
+    id: 'puma3',
+    name: "Puma Graphic Red T-Shirt",
+    description: "Bold red t-shirt with athletic graphic text design. Show off your sportier side with this vibrant Puma tee.",
+    price: 27.99,
+    rating: 4.5,
+    reviewCount: 31,
+    images: ['/lovable-uploads/85e5cba9-699f-4c04-b837-ae63a2d20237.png'],
+    colors: [
+      { name: 'Red', value: '#FF0000' },
+    ],
+    sizes: ['4', '5', '6', '7', '8'],
+    features: [
+      'Soft cotton material',
+      'Bold graphic design',
+      'Athletic fit',
+      'Machine washable',
+      'Official Puma merchandise'
+    ],
+    inStock: true,
+    brand: 'Puma',
+    category: 'Tops',
+    ageRange: '4-8 years',
+    tags: ['sports', 'graphic', 'red']
+  },
+  {
+    id: 'puma4',
+    name: "Puma Girls Floral Set",
+    description: "Pretty pink t-shirt with floral Puma text design and matching floral leggings. Perfect for active girls who love a touch of style.",
+    price: 39.99,
+    rating: 4.9,
+    reviewCount: 47,
+    images: ['/lovable-uploads/d63a9b83-76c4-4d33-a915-ebef09e1b705.png'],
+    colors: [
+      { name: 'Pink', value: '#FFC0CB' },
+    ],
+    sizes: ['4', '5', '6', '7', '8'],
+    features: [
+      'Stretchy comfortable fabric',
+      'Floral pattern design',
+      'Matching set',
+      'Machine washable',
+      'Official Puma merchandise'
+    ],
+    inStock: true,
+    brand: 'Puma',
+    category: 'Set',
+    ageRange: '4-8 years',
+    gender: 'girl',
+    tags: ['floral', 'pink', 'set', 'girls']
+  },
+  {
+    id: 'puma5',
+    name: "Puma Girls Glitter Logo T-Shirt",
+    description: "Stylish black t-shirt with a glittery Puma logo that sparkles. Fashion-forward design for trendy young girls.",
+    price: 32.99,
+    rating: 4.7,
+    reviewCount: 36,
+    images: ['/lovable-uploads/de2a3b1d-d4d3-4fc3-b978-d8912e563d38.png'],
+    colors: [
+      { name: 'Black', value: '#000000' },
+    ],
+    sizes: ['4', '5', '6', '7', '8'],
+    features: [
+      'Soft cotton material',
+      'Glitter logo application',
+      'Comfortable fit',
+      'Machine washable',
+      'Official Puma merchandise'
+    ],
+    inStock: true,
+    brand: 'Puma',
+    category: 'Tops',
+    ageRange: '4-8 years',
+    gender: 'girl',
+    tags: ['glitter', 'black', 'fashion', 'girls']
+  }
+];
 
 export const reviews: Review[] = [
   {
@@ -91,37 +221,36 @@ export const relatedProducts: Product[] = [
     inStock: true,
   },
   {
-    id: '3',
-    name: "Kids Rainbow Dress",
-    description: "Colorful rainbow dress that twirls beautifully. Made with soft, comfortable fabric perfect for all-day wear.",
-    price: 29.99,
-    rating: 4.9,
-    reviewCount: 128,
-    images: ['https://images.unsplash.com/photo-1531179589489-32d21f10befa?q=80&w=1000'],
+    id: 'puma1',
+    name: "Puma Red Sport T-Shirt & Socks Set",
+    description: "Sporty and stylish red Puma t-shirt with matching black and red socks. Perfect for active kids who love to play and look cool.",
+    price: 34.99,
+    rating: 4.7,
+    reviewCount: 42,
+    images: ['/lovable-uploads/5754ea2e-950a-497b-8481-99499b62e764.png'],
     colors: [
-      { name: 'Rainbow', value: '#FF9800' },
-      { name: 'Blue Rainbow', value: '#03A9F4' },
+      { name: 'Red', value: '#FF0000' },
     ],
-    sizes: ['2T', '3T', '4T', '5T', '6'],
+    sizes: ['4', '5', '6', '7', '8'],
     features: [],
     inStock: true,
+    brand: 'Puma',
   },
   {
-    id: '4',
-    name: "Superhero Hoodie",
-    description: "Let your little one feel like a superhero with this comfortable and warm hoodie featuring a detachable cape.",
-    price: 32.99,
-    discountPrice: 27.99,
-    rating: 4.7,
-    reviewCount: 86,
-    images: ['https://images.unsplash.com/photo-1522771930-78848d9293e8?q=80&w=1000'],
+    id: 'puma4',
+    name: "Puma Girls Floral Set",
+    description: "Pretty pink t-shirt with floral Puma text design and matching floral leggings. Perfect for active girls who love a touch of style.",
+    price: 39.99,
+    rating: 4.9,
+    reviewCount: 47,
+    images: ['/lovable-uploads/d63a9b83-76c4-4d33-a915-ebef09e1b705.png'],
     colors: [
-      { name: 'Red', value: '#F44336' },
-      { name: 'Blue', value: '#2196F3' },
+      { name: 'Pink', value: '#FFC0CB' },
     ],
-    sizes: ['3T', '4T', '5T', '6', '7'],
+    sizes: ['4', '5', '6', '7', '8'],
     features: [],
     inStock: true,
+    brand: 'Puma',
   },
   {
     id: '5',

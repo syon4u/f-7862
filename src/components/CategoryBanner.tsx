@@ -58,17 +58,17 @@ const CategoryBanner: React.FC<CategoryBannerProps> = ({
     
     switch(category.toLowerCase()) {
       case 'boys':
-        return 'public/lovable-uploads/image(17).png';
+        return '/lovable-uploads/image(17).png';
       case 'girls':
-        return 'public/lovable-uploads/image(6).png';
+        return '/lovable-uploads/image(6).png';
       case 'baby':
-        return 'public/lovable-uploads/image(12).png';
+        return '/lovable-uploads/image(12).png';
       case 'shoes':
-        return 'public/lovable-uploads/image(29).png';
+        return '/lovable-uploads/image(29).png';
       case 'new in':
-        return 'public/lovable-uploads/image(15).png';
+        return '/lovable-uploads/image(15).png';
       case 'designers':
-        return 'public/lovable-uploads/image(18).png';
+        return '/lovable-uploads/image(18).png';
       default:
         return '';
     }
