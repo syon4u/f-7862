@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Plus, Trash, Package, ShoppingBag, Box } from 'lucide-react';
+import { Plus, Trash, Package, ShoppingBag, Box, Upload, Image } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { 
@@ -161,7 +160,6 @@ const AdminInventory: React.FC = () => {
     setProducts(products.filter(product => product.id !== productId));
     toast.success("Product deleted successfully");
     
-    // Update stats
     updateInventoryStats(products.filter(product => product.id !== productId));
   };
 
@@ -171,8 +169,25 @@ const AdminInventory: React.FC = () => {
       totalProducts: updatedProducts.length,
       inStock,
       outOfStock: updatedProducts.length - inStock,
-      lowStock: Math.floor(updatedProducts.length * 0.4), // 40% of products for demo purposes
+      lowStock: Math.floor(updatedProducts.length * 0.4),
     });
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const currentImages = form.getValues().images || [];
+        form.setValue('images', [...currentImages, event.target?.result as string]);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleRemoveImage = (index: number) => {
+    const currentImages = form.getValues().images || [];
+    form.setValue('images', currentImages.filter((_, i) => i !== index));
   };
 
   const onSubmit = (data: Product) => {
@@ -333,6 +348,64 @@ const AdminInventory: React.FC = () => {
                       
                       <FormField
                         control={form.control}
+                        name="images"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Product Images</FormLabel>
+                            <div className="space-y-4">
+                              {field.value && field.value.length > 0 ? (
+                                <div className="grid grid-cols-3 gap-2">
+                                  {field.value.map((img, index) => (
+                                    <div key={index} className="relative group">
+                                      <img 
+                                        src={img} 
+                                        alt={`Product image ${index + 1}`} 
+                                        className="h-20 w-20 object-cover rounded-md border"
+                                      />
+                                      <button
+                                        type="button"
+                                        onClick={() => handleRemoveImage(index)}
+                                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                                        aria-label="Remove image"
+                                      >
+                                        <Trash className="h-3 w-3" />
+                                      </button>
+                                    </div>
+                                  ))}
+                                </div>
+                              ) : (
+                                <div className="flex items-center justify-center h-24 border-2 border-dashed rounded-md border-gray-300">
+                                  <div className="text-center">
+                                    <Image className="mx-auto h-8 w-8 text-gray-400" />
+                                    <p className="mt-1 text-sm text-gray-500">No images uploaded</p>
+                                  </div>
+                                </div>
+                              )}
+                              <FormControl>
+                                <div className="flex items-center">
+                                  <Input
+                                    type="file"
+                                    accept="image/*"
+                                    id="image-upload"
+                                    onChange={handleImageUpload}
+                                    className="hidden"
+                                  />
+                                  <label htmlFor="image-upload" className="cursor-pointer">
+                                    <Button type="button" variant="outline" className="flex items-center">
+                                      <Upload className="mr-2 h-4 w-4" />
+                                      Upload Image
+                                    </Button>
+                                  </label>
+                                </div>
+                              </FormControl>
+                            </div>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      
+                      <FormField
+                        control={form.control}
                         name="inStock"
                         render={({ field }) => (
                           <FormItem className="flex items-center space-x-2 space-y-0">
@@ -470,6 +543,64 @@ const AdminInventory: React.FC = () => {
                                             onChange={(e) => field.onChange(Number(e.target.value))}
                                           />
                                         </FormControl>
+                                        <FormMessage />
+                                      </FormItem>
+                                    )}
+                                  />
+                                  
+                                  <FormField
+                                    control={form.control}
+                                    name="images"
+                                    render={({ field }) => (
+                                      <FormItem>
+                                        <FormLabel>Product Images</FormLabel>
+                                        <div className="space-y-4">
+                                          {field.value && field.value.length > 0 ? (
+                                            <div className="grid grid-cols-3 gap-2">
+                                              {field.value.map((img, index) => (
+                                                <div key={index} className="relative group">
+                                                  <img 
+                                                    src={img} 
+                                                    alt={`Product image ${index + 1}`} 
+                                                    className="h-20 w-20 object-cover rounded-md border"
+                                                  />
+                                                  <button
+                                                    type="button"
+                                                    onClick={() => handleRemoveImage(index)}
+                                                    className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                                                    aria-label="Remove image"
+                                                  >
+                                                    <Trash className="h-3 w-3" />
+                                                  </button>
+                                                </div>
+                                              ))}
+                                            </div>
+                                          ) : (
+                                            <div className="flex items-center justify-center h-24 border-2 border-dashed rounded-md border-gray-300">
+                                              <div className="text-center">
+                                                <Image className="mx-auto h-8 w-8 text-gray-400" />
+                                                <p className="mt-1 text-sm text-gray-500">No images uploaded</p>
+                                              </div>
+                                            </div>
+                                          )}
+                                          <FormControl>
+                                            <div className="flex items-center">
+                                              <Input
+                                                type="file"
+                                                accept="image/*"
+                                                id="image-upload-edit"
+                                                onChange={handleImageUpload}
+                                                className="hidden"
+                                              />
+                                              <label htmlFor="image-upload-edit" className="cursor-pointer">
+                                                <Button type="button" variant="outline" className="flex items-center">
+                                                  <Upload className="mr-2 h-4 w-4" />
+                                                  Upload Image
+                                                </Button>
+                                              </label>
+                                            </div>
+                                          </FormControl>
+                                        </div>
                                         <FormMessage />
                                       </FormItem>
                                     )}
