@@ -31,6 +31,12 @@ const Navbar: React.FC = () => {
     { name: "OUTLET", path: "/shop-clothing?category=outlet" },
   ];
 
+  const mainMenuItems = [
+    { name: "SHOP NOW", path: "/shop-clothing", hasDropdown: true },
+    { name: "HOW IT WORKS", path: "/how-it-works", hasDropdown: false },
+    { name: "SOCIAL PURPOSE", path: "/social-purpose", hasDropdown: false },
+  ];
+
   return (
     <header className="border-b bg-white sticky top-0 z-50">
       {/* Main Header */}
@@ -97,15 +103,44 @@ const Navbar: React.FC = () => {
           </div>
         </div>
         
-        {/* Navigation Categories */}
+        {/* Navigation Menu */}
         <nav className="hidden md:block py-3">
           <NavigationMenu className="justify-center">
-            <NavigationMenuList className="gap-2">
-              {categories.map((category, index) => (
+            <NavigationMenuList className="gap-6">
+              {mainMenuItems.map((item, index) => (
                 <NavigationMenuItem key={index}>
-                  <Link to={category.path} className="text-sm font-medium hover:text-primary px-4 py-2 block transition-colors">
-                    {category.name}
-                  </Link>
+                  {item.hasDropdown ? (
+                    <>
+                      <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent">
+                        <Link to={item.path} className="text-sm font-medium">
+                          {item.name}
+                        </Link>
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent>
+                        <div className="grid grid-cols-5 gap-2 p-4 w-screen max-w-5xl">
+                          {categories.map((category, catIndex) => (
+                            <div key={catIndex} className="p-2">
+                              <NavigationMenuLink asChild>
+                                <Link 
+                                  to={category.path} 
+                                  className="text-sm font-medium hover:text-primary block transition-colors"
+                                >
+                                  {category.name}
+                                </Link>
+                              </NavigationMenuLink>
+                            </div>
+                          ))}
+                        </div>
+                      </NavigationMenuContent>
+                    </>
+                  ) : (
+                    <Link 
+                      to={item.path} 
+                      className="text-sm font-medium hover:text-primary px-4 py-2 block transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  )}
                 </NavigationMenuItem>
               ))}
             </NavigationMenuList>
@@ -116,8 +151,22 @@ const Navbar: React.FC = () => {
         {mobileMenuOpen && (
           <div className="md:hidden border-t py-4">
             <ul className="space-y-4">
-              {categories.map((category, index) => (
+              {mainMenuItems.map((item, index) => (
                 <li key={index} className="px-2">
+                  <Link 
+                    to={item.path} 
+                    className="block py-2 text-sm font-bold hover:text-primary transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+              <li className="border-t pt-2 mt-2">
+                <p className="px-2 text-xs text-muted-foreground">CATEGORIES</p>
+              </li>
+              {categories.map((category, index) => (
+                <li key={`cat-${index}`} className="px-2">
                   <Link 
                     to={category.path} 
                     className="block py-2 text-sm font-medium hover:text-primary transition-colors"
