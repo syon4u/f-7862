@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
@@ -222,8 +223,8 @@ const Index: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div className="aspect-square md:aspect-auto md:h-[400px] overflow-hidden rounded-md">
                 <img 
-                  src="https://images.unsplash.com/photo-1611403570720-162d8829689a?q=80&w=1000" 
-                  alt="Happy Kid with clothing box" 
+                  src="/lovable-uploads/f044c951-07c4-47c5-a201-ade478356f76.png" 
+                  alt="Kids clothing subscription boxes with neatly folded clothes" 
                   className="w-full h-full object-cover"
                 />
               </div>
