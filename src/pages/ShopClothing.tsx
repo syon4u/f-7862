@@ -212,13 +212,13 @@ const mockClothingItems: ClothingItem[] = [
 ];
 
 const categoryDescriptions = {
-  'all': 'Shop our complete collection of quality children's clothing',
-  'new-in': 'The latest styles and trends for your little ones',
-  'designers': 'Premium brands and exclusive designer collections',
-  'boys': 'Cool and comfortable styles for active boys',
-  'girls': 'Stylish and fun fashion for girls of all ages',
-  'baby': 'Soft and adorable outfits for the smallest family members',
-  'shoes': 'Quality footwear for growing feet'
+  'all': "Shop our complete collection of quality children's clothing",
+  'new-in': "The latest styles and trends for your little ones",
+  'designers': "Premium brands and exclusive designer collections",
+  'boys': "Cool and comfortable styles for active boys",
+  'girls': "Stylish and fun fashion for girls of all ages",
+  'baby': "Soft and adorable outfits for the smallest family members",
+  'shoes': "Quality footwear for growing feet"
 };
 
 const ShopClothing: React.FC = () => {
