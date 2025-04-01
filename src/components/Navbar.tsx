@@ -4,6 +4,15 @@ import { Search, ShoppingCart, User, Heart, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Link } from 'react-router-dom';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from '@/components/ui/navigation-menu';
 
 const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -24,11 +33,6 @@ const Navbar: React.FC = () => {
 
   return (
     <header className="border-b bg-white sticky top-0 z-50">
-      {/* Top Bar - Trustpilot or similar */}
-      <div className="bg-[#3c6e41] text-white py-2 text-center text-sm">
-        See our 9,202 reviews on <span className="font-bold">★ Trustpilot</span>
-      </div>
-      
       {/* Main Header */}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
@@ -95,18 +99,17 @@ const Navbar: React.FC = () => {
         
         {/* Navigation Categories */}
         <nav className="hidden md:block py-3">
-          <ul className="flex items-center justify-center space-x-8">
-            {categories.map((category, index) => (
-              <li key={index}>
-                <Link 
-                  to={category.path} 
-                  className="text-sm font-medium hover:text-primary transition-colors"
-                >
-                  {category.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <NavigationMenu className="justify-center">
+            <NavigationMenuList className="gap-2">
+              {categories.map((category, index) => (
+                <NavigationMenuItem key={index}>
+                  <Link to={category.path} className="text-sm font-medium hover:text-primary px-4 py-2 block transition-colors">
+                    {category.name}
+                  </Link>
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
         </nav>
         
         {/* Mobile Menu */}
