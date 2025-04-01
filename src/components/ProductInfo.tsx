@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Star, ShoppingCart, Check } from 'lucide-react';
+import { Star, ShoppingCart, Check, Heart, Gift } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import { Product } from '../types/product';
@@ -16,21 +16,21 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
 
   const handleAddToCart = () => {
     toast({
-      title: "Added to cart",
+      title: "Yay! Added to cart",
       description: `${quantity} × ${product.name} (${selectedColor.name}, ${selectedSize}) added to your cart.`,
       action: (
         <div className="flex items-center space-x-1">
-          <Check className="h-4 w-4" />
-          <span>Success</span>
+          <Check className="h-4 w-4 text-kid-green" />
+          <span>Success!</span>
         </div>
       ),
     });
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 kid-box bg-kid-gradient-1">
       <div>
-        <h1 className="text-3xl font-serif font-medium mb-2">{product.name}</h1>
+        <h1 className="text-3xl font-league-spartan font-bold mb-2">{product.name}</h1>
         <div className="flex items-center">
           <div className="flex">
             {[...Array(5)].map((_, i) => (
@@ -55,7 +55,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
           <>
             <span className="text-2xl font-semibold">${product.discountPrice.toFixed(2)}</span>
             <span className="text-lg text-muted-foreground line-through">${product.price.toFixed(2)}</span>
-            <span className="text-sm px-2 py-1 bg-red-100 text-red-700 rounded-md ml-2">
+            <span className="text-sm px-2 py-1 bg-kid-pink text-white rounded-full ml-2">
               Save ${(product.price - product.discountPrice).toFixed(2)}
             </span>
           </>
@@ -104,9 +104,9 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
 
         <div>
           <h3 className="text-sm font-semibold mb-2">Quantity</h3>
-          <div className="flex items-center border rounded-md w-fit">
+          <div className="flex items-center border rounded-full w-fit overflow-hidden">
             <button
-              className="px-3 py-2 border-r hover:bg-secondary transition-colors"
+              className="px-4 py-2 border-r hover:bg-kid-yellow transition-colors"
               onClick={() => setQuantity((prev) => (prev > 1 ? prev - 1 : prev))}
               aria-label="Decrease quantity"
             >
@@ -114,7 +114,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
             </button>
             <span className="px-6 py-2">{quantity}</span>
             <button
-              className="px-3 py-2 border-l hover:bg-secondary transition-colors"
+              className="px-4 py-2 border-l hover:bg-kid-yellow transition-colors"
               onClick={() => setQuantity((prev) => prev + 1)}
               aria-label="Increase quantity"
             >
@@ -124,23 +124,31 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
         </div>
       </div>
 
-      <div className="pt-4">
+      <div className="pt-4 flex gap-2">
         <Button
           onClick={handleAddToCart}
-          className="w-full py-6 text-lg"
+          className="w-full py-6 text-lg rounded-full shadow-md hover:shadow-lg transition-all"
           disabled={!product.inStock}
         >
-          <ShoppingCart className="h-5 w-5 mr-2" />
+          <ShoppingCart className="h-5 w-5 mr-2 animate-bounce-slight" />
           {product.inStock ? "Add to Cart" : "Out of Stock"}
+        </Button>
+        <Button
+          variant="outline"
+          className="py-6 rounded-full shadow-sm hover:bg-kid-pink/10 transition-all"
+        >
+          <Heart className="h-5 w-5 text-kid-pink" />
         </Button>
       </div>
 
       <div className="space-y-4 pt-4">
-        <h3 className="text-lg font-serif font-semibold">Features</h3>
-        <ul className="space-y-2">
+        <h3 className="text-lg font-league-spartan font-semibold">Features</h3>
+        <ul className="space-y-4">
           {product.features.map((feature, index) => (
             <li key={index} className="flex items-start">
-              <Check className="h-5 w-5 mr-2 text-green-500 flex-shrink-0 mt-0.5" />
+              <div className="bg-kid-green/20 p-1 rounded-full mr-3 mt-0.5">
+                <Check className="h-4 w-4 text-green-600" />
+              </div>
               <span>{feature}</span>
             </li>
           ))}

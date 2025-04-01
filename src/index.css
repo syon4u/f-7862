@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,7 +8,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 60 100% 99%; /* Softer, slightly cream background */
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -16,35 +17,41 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 84 64% 53%; /* #bada55 */
+    /* More vibrant, kid-friendly primary color - light green */
+    --primary: 138 50% 52%; /* #41c478 - a friendlier green */
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 355 83% 58%; /* #ec395d */
+    /* Warmer secondary color - coral pink */
+    --secondary: 350 100% 76%; /* #ff7a8a - warm coral */
     --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --tertiary: 240 50% 38%; /* #303192 */
+    /* Royal blue for tertiary */
+    --tertiary: 240 50% 48%; /* #4040b2 - Brighter blue */
     --tertiary-foreground: 210 40% 98%;
 
-    --quaternary: 187 100% 40%; /* #00c2cb */
+    /* Bright teal for quaternary */
+    --quaternary: 187 100% 45%; /* #00d9e4 - Bright teal */
     --quaternary-foreground: 210 40% 98%;
 
-    --quinary: 39 100% 68%; /* #ffbd59 */
+    /* Vibrant yellow for quinary */
+    --quinary: 49 100% 68%; /* #ffce43 - Bright sunny yellow */
     --quinary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
+    --accent: 349 89% 92%; /* Light pink accent */
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
+    --border: 220 33% 90%; /* Softer border */
     --input: 214.3 31.8% 91.4%;
-    --ring: 84 64% 53%;
+    --ring: 138 50% 52%;
 
-    --radius: 0.5rem;
+    /* Rounder corners for a friendlier look */
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -66,19 +73,19 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 84 64% 53%;
+    --primary: 138 50% 52%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 355 83% 58%;
+    --secondary: 350 100% 76%;
     --secondary-foreground: 210 40% 98%;
 
-    --tertiary: 240 50% 38%;
+    --tertiary: 240 50% 48%;
     --tertiary-foreground: 210 40% 98%;
 
-    --quaternary: 187 100% 40%;
+    --quaternary: 187 100% 45%;
     --quaternary-foreground: 210 40% 98%;
 
-    --quinary: 39 100% 68%;
+    --quinary: 49 100% 68%;
     --quinary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 217.2 32.6% 17.5%;
@@ -92,7 +99,7 @@
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 84 64% 53%;
+    --ring: 138 50% 52%;
     
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -112,10 +119,15 @@
 
   body {
     @apply bg-background text-foreground font-poppins;
+    background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239ED8DB' fill-opacity='0.1'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6h-2c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h-2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6h2c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h-2Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
   
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-league-spartan;
+  h1, h2, h3 {
+    @apply font-league-spartan font-bold;
+  }
+  
+  h4, h5, h6 {
+    @apply font-league-spartan font-semibold;
   }
   
   .subheading {
@@ -123,15 +135,15 @@
   }
   
   .product-image-container {
-    @apply aspect-square overflow-hidden relative;
+    @apply aspect-square overflow-hidden relative rounded-2xl;
   }
   
   .thumbnail-active {
-    @apply border-2 border-primary opacity-100;
+    @apply border-2 border-primary opacity-100 rounded-lg;
   }
   
   .thumbnail {
-    @apply border border-border opacity-70 transition-all hover:opacity-100;
+    @apply border border-border opacity-70 transition-all hover:opacity-100 rounded-lg;
   }
   
   .color-option {
@@ -161,4 +173,36 @@
   .review-progress-bar {
     @apply h-full rounded-full bg-primary;
   }
+  
+  /* Kid-friendly additions */
+  .kid-card {
+    @apply rounded-2xl border-2 shadow-md hover:shadow-lg transition-all;
+  }
+  
+  .kid-button {
+    @apply rounded-full font-bold shadow-md hover:shadow-lg transition-all;
+  }
+  
+  .kid-icon {
+    @apply animate-bounce-slight;
+  }
+  
+  .kid-box {
+    @apply bg-white rounded-2xl border-2 shadow-md p-6;
+  }
 }
+
+/* Additional kid-friendly styles */
+.bubble {
+  @apply relative inline-block;
+}
+
+.bubble::after {
+  content: '';
+  @apply absolute w-full h-[3px] bg-primary bottom-0 left-0 rounded-full transform scale-x-0 transition-transform duration-300 origin-bottom-left;
+}
+
+.bubble:hover::after {
+  @apply scale-x-100;
+}
+

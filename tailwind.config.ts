@@ -66,6 +66,13 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Kid-friendly colors
+        "kid-blue": "#9ED8DB",
+        "kid-pink": "#FFB6C1",
+        "kid-yellow": "#FDFD96",
+        "kid-green": "#B5EAD7",
+        "kid-purple": "#C7CEEA",
+        "kid-orange": "#FFB347",
       },
       fontFamily: {
         "league-spartan": ["League Spartan", ...fontFamily.sans],
@@ -86,10 +93,25 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        "bounce-slight": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-5px)" },
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "float": "float 6s ease-in-out infinite",
+        "bounce-slight": "bounce-slight 2s ease-in-out infinite"
+      },
+      backgroundImage: {
+        "kid-gradient-1": "linear-gradient(to right, #f9f9ff, #ffe2e4)",
+        "kid-gradient-2": "linear-gradient(to right, #e4f9ff, #d9ffde)",
+        "kid-gradient-3": "linear-gradient(to right, #fff9e3, #ffeaf8)",
       },
     },
   },
