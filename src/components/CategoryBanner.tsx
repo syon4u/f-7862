@@ -52,17 +52,37 @@ const CategoryBanner: React.FC<CategoryBannerProps> = ({
     }
   };
 
+  // Get category-specific background images
+  const getCategoryImage = () => {
+    if (image) return image;
+    
+    switch(category.toLowerCase()) {
+      case 'boys':
+        return 'public/lovable-uploads/image(17).png';
+      case 'girls':
+        return 'public/lovable-uploads/image(6).png';
+      case 'baby':
+        return 'public/lovable-uploads/image(12).png';
+      case 'shoes':
+        return 'public/lovable-uploads/image(29).png';
+      case 'new in':
+        return 'public/lovable-uploads/image(15).png';
+      case 'designers':
+        return 'public/lovable-uploads/image(18).png';
+      default:
+        return '';
+    }
+  };
+
   return (
     <div className={`relative overflow-hidden rounded-xl mb-6 ${getBgPattern()}`}>
       <div className="absolute inset-0 opacity-20 bg-pattern"></div>
       <div className={`relative w-full h-40 md:h-48 flex items-center justify-center p-6 overflow-hidden`}>
-        {image && (
-          <img 
-            src={image} 
-            alt={`${category} category`}
-            className="absolute inset-0 w-full h-full object-cover opacity-30"
-          />
-        )}
+        <img 
+          src={getCategoryImage()} 
+          alt={`${category} category`}
+          className="absolute inset-0 w-full h-full object-cover opacity-30"
+        />
         <div className="relative z-10 text-center">
           <h2 className={`text-3xl font-bold mb-2 bg-gradient-to-r ${getCategoryColors()} bg-clip-text text-transparent`}>
             {category.toUpperCase()}

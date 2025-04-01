@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
@@ -53,7 +52,7 @@ const mockClothingItems: ClothingItem[] = [
     id: "1",
     name: "Wild Cheetah T-Shirt",
     price: 24.99,
-    image: "public/lovable-uploads/761ea3ff-40e2-457d-84f2-d1bb82065633.png",
+    image: "public/lovable-uploads/image(3).png",
     category: "tops",
     subcategory: "girls",
     age: "5-7",
@@ -66,7 +65,7 @@ const mockClothingItems: ClothingItem[] = [
     id: "2",
     name: "Tie Dye Summer Top",
     price: 29.99,
-    image: "public/lovable-uploads/d63a9b83-76c4-4d33-a915-ebef09e1b705.png",
+    image: "public/lovable-uploads/image(4).png",
     category: "tops",
     subcategory: "girls",
     age: "8-10",
@@ -78,9 +77,9 @@ const mockClothingItems: ClothingItem[] = [
   },
   {
     id: "3",
-    name: "Sequin Unicorn Shirt",
+    name: "Colorful Pattern Shirt",
     price: 32.99,
-    image: "public/lovable-uploads/5754ea2e-950a-497b-8481-99499b62e764.png",
+    image: "public/lovable-uploads/image(5).png",
     category: "tops",
     subcategory: "girls",
     age: "5-7",
@@ -91,23 +90,23 @@ const mockClothingItems: ClothingItem[] = [
   },
   {
     id: "4",
-    name: "Palm Print Tank Top",
-    price: 26.99,
-    image: "public/lovable-uploads/85e5cba9-699f-4c04-b837-ae63a2d20237.png",
-    category: "tops",
+    name: "Floral Print Dress",
+    price: 36.99,
+    image: "public/lovable-uploads/image(6).png",
+    category: "dresses",
     subcategory: "girls",
     age: "8-10",
-    color: "black",
+    color: "multi",
     rating: 4.6,
     sale: false,
     new: false
   },
   {
     id: "5",
-    name: "Classic Denim Jeans",
-    price: 39.99,
-    image: "https://images.unsplash.com/photo-1565292334631-127e15e74bf1?w=800&auto=format&fit=crop&q=60",
-    category: "bottoms",
+    name: "Boys Graphic T-Shirt",
+    price: 22.99,
+    image: "public/lovable-uploads/image(7).png",
+    category: "tops",
     subcategory: "boys",
     age: "5-7",
     color: "blue",
@@ -117,26 +116,26 @@ const mockClothingItems: ClothingItem[] = [
   },
   {
     id: "6",
-    name: "Cotton Bear Hoodie",
+    name: "Baby Sailor Outfit",
     price: 44.99,
-    image: "https://images.unsplash.com/photo-1522968639566-c048a0ea1e36?w=800&auto=format&fit=crop&q=60",
+    image: "public/lovable-uploads/image(8).png",
     category: "outerwear",
     subcategory: "baby",
     age: "0-2",
-    color: "brown",
+    color: "white",
     rating: 4.6,
     sale: false,
     new: true
   },
   {
     id: "7",
-    name: "Designer Polka Dot Swimsuit",
+    name: "Designer Polka Dot Dress",
     price: 49.99,
-    image: "https://images.unsplash.com/photo-1543702610-31e0b297b88e?w=800&auto=format&fit=crop&q=60",
-    category: "swimwear",
+    image: "public/lovable-uploads/image(9).png",
+    category: "dresses",
     subcategory: "designers",
     age: "8-10",
-    color: "blue",
+    color: "pink",
     rating: 4.5,
     sale: true,
     salePrice: 39.99,
@@ -144,13 +143,13 @@ const mockClothingItems: ClothingItem[] = [
   },
   {
     id: "8",
-    name: "New Season Jungle Print T-Shirt",
+    name: "New Season Casual T-Shirt",
     price: 26.99,
-    image: "https://images.unsplash.com/photo-1486714941986-f2113c751c97?w=800&auto=format&fit=crop&q=60",
+    image: "public/lovable-uploads/image(10).png",
     category: "tops",
     subcategory: "new-in",
     age: "5-7",
-    color: "green",
+    color: "yellow",
     rating: 4.2,
     sale: false,
     new: true
@@ -159,11 +158,11 @@ const mockClothingItems: ClothingItem[] = [
     id: "9",
     name: "Kids Summer Sandals",
     price: 34.99,
-    image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800&auto=format&fit=crop&q=60",
+    image: "public/lovable-uploads/image(11).png",
     category: "footwear",
     subcategory: "shoes",
     age: "2-4",
-    color: "pink",
+    color: "brown",
     rating: 4.4,
     sale: true,
     salePrice: 29.99,
@@ -173,7 +172,7 @@ const mockClothingItems: ClothingItem[] = [
     id: "10",
     name: "Baby Cotton Romper",
     price: 29.99,
-    image: "https://images.unsplash.com/photo-1519278409-1f56fdda7fe5?w=800&auto=format&fit=crop&q=60",
+    image: "public/lovable-uploads/image(12).png",
     category: "onesies",
     subcategory: "baby",
     age: "0-2",
@@ -184,9 +183,9 @@ const mockClothingItems: ClothingItem[] = [
   },
   {
     id: "11",
-    name: "Boys Denim Shorts",
+    name: "Boys Casual Shorts",
     price: 32.99,
-    image: "https://images.unsplash.com/photo-1490481651871-ab68de25cc55?w=800&auto=format&fit=crop&q=60",
+    image: "public/lovable-uploads/image(13).png",
     category: "bottoms",
     subcategory: "boys",
     age: "8-10",
@@ -200,7 +199,7 @@ const mockClothingItems: ClothingItem[] = [
     id: "12",
     name: "Designer Kids Sneakers",
     price: 79.99,
-    image: "https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=800&auto=format&fit=crop&q=60",
+    image: "public/lovable-uploads/image(14).png",
     category: "footwear",
     subcategory: "designers",
     age: "5-7",
@@ -209,16 +208,272 @@ const mockClothingItems: ClothingItem[] = [
     sale: false,
     new: true
   },
+  {
+    id: "13",
+    name: "Colorful Summer Dress",
+    price: 42.99,
+    image: "public/lovable-uploads/image(15).png",
+    category: "dresses",
+    subcategory: "new-in",
+    age: "5-7",
+    color: "multi",
+    rating: 4.7,
+    sale: false,
+    new: true
+  },
+  {
+    id: "14",
+    name: "Baby Duck Raincoat",
+    price: 38.99,
+    image: "public/lovable-uploads/image(16).png",
+    category: "outerwear",
+    subcategory: "baby",
+    age: "2-4",
+    color: "yellow",
+    rating: 4.9,
+    sale: true,
+    salePrice: 32.99,
+    new: false
+  },
+  {
+    id: "15",
+    name: "Boys Sports Jersey",
+    price: 34.99,
+    image: "public/lovable-uploads/image(17).png",
+    category: "tops",
+    subcategory: "boys",
+    age: "8-10",
+    color: "red",
+    rating: 4.6,
+    sale: false,
+    new: true
+  },
+  {
+    id: "16",
+    name: "Designer Party Dress",
+    price: 89.99,
+    image: "public/lovable-uploads/image(18).png",
+    category: "dresses",
+    subcategory: "designers",
+    age: "5-7",
+    color: "pink",
+    rating: 4.8,
+    sale: true,
+    salePrice: 69.99,
+    new: false
+  },
+  {
+    id: "17",
+    name: "Summer Hat Collection",
+    price: 19.99,
+    image: "public/lovable-uploads/image(19).png",
+    category: "accessories",
+    subcategory: "new-in",
+    age: "2-4",
+    color: "multi",
+    rating: 4.5,
+    sale: false,
+    new: true
+  },
+  {
+    id: "18",
+    name: "Canvas Slip-On Shoes",
+    price: 42.99,
+    image: "public/lovable-uploads/image(20).png",
+    category: "footwear",
+    subcategory: "shoes",
+    age: "5-7",
+    color: "blue",
+    rating: 4.4,
+    sale: true,
+    salePrice: 36.99,
+    new: false
+  },
+  {
+    id: "19",
+    name: "Patterned Leggings Set",
+    price: 28.99,
+    image: "public/lovable-uploads/image(21).png",
+    category: "bottoms",
+    subcategory: "girls",
+    age: "2-4",
+    color: "multi",
+    rating: 4.7,
+    sale: false,
+    new: true
+  },
+  {
+    id: "20",
+    name: "Baby Two-Piece Set",
+    price: 45.99,
+    image: "public/lovable-uploads/image(22).png",
+    category: "outfits",
+    subcategory: "baby",
+    age: "0-2",
+    color: "white",
+    rating: 4.9,
+    sale: true,
+    salePrice: 38.99,
+    new: false
+  },
+  {
+    id: "21",
+    name: "Boys Formal Shirt",
+    price: 32.99,
+    image: "public/lovable-uploads/image(23).png",
+    category: "tops",
+    subcategory: "boys",
+    age: "8-10",
+    color: "white",
+    rating: 4.5,
+    sale: false,
+    new: true
+  },
+  {
+    id: "22",
+    name: "Sparkle Princess Shoes",
+    price: 49.99,
+    image: "public/lovable-uploads/image(24).png",
+    category: "footwear",
+    subcategory: "shoes",
+    age: "5-7",
+    color: "pink",
+    rating: 4.8,
+    sale: false,
+    new: true
+  },
+  {
+    id: "23",
+    name: "Summer Shorts Collection",
+    price: 26.99,
+    image: "public/lovable-uploads/image(25).png",
+    category: "bottoms",
+    subcategory: "new-in",
+    age: "5-7",
+    color: "blue",
+    rating: 4.6,
+    sale: true,
+    salePrice: 22.99,
+    new: false
+  },
+  {
+    id: "24",
+    name: "Designer School Backpack",
+    price: 64.99,
+    image: "public/lovable-uploads/image(26).png",
+    category: "accessories",
+    subcategory: "designers",
+    age: "5-7",
+    color: "purple",
+    rating: 4.7,
+    sale: false,
+    new: true
+  },
+  {
+    id: "25",
+    name: "Girls Summer Playsuit",
+    price: 38.99,
+    image: "public/lovable-uploads/image(27).png",
+    category: "outfits",
+    subcategory: "girls",
+    age: "2-4",
+    color: "pink",
+    rating: 4.5,
+    sale: true,
+    salePrice: 32.99,
+    new: false
+  },
+  {
+    id: "26",
+    name: "Baby Winter Snowsuit",
+    price: 52.99,
+    image: "public/lovable-uploads/image(28).png",
+    category: "outerwear",
+    subcategory: "baby",
+    age: "0-2",
+    color: "blue",
+    rating: 4.9,
+    sale: false,
+    new: true
+  },
+  {
+    id: "27",
+    name: "Kids Athletic Shoes",
+    price: 45.99,
+    image: "public/lovable-uploads/image(29).png",
+    category: "footwear",
+    subcategory: "shoes",
+    age: "8-10",
+    color: "black",
+    rating: 4.7,
+    sale: true,
+    salePrice: 39.99,
+    new: false
+  },
+  {
+    id: "28",
+    name: "Boys Superhero Pajamas",
+    price: 34.99,
+    image: "public/lovable-uploads/image(30).png",
+    category: "sleepwear",
+    subcategory: "boys",
+    age: "5-7",
+    color: "blue",
+    rating: 4.8,
+    sale: false,
+    new: true
+  },
+  {
+    id: "29",
+    name: "Designer Kids Sunglasses",
+    price: 28.99,
+    image: "public/lovable-uploads/image(31).png",
+    category: "accessories",
+    subcategory: "designers",
+    age: "5-7",
+    color: "black",
+    rating: 4.6,
+    sale: true,
+    salePrice: 22.99,
+    new: false
+  },
+  {
+    id: "30",
+    name: "Girls Ballet Flats",
+    price: 36.99,
+    image: "public/lovable-uploads/image(32).png",
+    category: "footwear",
+    subcategory: "girls",
+    age: "5-7",
+    color: "pink",
+    rating: 4.5,
+    sale: false,
+    new: true
+  },
+  {
+    id: "31",
+    name: "New Season Denim Jacket",
+    price: 48.99,
+    image: "public/lovable-uploads/image(33).png",
+    category: "outerwear",
+    subcategory: "new-in",
+    age: "8-10",
+    color: "blue",
+    rating: 4.7,
+    sale: true,
+    salePrice: 42.99,
+    new: true
+  }
 ];
 
 const categoryDescriptions = {
-  'all': "Shop our complete collection of quality children's clothing",
-  'new-in': "The latest styles and trends for your little ones",
-  'designers': "Premium brands and exclusive designer collections",
-  'boys': "Cool and comfortable styles for active boys",
-  'girls': "Stylish and fun fashion for girls of all ages",
-  'baby': "Soft and adorable outfits for the smallest family members",
-  'shoes': "Quality footwear for growing feet"
+  "all": "Shop our complete collection of quality children's clothing",
+  "new-in": "The latest styles and trends for your little ones",
+  "designers": "Premium brands and exclusive designer collections",
+  "boys": "Cool and comfortable styles for active boys",
+  "girls": "Stylish and fun fashion for girls of all ages",
+  "baby": "Soft and adorable outfits for the smallest family members",
+  "shoes": "Quality footwear for growing feet"
 };
 
 const ShopClothing: React.FC = () => {
@@ -265,12 +520,10 @@ const ShopClothing: React.FC = () => {
   };
   
   const filteredItems = mockClothingItems.filter(item => {
-    // Filter by subcategory tab
     if (activeTab !== 'all' && item.subcategory !== activeTab) {
       return false;
     }
     
-    // Search term filter
     if (searchTerm && !item.name.toLowerCase().includes(searchTerm.toLowerCase())) {
       return false;
     }
@@ -291,7 +544,6 @@ const ShopClothing: React.FC = () => {
       case "rating":
         return b.rating - a.rating;
       default:
-        // Sort by newness by default
         return Number(b.new) - Number(a.new);
     }
   });
@@ -312,7 +564,6 @@ const ShopClothing: React.FC = () => {
       <Navbar />
       
       <main className="flex-grow container mx-auto px-4 py-8">
-        {/* Category Tabs */}
         <div className="mb-8">
           <Tabs 
             defaultValue="all" 
@@ -339,7 +590,6 @@ const ShopClothing: React.FC = () => {
         </div>
       
         <div className="flex flex-col md:flex-row justify-between items-start gap-8">
-          {/* Mobile Filter and Search */}
           <div className="w-full md:hidden space-y-4">
             <div className="flex gap-2">
               <Sheet>
@@ -468,7 +718,6 @@ const ShopClothing: React.FC = () => {
             </div>
           </div>
           
-          {/* Desktop Filters */}
           <div className="hidden md:block w-1/4 bg-white p-6 rounded-lg shadow-sm">
             <div className="mb-6">
               <div className="relative">
@@ -577,7 +826,7 @@ const ShopClothing: React.FC = () => {
           <div className="w-full md:w-3/4">
             <div className="flex flex-col space-y-6">
               <div className="hidden md:flex justify-between items-center">
-                <div></div> {/* Empty div for spacing */}
+                <div></div>
                 <Select value={sortBy} onValueChange={setSortBy}>
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Sort by" />
