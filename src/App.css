@@ -33,8 +33,17 @@
   50% { transform: translateY(-10px); }
 }
 
+@keyframes bubble {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
 .float {
   animation: float 6s ease-in-out infinite;
+}
+
+.bubble:hover {
+  animation: bubble 0.5s ease-in-out;
 }
 
 .rounded-kids {
@@ -95,3 +104,62 @@
   );
 }
 
+.color-option {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.color-active {
+  border-color: black;
+  box-shadow: 0 0 0 2px white inset;
+}
+
+.size-option {
+  padding: 6px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 999px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.size-active {
+  background-color: black;
+  color: white;
+  border-color: black;
+}
+
+.kid-box {
+  border-radius: 20px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+.kid-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* New animations */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+.wiggle:hover {
+  animation: wiggle 0.5s ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.bounce:hover {
+  animation: bounce 0.8s ease-in-out;
+}

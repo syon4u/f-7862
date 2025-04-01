@@ -18,10 +18,11 @@ const Navbar: React.FC = () => {
             />
           </Link>
           <nav className="hidden md:flex space-x-8">
-            <Link to="/shop-now" className="text-sm font-medium hover:text-primary transition-colors bubble">Shop Now</Link>
+            <Link to="/shop-clothing" className="text-sm font-medium hover:text-primary transition-colors bubble">Shop Clothing</Link>
+            <Link to="/shop-now" className="text-sm font-medium hover:text-primary transition-colors bubble">Subscription Boxes</Link>
+            <Link to="/style-quiz" className="text-sm font-medium hover:text-primary transition-colors bubble">Style Quiz</Link>
             <Link to="/how-it-works" className="text-sm font-medium hover:text-primary transition-colors bubble">How It Works</Link>
             <Link to="/social-purpose" className="text-sm font-medium hover:text-primary transition-colors bubble">Social Purpose</Link>
-            <Link to="/contact" className="text-sm font-medium hover:text-primary transition-colors bubble">Contact Us</Link>
           </nav>
         </div>
         
@@ -42,12 +43,19 @@ const Navbar: React.FC = () => {
               <User className="h-5 w-5" />
             </Button>
           </Link>
-          <Button variant="ghost" size="icon" aria-label="Cart" className="text-kid-yellow hover:text-primary transition-colors">
-            <div className="relative">
-              <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 bg-secondary text-white text-xs rounded-full">0</span>
-            </div>
-          </Button>
+          <Link to="/wishlist">
+            <Button variant="ghost" size="icon" aria-label="Wishlist" className="text-kid-purple hover:text-primary transition-colors">
+              <Heart className="h-5 w-5" />
+            </Button>
+          </Link>
+          <Link to="/checkout">
+            <Button variant="ghost" size="icon" aria-label="Cart" className="text-kid-yellow hover:text-primary transition-colors">
+              <div className="relative">
+                <ShoppingCart className="h-5 w-5" />
+                <span className="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 bg-secondary text-white text-xs rounded-full">0</span>
+              </div>
+            </Button>
+          </Link>
         </div>
       </div>
     </header>
