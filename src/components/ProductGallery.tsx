@@ -4,10 +4,15 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ProductGalleryProps {
   images: string[];
+  altPrefix?: string;
 }
 
-const ProductGallery: React.FC<ProductGalleryProps> = ({ images }) => {
+const ProductGallery: React.FC<ProductGalleryProps> = ({ 
+  images, 
+  altPrefix = "Product" 
+}) => {
   const [currentImage, setCurrentImage] = useState(0);
+  const [isLoading, setIsLoading] = useState<boolean[]>(images.map(() => true));
 
   const handlePrev = () => {
     setCurrentImage((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -17,13 +22,34 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ images }) => {
     setCurrentImage((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
+  const handleImageLoad = (index: number) => {
+    setIsLoading(prev => {
+      const newLoading = [...prev];
+      newLoading[index] = false;
+      return newLoading;
+    });
+  };
+
+  // Fallback image if the original fails to load
+  const fallbackImage = "https://images.unsplash.com/photo-1590013500472-2c2d7349dffb?q=80&w=1000";
+
   return (
     <div className="flex flex-col space-y-4">
-      <div className="product-image-container rounded-lg overflow-hidden">
+      <div className="product-image-container rounded-lg overflow-hidden relative">
+        {isLoading[currentImage] && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+            <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        )}
         <img 
           src={images[currentImage]} 
-          alt="Product image" 
-          className="w-full h-full object-cover transition-opacity duration-300 animate-fade-in"
+          alt={`${altPrefix} image ${currentImage + 1}`} 
+          className={`w-full h-full object-cover transition-opacity duration-300 ${isLoading[currentImage] ? 'opacity-0' : 'opacity-100'}`}
+          onLoad={() => handleImageLoad(currentImage)}
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = fallbackImage;
+          }}
         />
         
         <div className="absolute inset-0 flex items-center justify-between p-4">
@@ -49,11 +75,25 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ images }) => {
           <button
             key={index}
             onClick={() => setCurrentImage(index)}
-            className={`rounded-md overflow-hidden aspect-square ${
-              index === currentImage ? "thumbnail-active" : "thumbnail"
+            className={`rounded-md overflow-hidden aspect-square relative ${
+              index === currentImage ? "ring-2 ring-primary" : "hover:opacity-80"
             }`}
           >
-            <img src={img} alt={`Product thumbnail ${index + 1}`} className="w-full h-full object-cover" />
+            {isLoading[index] && (
+              <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
+                <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            )}
+            <img 
+              src={img} 
+              alt={`${altPrefix} thumbnail ${index + 1}`} 
+              className="w-full h-full object-cover"
+              onLoad={() => handleImageLoad(index)}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = fallbackImage;
+              }}
+            />
           </button>
         ))}
       </div>

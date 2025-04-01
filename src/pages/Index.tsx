@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -12,27 +11,40 @@ import {
   CarouselNext, 
   CarouselPrevious 
 } from '@/components/ui/carousel';
+import { useToast } from '@/components/ui/use-toast';
 
 const Index: React.FC = () => {
+  const { toast } = useToast();
+  const [instagramImages, setInstagramImages] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const diverseImages = {
+    boys: "https://images.unsplash.com/photo-1604652716188-77c0a9908e47?q=80&w=1000",
+    girls: "https://images.unsplash.com/photo-1633966887768-64f9a867bdba?q=80&w=1000",
+    baby: "https://images.unsplash.com/photo-1590013500472-2c2d7349dffb?q=80&w=1000",
+    footwear: "https://images.unsplash.com/photo-1471039497385-b6d6ba609f9c?q=80&w=1000",
+    hero: "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?q=80&w=1000"
+  };
+
   const categoryCards = [
     {
       title: "BOYS",
-      image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?q=80&w=1000",
+      image: diverseImages.boys,
       link: "/shop-clothing?category=boys"
     },
     {
       title: "GIRLS",
-      image: "https://images.unsplash.com/photo-1607453998774-d533f65dac99?q=80&w=1000",
+      image: diverseImages.girls,
       link: "/shop-clothing?category=girls"
     },
     {
       title: "BABY",
-      image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?q=80&w=1000",
+      image: diverseImages.baby,
       link: "/shop-clothing?category=baby"
     },
     {
       title: "FOOTWEAR",
-      image: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=1000",
+      image: diverseImages.footwear,
       link: "/shop-clothing?category=footwear"
     }
   ];
@@ -48,16 +60,52 @@ const Index: React.FC = () => {
     { title: "SCHOOLWEAR", link: "/shop-clothing?category=schoolwear" }
   ];
 
+  useEffect(() => {
+    fetchInstagramImages();
+  }, []);
+
+  const fetchInstagramImages = async () => {
+    setIsLoading(true);
+    try {
+      const images = await mockFetchInstagramImages();
+      setInstagramImages(images);
+    } catch (error) {
+      console.error("Error fetching Instagram images:", error);
+      toast({
+        title: "Couldn't load images from Instagram",
+        description: "Using fallback images instead. Please try again later.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const mockFetchInstagramImages = async (): Promise<string[]> => {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    return [
+      "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?q=80&w=500",
+      "https://images.unsplash.com/photo-1604652716188-77c0a9908e47?q=80&w=500",
+      "https://images.unsplash.com/photo-1633966887768-64f9a867bdba?q=80&w=500",
+      "https://images.unsplash.com/photo-1590013500472-2c2d7349dffb?q=80&w=500",
+      "https://images.unsplash.com/photo-1471039497385-b6d6ba609f9c?q=80&w=500",
+      "https://images.unsplash.com/photo-1611403570720-162d8829689a?q=80&w=500"
+    ];
+  };
+
+  const carouselImages = instagramImages.length > 0 ? instagramImages : Array.from({ length: 6 }).map((_, i) => 
+    `https://images.unsplash.com/photo-${1590000000 + i * 100000}?q=80&w=500`
+  );
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
       
       <main className="flex-grow">
-        {/* Hero Section */}
         <section className="relative">
           <div className="w-full h-[500px] md:h-[600px] overflow-hidden">
             <img 
-              src="https://images.unsplash.com/photo-1560506840-ec148e82a604?q=80&w=1000" 
+              src={diverseImages.hero} 
               alt="Spring children's clothing collection" 
               className="w-full h-full object-cover"
             />
@@ -72,7 +120,6 @@ const Index: React.FC = () => {
           </div>
         </section>
 
-        {/* Quick Links Bar */}
         <section className="py-4 border-b">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-center flex-wrap gap-8">
@@ -89,7 +136,6 @@ const Index: React.FC = () => {
           </div>
         </section>
 
-        {/* Category Cards */}
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -111,38 +157,53 @@ const Index: React.FC = () => {
           </div>
         </section>
 
-        {/* Featured Products */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12">New In This Season</h2>
             
             <Carousel className="max-w-5xl mx-auto">
               <CarouselContent>
-                {Array.from({ length: 6 }).map((_, index) => (
-                  <CarouselItem key={index} className="md:basis-1/3 lg:basis-1/3">
-                    <Link to={`/shop-clothing/product-${index + 1}`}>
+                {isLoading ? (
+                  Array.from({ length: 3 }).map((_, index) => (
+                    <CarouselItem key={`loading-${index}`} className="md:basis-1/3 lg:basis-1/3">
                       <div className="p-2">
-                        <div className="bg-white rounded-md overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                          <div className="aspect-square overflow-hidden">
-                            <img 
-                              src={`https://images.unsplash.com/photo-${1610000000 + index * 100}?q=80&w=500`} 
-                              alt={`Product ${index + 1}`}
-                              className="w-full h-full object-cover"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                target.src = "https://images.unsplash.com/photo-1607453998774-d533f65dac99?q=80&w=500";
-                              }}
-                            />
-                          </div>
-                          <div className="p-4">
-                            <h3 className="font-medium">Kids Summer Dress</h3>
-                            <p className="text-primary font-semibold mt-1">$29.99</p>
+                        <div className="bg-white rounded-md overflow-hidden shadow-sm">
+                          <div className="aspect-square bg-gray-200 animate-pulse"></div>
+                          <div className="p-4 space-y-2">
+                            <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
+                            <div className="h-4 w-1/3 bg-gray-200 rounded animate-pulse"></div>
                           </div>
                         </div>
                       </div>
-                    </Link>
-                  </CarouselItem>
-                ))}
+                    </CarouselItem>
+                  ))
+                ) : (
+                  carouselImages.map((imageUrl, index) => (
+                    <CarouselItem key={index} className="md:basis-1/3 lg:basis-1/3">
+                      <Link to={`/shop-clothing/product-${index + 1}`}>
+                        <div className="p-2">
+                          <div className="bg-white rounded-md overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                            <div className="aspect-square overflow-hidden">
+                              <img 
+                                src={imageUrl} 
+                                alt={`Product ${index + 1}`}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.src = diverseImages.baby;
+                                }}
+                              />
+                            </div>
+                            <div className="p-4">
+                              <h3 className="font-medium">Kids Summer Collection</h3>
+                              <p className="text-primary font-semibold mt-1">$29.99</p>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    </CarouselItem>
+                  ))
+                )}
               </CarouselContent>
               <CarouselPrevious className="left-0" />
               <CarouselNext className="right-0" />
@@ -156,13 +217,12 @@ const Index: React.FC = () => {
           </div>
         </section>
 
-        {/* Subscription Boxes Banner */}
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div className="aspect-square md:aspect-auto md:h-[400px] overflow-hidden rounded-md">
                 <img 
-                  src="https://images.unsplash.com/photo-1632163030629-a7b9a21b6094?q=80&w=1000" 
+                  src="https://images.unsplash.com/photo-1611403570720-162d8829689a?q=80&w=1000" 
                   alt="Happy Kid with clothing box" 
                   className="w-full h-full object-cover"
                 />
@@ -206,7 +266,6 @@ const Index: React.FC = () => {
           </div>
         </section>
 
-        {/* CTA - Style Quiz */}
         <section className="py-16 bg-secondary/10">
           <div className="container mx-auto px-4 text-center max-w-2xl">
             <h2 className="text-3xl font-league-spartan font-bold mb-4">Not Sure What to Buy?</h2>

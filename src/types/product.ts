@@ -12,20 +12,27 @@ export interface Product {
   sizes: string[];
   features: string[];
   inStock: boolean;
-  // Added fields
-  gender?: string;
-  ageRange?: string;
+  // Enhanced fields for diverse representation
+  gender?: "boy" | "girl" | "unisex";
+  ageRange?: string; // e.g., "0-3 months", "2-3 years"
   brand?: string;
   material?: string;
   category?: string;
   tags?: string[];
   seasonality?: string;
   careInstructions?: string;
+  // Caribbean-specific fields
+  islandCollection?: string; // e.g., "Jamaica", "Trinidad", "Barbados"
+  culturalSignificance?: string;
+  localDesigner?: boolean;
+  sustainablySourced?: boolean;
 }
 
 export interface ProductColor {
   name: string;
   value: string;
+  // Add cultural context for colors if relevant
+  culturalMeaning?: string;
 }
 
 export interface Review {
@@ -37,6 +44,12 @@ export interface Review {
   content: string;
   helpful: number;
   notHelpful: number;
+  // Additional fields for review enhancement
+  verifiedPurchase?: boolean;
+  location?: string;
+  childAge?: string;
+  childGender?: string;
+  photos?: string[];
 }
 
 export interface RatingDistribution {
