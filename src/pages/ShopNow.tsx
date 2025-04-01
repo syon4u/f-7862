@@ -19,48 +19,57 @@ const ShopNow: React.FC = () => {
   const boxOptions: BoxOption[] = [
     {
       id: '1',
-      name: 'HK Baby Box',
+      name: 'Baby Boy Box',
       sizes: 'Newborn - 24 months',
       items: '6 items',
-      description: '(style mix of brand bottoms, tops and one-piece outfits)',
+      description: 'A style mix of bottoms, tops and one-pieces',
       price: 'US$85',
-      image: 'https://images.unsplash.com/photo-1544413164-5f1b361f5n69?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFieSUyMGNsb3RoZXN8ZW58MHx8MHx8fDA%3D'
+      image: '/lovable-uploads/494ece28-9057-4d3a-85ad-73b8c5e59d8c.png'
     },
     {
       id: '2',
-      name: 'HK Mini Box',
-      sizes: '2T- 14 years',
-      items: '2 items',
-      description: '(styled brand outfit)',
-      price: 'US$62',
-      image: 'https://images.unsplash.com/photo-1543266793-7d7a2c640fb6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGtpZHMlMjBjbG90aGVzfGVufDB8fDB8fHww'
+      name: 'Baby Girl Box',
+      sizes: 'Newborn - 24 months',
+      items: '6 items',
+      description: 'A style mix of bottoms, tops and one-pieces',
+      price: 'US$85',
+      image: '/lovable-uploads/3abf5482-391c-402e-ba1f-2ef92ae703ec.png'
     },
     {
       id: '3',
-      name: 'HK Classic Box',
-      sizes: '2T- 14 years',
+      name: 'Classic Boy Box',
+      sizes: '2T - 14 years',
       items: '4 items',
-      description: '(style mix of brand bottoms, tops and one-piece outfits)',
+      description: 'A style mix of tops and bottoms',
       price: 'US$85',
-      image: 'https://images.unsplash.com/photo-1519392933350-e5b0672e5b34?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGtpZHMlMjBjbG90aGVzfGVufDB8fDB8fHww'
+      image: '/lovable-uploads/f9c911a0-93ee-488f-b585-0a8f590f189d.png'
     },
     {
       id: '4',
-      name: 'HK Deluxe Box',
-      sizes: '2T- 14 years',
+      name: 'Deluxe Boy Box',
+      sizes: '2T - 14 years',
       items: '6 items',
-      description: '(style mix of brand bottoms, tops and one-piece outfits)',
+      description: 'A style mix of tops and bottoms',
       price: 'US$124',
-      image: 'https://images.unsplash.com/photo-1519241047957-be31d7379a5d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fGtpZHMlMjBjbG90aGVzfGVufDB8fDB8fHww'
+      image: '/lovable-uploads/bf084176-f391-479e-9596-fc7c6075a4e6.png'
     },
     {
       id: '5',
-      name: 'HK Grand Box',
-      sizes: '2T- 14 years',
-      items: '8 items',
-      description: '(style mix of brand bottoms, tops and one-piece outfits)',
-      price: 'US$155',
-      image: 'https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fGtpZHMlMjBjbG90aGVzfGVufDB8fDB8fHww'
+      name: 'Classic Girl Box',
+      sizes: '2T - 14 years',
+      items: '4 items',
+      description: 'A style mix of tops, bottoms and one-pieces',
+      price: 'US$85',
+      image: '/lovable-uploads/9ba91523-8974-43d9-8cd7-284caed511a8.png'
+    },
+    {
+      id: '6',
+      name: 'Deluxe Girl Box',
+      sizes: '2T - 14 years',
+      items: '6 items',
+      description: 'A style mix of tops, bottoms and one-pieces',
+      price: 'US$124',
+      image: '/lovable-uploads/a168f316-8f5a-400d-9c72-632a270f6f98.png'
     }
   ];
 
@@ -69,7 +78,7 @@ const ShopNow: React.FC = () => {
       <Navbar />
       
       <main className="flex-grow container mx-auto px-4 py-8">
-        <h1 className="font-league-spartan text-3xl md:text-4xl font-bold text-center mb-2">Select Your Box Option</h1>
+        <h1 className="font-league-spartan text-3xl md:text-4xl font-bold text-center mb-2">Select Your Happy Kids Box</h1>
         <p className="text-center text-muted-foreground mb-12">Choose the perfect clothing subscription box for your little one</p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
