@@ -42,7 +42,60 @@ const Navbar: React.FC = () => {
       {/* Main Header */}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
-          {/* Left Section - Search */}
+          {/* Left Section - Logo */}
+          <Link to="/" className="flex items-center">
+            <img 
+              src="/lovable-uploads/de2a3b1d-d4d3-4fc3-b978-d8912e563d38.png" 
+              alt="Happy Kids Box Logo" 
+              className="h-10 md:h-12"
+            />
+          </Link>
+          
+          {/* Center - Navigation */}
+          <nav className="hidden md:block">
+            <NavigationMenu className="justify-center">
+              <NavigationMenuList className="gap-6">
+                {mainMenuItems.map((item, index) => (
+                  <NavigationMenuItem key={index}>
+                    {item.hasDropdown ? (
+                      <>
+                        <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent">
+                          <Link to={item.path} className="text-sm font-medium">
+                            {item.name}
+                          </Link>
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                          <div className="grid grid-cols-5 gap-2 p-4 w-screen max-w-5xl">
+                            {categories.map((category, catIndex) => (
+                              <div key={catIndex} className="p-2">
+                                <NavigationMenuLink asChild>
+                                  <Link 
+                                    to={category.path} 
+                                    className="text-sm font-medium hover:text-primary block transition-colors"
+                                  >
+                                    {category.name}
+                                  </Link>
+                                </NavigationMenuLink>
+                              </div>
+                            ))}
+                          </div>
+                        </NavigationMenuContent>
+                      </>
+                    ) : (
+                      <Link 
+                        to={item.path} 
+                        className="text-sm font-medium hover:text-primary px-4 py-2 block transition-colors"
+                      >
+                        {item.name}
+                      </Link>
+                    )}
+                  </NavigationMenuItem>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
+          </nav>
+
+          {/* Right Section - Icons */}
           <div className="flex items-center space-x-2">
             <div className={`${searchOpen ? 'flex' : 'hidden'} md:flex relative`}>
               <Input 
@@ -60,19 +113,6 @@ const Navbar: React.FC = () => {
             >
               <Search className="h-5 w-5" />
             </Button>
-          </div>
-          
-          {/* Center - Logo */}
-          <Link to="/" className="flex items-center">
-            <img 
-              src="/lovable-uploads/de2a3b1d-d4d3-4fc3-b978-d8912e563d38.png" 
-              alt="Happy Kids Box Logo" 
-              className="h-10 md:h-12"
-            />
-          </Link>
-          
-          {/* Right Section - Icons */}
-          <div className="flex items-center space-x-2">
             <Link to="/my-account" className="hidden md:block text-xs font-medium">
               CUSTOMER CARE
             </Link>
@@ -102,50 +142,6 @@ const Navbar: React.FC = () => {
             </Button>
           </div>
         </div>
-        
-        {/* Navigation Menu */}
-        <nav className="hidden md:block py-3">
-          <NavigationMenu className="justify-center">
-            <NavigationMenuList className="gap-6">
-              {mainMenuItems.map((item, index) => (
-                <NavigationMenuItem key={index}>
-                  {item.hasDropdown ? (
-                    <>
-                      <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent">
-                        <Link to={item.path} className="text-sm font-medium">
-                          {item.name}
-                        </Link>
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <div className="grid grid-cols-5 gap-2 p-4 w-screen max-w-5xl">
-                          {categories.map((category, catIndex) => (
-                            <div key={catIndex} className="p-2">
-                              <NavigationMenuLink asChild>
-                                <Link 
-                                  to={category.path} 
-                                  className="text-sm font-medium hover:text-primary block transition-colors"
-                                >
-                                  {category.name}
-                                </Link>
-                              </NavigationMenuLink>
-                            </div>
-                          ))}
-                        </div>
-                      </NavigationMenuContent>
-                    </>
-                  ) : (
-                    <Link 
-                      to={item.path} 
-                      className="text-sm font-medium hover:text-primary px-4 py-2 block transition-colors"
-                    >
-                      {item.name}
-                    </Link>
-                  )}
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
-        </nav>
         
         {/* Mobile Menu */}
         {mobileMenuOpen && (

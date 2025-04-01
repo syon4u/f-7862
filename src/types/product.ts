@@ -12,6 +12,15 @@ export interface Product {
   sizes: string[];
   features: string[];
   inStock: boolean;
+  // Added fields
+  gender?: string;
+  ageRange?: string;
+  brand?: string;
+  material?: string;
+  category?: string;
+  tags?: string[];
+  seasonality?: string;
+  careInstructions?: string;
 }
 
 export interface ProductColor {
