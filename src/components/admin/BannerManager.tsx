@@ -1,36 +1,15 @@
 
-import React, { useState } from 'react';
-import { Upload, Trash, Image } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Upload, Trash, Image, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
+import { useBanners, BannerImage } from '@/contexts/BannerContext';
 
-interface BannerImage {
-  id: string;
-  url: string;
-  title: string;
-  subtitle?: string;
-  buttonText?: string;
-  buttonLink?: string;
-  isActive: boolean;
-}
-
-interface BannerManagerProps {
-  initialBanners?: BannerImage[];
-}
-
-const BannerManager: React.FC<BannerManagerProps> = ({ initialBanners = [] }) => {
-  const [banners, setBanners] = useState<BannerImage[]>(initialBanners.length > 0 ? initialBanners : [
-    {
-      id: '1',
-      url: 'https://images.unsplash.com/photo-1560506840-ec148e82a604?q=80&w=1000',
-      title: 'Spring Wardrobe Refresh!',
-      buttonText: 'SHOP NEW IN',
-      buttonLink: '/shop-now',
-      isActive: true
-    }
-  ]);
+const BannerManager: React.FC = () => {
+  const { banners, addBanner, deleteBanner, setActiveBanner } = useBanners();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   
   const [newBanner, setNewBanner] = useState<Partial<BannerImage>>({
     title: '',
@@ -60,7 +39,7 @@ const BannerManager: React.FC<BannerManagerProps> = ({ initialBanners = [] }) =>
       isActive: false
     };
     
-    setBanners([...banners, banner]);
+    addBanner(banner);
     setNewBanner({
       title: '',
       url: '',
@@ -72,24 +51,36 @@ const BannerManager: React.FC<BannerManagerProps> = ({ initialBanners = [] }) =>
   };
 
   const handleDeleteBanner = (id: string) => {
-    const updatedBanners = banners.filter(banner => banner.id !== id);
-    setBanners(updatedBanners);
+    const activeBanner = banners.find(banner => banner.isActive);
+    if (activeBanner && activeBanner.id === id) {
+      toast.error("Cannot delete the active banner. Please set another banner as active first.");
+      return;
+    }
+    
+    deleteBanner(id);
     toast.success("Banner deleted successfully");
   };
 
   const handleSetActive = (id: string) => {
-    const updatedBanners = banners.map(banner => ({
-      ...banner,
-      isActive: banner.id === id
-    }));
-    
-    setBanners(updatedBanners);
+    setActiveBanner(id);
     toast.success("Banner set as active");
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      // Check file type
+      if (!file.type.startsWith('image/')) {
+        toast.error("Please upload an image file");
+        return;
+      }
+      
+      // Check file size (limit to 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error("Image size should be less than 5MB");
+        return;
+      }
+
       const reader = new FileReader();
       reader.onload = (event) => {
         setNewBanner({
@@ -99,6 +90,10 @@ const BannerManager: React.FC<BannerManagerProps> = ({ initialBanners = [] }) =>
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const triggerFileInput = () => {
+    fileInputRef.current?.click();
   };
 
   return (
@@ -134,18 +129,22 @@ const BannerManager: React.FC<BannerManagerProps> = ({ initialBanners = [] }) =>
                   <div className="text-center">
                     <Image className="mx-auto h-12 w-12 text-gray-400" />
                     <p className="mt-2 text-sm text-gray-500">Upload a banner image</p>
-                    <Input
+                    <input
+                      ref={fileInputRef}
                       id="banner-image"
                       type="file"
                       accept="image/*"
                       className="hidden"
                       onChange={handleImageUpload}
                     />
-                    <label htmlFor="banner-image" className="cursor-pointer">
-                      <Button type="button" variant="outline" className="mt-2">
-                        <Upload className="mr-2 h-4 w-4" /> Upload
-                      </Button>
-                    </label>
+                    <Button 
+                      type="button" 
+                      variant="outline" 
+                      className="mt-2"
+                      onClick={triggerFileInput}
+                    >
+                      <Upload className="mr-2 h-4 w-4" /> Upload
+                    </Button>
                   </div>
                 </div>
               )}
@@ -241,6 +240,7 @@ const BannerManager: React.FC<BannerManagerProps> = ({ initialBanners = [] }) =>
                         size="sm"
                         variant="destructive"
                         onClick={() => handleDeleteBanner(banner.id)}
+                        disabled={banner.isActive}
                       >
                         Delete
                       </Button>
