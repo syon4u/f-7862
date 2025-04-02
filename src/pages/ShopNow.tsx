@@ -89,6 +89,11 @@ const ShopNow: React.FC = () => {
                   src={box.image} 
                   alt={box.name}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = "/placeholder.svg";
+                  }}
                 />
               </div>
               <div className="p-6">
@@ -100,7 +105,12 @@ const ShopNow: React.FC = () => {
                   <span className="text-lg font-bold">{box.price}</span>
                   <span className="text-sm text-muted-foreground">Includes shipping</span>
                 </div>
-                <Button className="w-full mt-4 bg-primary hover:bg-primary/90">Select Box</Button>
+                <Button 
+                  className="w-full mt-4 bg-primary hover:bg-primary/90"
+                  asChild
+                >
+                  <Link to="/style-quiz">Select Box</Link>
+                </Button>
               </div>
             </div>
           ))}
