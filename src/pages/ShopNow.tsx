@@ -24,7 +24,7 @@ const ShopNow: React.FC = () => {
       items: '6 items',
       description: 'A style mix of bottoms, tops and one-pieces',
       price: 'US$85',
-      image: '/lovable-uploads/494ece28-9057-4d3a-85ad-73b8c5e59d8c.png'
+      image: '/lovable-uploads/7f1ef772-a46e-4a42-b089-8cb4abddcb34.png'
     },
     {
       id: '2',
@@ -33,7 +33,7 @@ const ShopNow: React.FC = () => {
       items: '6 items',
       description: 'A style mix of bottoms, tops and one-pieces',
       price: 'US$85',
-      image: '/lovable-uploads/3abf5482-391c-402e-ba1f-2ef92ae703ec.png'
+      image: '/lovable-uploads/1603b4f5-d462-4411-a7a8-c5001b061886.png'
     },
     {
       id: '3',
@@ -42,7 +42,7 @@ const ShopNow: React.FC = () => {
       items: '4 items',
       description: 'A style mix of tops and bottoms',
       price: 'US$85',
-      image: '/lovable-uploads/f9c911a0-93ee-488f-b585-0a8f590f189d.png'
+      image: '/lovable-uploads/bc2db481-37c2-450f-a229-e25e3021907f.png'
     },
     {
       id: '4',
@@ -51,7 +51,7 @@ const ShopNow: React.FC = () => {
       items: '6 items',
       description: 'A style mix of tops and bottoms',
       price: 'US$124',
-      image: '/lovable-uploads/bf084176-f391-479e-9596-fc7c6075a4e6.png'
+      image: '/lovable-uploads/c22fa864-deb4-47b1-8d7f-3f2652269156.png'
     },
     {
       id: '5',
@@ -60,7 +60,7 @@ const ShopNow: React.FC = () => {
       items: '4 items',
       description: 'A style mix of tops, bottoms and one-pieces',
       price: 'US$85',
-      image: '/lovable-uploads/9ba91523-8974-43d9-8cd7-284caed511a8.png'
+      image: '/lovable-uploads/b29bd98b-c3d6-46b2-8679-220e3564a7cd.png'
     },
     {
       id: '6',
@@ -69,7 +69,7 @@ const ShopNow: React.FC = () => {
       items: '6 items',
       description: 'A style mix of tops, bottoms and one-pieces',
       price: 'US$124',
-      image: '/lovable-uploads/a168f316-8f5a-400d-9c72-632a270f6f98.png'
+      image: '/lovable-uploads/6f94432e-74b3-4770-a3ff-86d48982be97.png'
     }
   ];
 
