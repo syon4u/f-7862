@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import MyAccount from "./pages/MyAccount";
 import ShopNow from "./pages/ShopNow";
+import BoxDetail from "./pages/BoxDetail";
 import ShopClothing from "./pages/ShopClothing";
 import HowItWorks from "./pages/HowItWorks";
 import SocialPurpose from "./pages/SocialPurpose";
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/my-account" element={<MyAccount />} />
           <Route path="/shop-now" element={<ShopNow />} />
+          <Route path="/box/:id" element={<BoxDetail />} />
           <Route path="/shop-clothing" element={<ShopClothing />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/social-purpose" element={<SocialPurpose />} />

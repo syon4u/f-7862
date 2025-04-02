@@ -84,7 +84,7 @@ const ShopNow: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {boxOptions.map((box) => (
             <div key={box.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="aspect-square overflow-hidden">
+              <Link to={`/box/${box.id}`} className="block aspect-square overflow-hidden">
                 <img 
                   src={box.image} 
                   alt={box.name}
@@ -95,9 +95,11 @@ const ShopNow: React.FC = () => {
                     target.src = "/placeholder.svg";
                   }}
                 />
-              </div>
+              </Link>
               <div className="p-6">
-                <h3 className="font-league-spartan text-xl font-bold mb-2">{box.name}</h3>
+                <Link to={`/box/${box.id}`}>
+                  <h3 className="font-league-spartan text-xl font-bold mb-2 hover:text-primary transition-colors">{box.name}</h3>
+                </Link>
                 <p className="text-sm mb-1"><span className="font-medium">Size:</span> {box.sizes}</p>
                 <p className="text-sm mb-1"><span className="font-medium">{box.items}</span></p>
                 <p className="text-sm text-muted-foreground mb-4">{box.description}</p>
@@ -105,12 +107,20 @@ const ShopNow: React.FC = () => {
                   <span className="text-lg font-bold">{box.price}</span>
                   <span className="text-sm text-muted-foreground">Includes shipping</span>
                 </div>
-                <Button 
-                  className="w-full mt-4 bg-primary hover:bg-primary/90"
-                  asChild
-                >
-                  <Link to="/style-quiz">Select Box</Link>
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-2 mt-4">
+                  <Button 
+                    className="flex-1 bg-primary hover:bg-primary/90"
+                    asChild
+                  >
+                    <Link to={`/box/${box.id}`}>View Details</Link>
+                  </Button>
+                  <Button 
+                    className="flex-1 bg-secondary hover:bg-secondary/90"
+                    asChild
+                  >
+                    <Link to="/style-quiz">Style Quiz</Link>
+                  </Button>
+                </div>
               </div>
             </div>
           ))}
