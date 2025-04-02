@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -27,8 +28,13 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
-import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Checkbox
+} from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { useProducts } from '@/contexts/ProductContext';
+import { Product } from '@/types/product';
+import { toast } from '@/hooks/use-toast';
 
 type Category = 'all' | 'new-in' | 'designers' | 'boys' | 'girls' | 'baby' | 'shoes';
 
@@ -47,6 +53,7 @@ interface ClothingItem {
   new: boolean;
 }
 
+// Static mock data as fallback
 const mockClothingItems: ClothingItem[] = [
   {
     id: "1",
@@ -485,6 +492,46 @@ const ShopClothing: React.FC = () => {
   const [filterNew, setFilterNew] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<Category>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [clothingItems, setClothingItems] = useState<ClothingItem[]>([]);
+  
+  // Get products from context
+  const { products, loading } = useProducts();
+  
+  // Convert products from admin inventory to clothing items format
+  useEffect(() => {
+    if (products.length > 0) {
+      const convertedItems: ClothingItem[] = products.map(product => ({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.images && product.images.length > 0 ? product.images[0] : '/placeholder.svg',
+        category: product.category?.toLowerCase() || 'tops',
+        subcategory: (product.gender === 'boy' ? 'boys' : 
+                     product.gender === 'girl' ? 'girls' : 
+                     product.gender === 'unisex' && product.ageRange?.includes('0-') ? 'baby' : 'new-in') as Category,
+        age: product.ageRange || '5-7',
+        color: product.colors && product.colors.length > 0 ? product.colors[0].value.toLowerCase() : 'multi',
+        rating: product.rating || 4.5,
+        sale: product.discountPrice !== undefined,
+        salePrice: product.discountPrice,
+        new: product.tags?.includes('new') || false
+      }));
+      
+      // Combine admin products with mock data, prioritizing admin products
+      const adminProductIds = new Set(convertedItems.map(item => item.id));
+      const filteredMockItems = mockClothingItems.filter(item => !adminProductIds.has(item.id));
+      
+      setClothingItems([...convertedItems, ...filteredMockItems]);
+      toast({
+        title: "Products Loaded",
+        description: `${convertedItems.length} products loaded from inventory`,
+        variant: "default"
+      });
+    } else {
+      // Use mock data if no admin products
+      setClothingItems(mockClothingItems);
+    }
+  }, [products]);
   
   const handleCategoryChange = (category: string) => {
     setFilterCategory(prev => 
@@ -519,7 +566,7 @@ const ShopClothing: React.FC = () => {
     setSearchTerm('');
   };
   
-  const filteredItems = mockClothingItems.filter(item => {
+  const filteredItems = clothingItems.filter(item => {
     if (activeTab !== 'all' && item.subcategory !== activeTab) {
       return false;
     }

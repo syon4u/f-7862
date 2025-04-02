@@ -16,31 +16,34 @@ import StyleQuiz from "./pages/StyleQuiz";
 import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
 import AdminInventory from "./pages/AdminInventory";
+import { ProductProvider } from "./contexts/ProductContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/my-account" element={<MyAccount />} />
-          <Route path="/shop-now" element={<ShopNow />} />
-          <Route path="/box/:id" element={<BoxDetail />} />
-          <Route path="/shop-clothing" element={<ShopClothing />} />
-          <Route path="/how-it-works" element={<HowItWorks />} />
-          <Route path="/social-purpose" element={<SocialPurpose />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/style-quiz" element={<StyleQuiz />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/admin/inventory" element={<AdminInventory />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <ProductProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/my-account" element={<MyAccount />} />
+            <Route path="/shop-now" element={<ShopNow />} />
+            <Route path="/box/:id" element={<BoxDetail />} />
+            <Route path="/shop-clothing" element={<ShopClothing />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="/social-purpose" element={<SocialPurpose />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/style-quiz" element={<StyleQuiz />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/admin/inventory" element={<AdminInventory />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </ProductProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
