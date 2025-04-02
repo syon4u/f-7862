@@ -28,7 +28,8 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Check, Trash, Edit, Plus, Upload } from 'lucide-react';
+import { Check, Trash, Edit, Plus, Upload, X } from 'lucide-react';
+import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from '@/hooks/use-toast';
 
 const AdminInventory = () => {
