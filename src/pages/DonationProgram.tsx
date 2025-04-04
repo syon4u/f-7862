@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -36,7 +35,7 @@ const DonationProgram: React.FC = () => {
   ];
 
   const impactStats = [
-    { label: "Boxes Donated", value: 1,247, icon: Gift },
+    { label: "Boxes Donated", value: 1247, icon: Gift },
     { label: "Children Supported", value: 842, icon: Users },
     { label: "Partner Homes", value: 12, icon: MapPin },
   ];
