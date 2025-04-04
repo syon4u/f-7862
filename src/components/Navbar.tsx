@@ -54,7 +54,13 @@ const Navbar: React.FC = () => {
             <img 
               src="/lovable-uploads/de2a3b1d-d4d3-4fc3-b978-d8912e563d38.png" 
               alt="Happy Kids Box Logo" 
-              className="h-10 md:h-12"
+              className="h-12 md:h-14 object-contain"
+              onError={(e) => {
+                console.error("Logo failed to load");
+                e.currentTarget.src = "/placeholder.svg";
+                e.currentTarget.style.height = "40px";
+                e.currentTarget.style.width = "160px";
+              }}
             />
           </Link>
           
