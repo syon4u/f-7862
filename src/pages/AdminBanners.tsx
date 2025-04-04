@@ -6,15 +6,17 @@ import BannerManager from '../components/admin/BannerManager';
 
 const AdminBanners = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-amber-50 to-blue-50">
       <Navbar />
       
       <div className="container mx-auto px-4 py-8 flex-grow">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">Banner Management</h1>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent">Banner Management</h1>
         </div>
         
-        <BannerManager />
+        <div className="bg-white rounded-xl shadow-md p-6">
+          <BannerManager />
+        </div>
       </div>
       
       <Footer />

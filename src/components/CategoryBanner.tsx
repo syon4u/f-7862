@@ -12,43 +12,43 @@ const CategoryBanner: React.FC<CategoryBannerProps> = ({
   image,
   description
 }) => {
-  // Default background patterns based on category
+  // Default background patterns based on category - enhanced with richer patterns
   const getBgPattern = () => {
     switch(category.toLowerCase()) {
       case 'boys':
-        return 'bg-blue-50 squares-pattern';
+        return 'bg-blue-100 squares-pattern';
       case 'girls':
-        return 'bg-pink-50 dots-pattern';
+        return 'bg-pink-100 dots-pattern';
       case 'baby':
-        return 'bg-yellow-50 waves-pattern';
+        return 'bg-amber-100 waves-pattern';
       case 'shoes':
-        return 'bg-purple-50 dots-pattern';
+        return 'bg-purple-100 dots-pattern';
       case 'new in':
-        return 'bg-green-50 squares-pattern';
+        return 'bg-emerald-100 squares-pattern';
       case 'designers':
-        return 'bg-orange-50 waves-pattern';
+        return 'bg-orange-100 waves-pattern';
       default:
-        return 'bg-gray-50';
+        return 'bg-gray-100';
     }
   };
 
-  // Get category-specific colors
+  // Get category-specific colors - enhanced with richer gradients
   const getCategoryColors = () => {
     switch(category.toLowerCase()) {
       case 'boys':
-        return 'from-blue-500 to-cyan-400';
+        return 'from-blue-600 to-cyan-500';
       case 'girls':
-        return 'from-pink-500 to-purple-400';
+        return 'from-pink-600 to-purple-500';
       case 'baby':
-        return 'from-yellow-400 to-amber-300';
+        return 'from-amber-500 to-yellow-400';
       case 'shoes':
-        return 'from-purple-500 to-fuchsia-400';
+        return 'from-purple-600 to-fuchsia-500';
       case 'new in':
-        return 'from-green-500 to-emerald-400';
+        return 'from-emerald-600 to-green-500';
       case 'designers':
-        return 'from-orange-500 to-amber-400';
+        return 'from-orange-600 to-amber-500';
       default:
-        return 'from-gray-500 to-slate-400';
+        return 'from-gray-600 to-slate-500';
     }
   };
 
@@ -76,7 +76,7 @@ const CategoryBanner: React.FC<CategoryBannerProps> = ({
 
   return (
     <div className={`relative overflow-hidden rounded-xl mb-6 ${getBgPattern()}`}>
-      <div className="absolute inset-0 opacity-20 bg-pattern"></div>
+      <div className="absolute inset-0 opacity-25 bg-pattern"></div>
       <div className={`relative w-full h-40 md:h-48 flex items-center justify-center p-6 overflow-hidden`}>
         <img 
           src={getCategoryImage()} 
@@ -88,11 +88,11 @@ const CategoryBanner: React.FC<CategoryBannerProps> = ({
             {category.toUpperCase()}
           </h2>
           {description && (
-            <p className="text-gray-700 max-w-md mx-auto">
+            <p className="text-gray-800 max-w-md mx-auto font-medium">
               {description}
             </p>
           )}
-          <div className={`h-1 w-24 mx-auto mt-4 rounded-full bg-gradient-to-r ${getCategoryColors()}`}></div>
+          <div className={`h-1.5 w-24 mx-auto mt-4 rounded-full bg-gradient-to-r ${getCategoryColors()}`}></div>
         </div>
       </div>
     </div>

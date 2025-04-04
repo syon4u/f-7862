@@ -1,4 +1,3 @@
-
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
@@ -66,25 +65,25 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Kid-friendly colors
-        "kid-blue": "#9ED8DB",
-        "kid-pink": "#FFB6C1",
-        "kid-yellow": "#FDFD96",
-        "kid-green": "#B5EAD7",
-        "kid-purple": "#C7CEEA",
-        "kid-orange": "#FFB347",
-        // Additional vibrant colors
-        "vibrant-coral": "#FF6F61",
-        "vibrant-turquoise": "#00C9A7",
-        "vibrant-marigold": "#FCBF49",
-        "vibrant-violet": "#845EC2",
-        "vibrant-lime": "#C5D86D",
-        // Pastel colors
-        "pastel-peach": "#FFD8CC",
-        "pastel-mint": "#D4F0F0",
-        "pastel-lavender": "#E6E6FA",
-        "pastel-banana": "#FAFAD2",
-        "pastel-blush": "#FFCCCB",
+        // Kid-friendly colors - enhanced with richer tones
+        "kid-blue": "#3AA0FF",
+        "kid-pink": "#FF4D6D",
+        "kid-yellow": "#FFCD4F",
+        "kid-green": "#42D778",
+        "kid-purple": "#9537FF",
+        "kid-orange": "#FF8C00",
+        // Additional vibrant colors - enhanced
+        "vibrant-coral": "#FF5A4E",
+        "vibrant-turquoise": "#00BC9A",
+        "vibrant-marigold": "#FF9F00",
+        "vibrant-violet": "#7A4EBD",
+        "vibrant-lime": "#B8D44A",
+        // Pastel colors - slightly more saturated but still soft
+        "pastel-peach": "#FFCBB8",
+        "pastel-mint": "#C1EFEF",
+        "pastel-lavender": "#DFD9FF",
+        "pastel-banana": "#FFF9A6",
+        "pastel-blush": "#FFBDBC",
       },
       fontFamily: {
         "league-spartan": ["League Spartan", ...fontFamily.sans],

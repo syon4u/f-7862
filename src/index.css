@@ -7,7 +7,7 @@
 
 @layer base {
   :root {
-    --background: 50 95% 97%; /* Warmer, slightly more saturated background */
+    --background: 36 95% 97%; /* Warmer, more saturated background */
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -17,7 +17,7 @@
     --popover-foreground: 222.2 84% 4.9%;
 
     /* More saturated, vibrant primary color - brighter green */
-    --primary: 142 76% 45%; /* #0ad168 - a more vibrant green */
+    --primary: 142 80% 45%; /* Increased saturation */
     --primary-foreground: 210 40% 98%;
 
     /* Richer secondary color - deeper coral */
@@ -25,21 +25,21 @@
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     /* More saturated tertiary - deeper royal blue */
-    --tertiary: 240 76% 54%; /* #4545c9 - Deeper blue */
+    --tertiary: 240 84% 54%; /* Increased saturation */
     --tertiary-foreground: 210 40% 98%;
 
     /* More vibrant teal for quaternary */
-    --quaternary: 187 100% 40%; /* #00b3bd - Deeper teal */
+    --quaternary: 187 100% 42%; /* Increased saturation and darker */
     --quaternary-foreground: 210 40% 98%;
 
     /* More vibrant yellow for quinary */
-    --quinary: 45 100% 60%; /* #ffbc1f - Richer yellow */
+    --quinary: 45 100% 64%; /* Increased saturation */
     --quinary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 93%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 349 89% 88%; /* Slightly deeper pink accent */
+    --accent: 349 92% 88%; /* Slightly deeper pink accent */
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -51,7 +51,7 @@
 
     --radius: 1rem;
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 36 80% 97%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
     --sidebar-primary-foreground: 0 0% 98%;
@@ -117,7 +117,7 @@
 
   body {
     @apply bg-background text-foreground font-poppins;
-    background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2347B5FF' fill-opacity='0.15'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6h-2c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h-2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6h2c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h-2Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2347B5FF' fill-opacity='0.2'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6h-2c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h-2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6h2c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h-2Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
   
   h1, h2, h3 {
