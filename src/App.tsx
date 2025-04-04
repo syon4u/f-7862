@@ -24,43 +24,46 @@ import Events from "./pages/Events";
 import CustomerSupport from "./pages/CustomerSupport";
 import { ProductProvider } from "./contexts/ProductContext";
 import { BannerProvider } from "./contexts/BannerContext";
+import React from 'react';
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <ProductProvider>
-        <BannerProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/my-account" element={<MyAccount />} />
-              <Route path="/shop-now" element={<ShopNow />} />
-              <Route path="/box/:id" element={<BoxDetail />} />
-              <Route path="/shop-clothing" element={<ShopClothing />} />
-              <Route path="/how-it-works" element={<HowItWorks />} />
-              <Route path="/social-purpose" element={<SocialPurpose />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/style-quiz" element={<StyleQuiz />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/membership" element={<Membership />} />
-              <Route path="/donation-program" element={<DonationProgram />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/events" element={<Events />} />
-              <Route path="/customer-support" element={<CustomerSupport />} />
-              <Route path="/admin/inventory" element={<AdminInventory />} />
-              <Route path="/admin/banners" element={<AdminBanners />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </BannerProvider>
-      </ProductProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <ProductProvider>
+          <BannerProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/my-account" element={<MyAccount />} />
+                <Route path="/shop-now" element={<ShopNow />} />
+                <Route path="/box/:id" element={<BoxDetail />} />
+                <Route path="/shop-clothing" element={<ShopClothing />} />
+                <Route path="/how-it-works" element={<HowItWorks />} />
+                <Route path="/social-purpose" element={<SocialPurpose />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/style-quiz" element={<StyleQuiz />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/membership" element={<Membership />} />
+                <Route path="/donation-program" element={<DonationProgram />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/events" element={<Events />} />
+                <Route path="/customer-support" element={<CustomerSupport />} />
+                <Route path="/admin/inventory" element={<AdminInventory />} />
+                <Route path="/admin/banners" element={<AdminBanners />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </TooltipProvider>
+          </BannerProvider>
+        </ProductProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
+  </React.StrictMode>
 );
 
 export default App;
