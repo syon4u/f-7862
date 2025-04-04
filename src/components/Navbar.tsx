@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Search, ShoppingCart, User, Heart, Menu, X, Gift, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -54,12 +53,12 @@ const Navbar: React.FC = () => {
             <img 
               src="/lovable-uploads/de2a3b1d-d4d3-4fc3-b978-d8912e563d38.png" 
               alt="Happy Kids Box Logo" 
-              className="h-12 md:h-14 object-contain"
+              className="h-16 md:h-20 object-contain"
               onError={(e) => {
                 console.error("Logo failed to load");
                 e.currentTarget.src = "/placeholder.svg";
-                e.currentTarget.style.height = "40px";
-                e.currentTarget.style.width = "160px";
+                e.currentTarget.style.height = "50px";
+                e.currentTarget.style.width = "200px";
               }}
             />
           </Link>
