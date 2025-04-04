@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Search, ShoppingCart, User, Heart, Menu, X, Gift, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -44,14 +45,14 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <header className="border-b bg-gradient-to-r from-purple-50 to-pink-50 sticky top-0 z-50 shadow-sm">
+    <header className="border-b bg-gradient-to-r from-[#5D4EBD] to-[#45B8FF] sticky top-0 z-50 shadow-md">
       {/* Main Header */}
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between py-4">
+        <div className="flex items-center justify-between py-3">
           {/* Left Section - Logo */}
           <Link to="/" className="flex items-center">
             <img 
-              src="/lovable-uploads/de2a3b1d-d4d3-4fc3-b978-d8912e563d38.png" 
+              src="/lovable-uploads/af77dcd8-39d9-4916-9ac0-cf012692472e.png" 
               alt="Happy Kids Box Logo" 
               className="h-16 md:h-20 object-contain"
               onError={(e) => {
@@ -71,19 +72,19 @@ const Navbar: React.FC = () => {
                   <NavigationMenuItem key={index}>
                     {item.hasDropdown ? (
                       <>
-                        <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent">
-                          <Link to={item.path} className="text-sm font-medium">
+                        <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 focus:bg-white/10 data-[state=open]:bg-white/10 text-white">
+                          <Link to={item.path} className="text-sm font-bold">
                             {item.name}
                           </Link>
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-                          <div className="grid grid-cols-5 gap-2 p-4 w-screen max-w-5xl">
+                          <div className="grid grid-cols-5 gap-2 p-4 w-screen max-w-5xl bg-white rounded-b-xl shadow-lg">
                             {categories.map((category, catIndex) => (
                               <div key={catIndex} className="p-2">
                                 <NavigationMenuLink asChild>
                                   <Link 
                                     to={category.path} 
-                                    className="text-sm font-medium hover:text-primary block transition-colors"
+                                    className="text-sm font-bold hover:text-[#FF4D6D] block transition-colors"
                                   >
                                     {category.name}
                                   </Link>
@@ -96,7 +97,7 @@ const Navbar: React.FC = () => {
                     ) : (
                       <Link 
                         to={item.path} 
-                        className="text-sm font-medium hover:text-primary px-3 py-2 block transition-colors"
+                        className="text-sm font-bold text-white hover:text-white/80 px-3 py-2 block transition-colors"
                       >
                         {item.name}
                       </Link>
@@ -105,16 +106,16 @@ const Navbar: React.FC = () => {
                 ))}
                 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent">
-                    <span className="text-sm font-medium">COMMUNITY</span>
+                  <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 focus:bg-white/10 data-[state=open]:bg-white/10 text-white">
+                    <span className="text-sm font-bold">COMMUNITY</span>
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="p-4 w-56">
+                    <div className="p-4 w-56 bg-white rounded-b-xl shadow-lg">
                       {communityItems.map((item, index) => (
                         <Link 
                           key={index}
                           to={item.path} 
-                          className="block p-2 hover:bg-primary/10 rounded text-sm font-medium transition-colors"
+                          className="block p-2 hover:bg-[#FFCD4F]/10 rounded text-sm font-bold transition-colors"
                         >
                           {item.name}
                         </Link>
@@ -132,51 +133,51 @@ const Navbar: React.FC = () => {
               <Input 
                 type="text" 
                 placeholder="Search for..." 
-                className="w-32 md:w-56 pr-8"
+                className="w-32 md:w-56 pr-8 border-white bg-white/90"
               />
               <Search className="absolute right-2 top-2.5 h-4 w-4 text-muted-foreground" />
             </div>
             <Button 
               variant="ghost" 
               size="icon" 
-              className="md:hidden"
+              className="md:hidden text-white hover:bg-white/10"
               onClick={() => setSearchOpen(!searchOpen)}
             >
               <Search className="h-5 w-5" />
             </Button>
-            <Link to="/customer-support" className="hidden md:block text-xs font-medium">
+            <Link to="/customer-support" className="hidden md:block text-xs font-bold text-white hover:text-white/80">
               CUSTOMER CARE
             </Link>
             <Link to="/my-account">
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
                 <User className="h-5 w-5" />
               </Button>
             </Link>
             <Link to="/wishlist">
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
                 <Heart className="h-5 w-5" />
               </Button>
             </Link>
             <Link to="/donation-program" className="hidden md:block">
-              <Button variant="ghost" size="icon" title="Donation Program">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10" title="Donation Program">
                 <Gift className="h-5 w-5" />
               </Button>
             </Link>
             <Link to="/membership" className="hidden md:block">
-              <Button variant="ghost" size="icon" title="Membership Club">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10" title="Membership Club">
                 <Shield className="h-5 w-5" />
               </Button>
             </Link>
             <Link to="/checkout" className="relative">
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
                 <ShoppingCart className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                <span className="absolute -top-1 -right-1 bg-[#FF4D6D] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
               </Button>
             </Link>
             <Button 
               variant="ghost" 
               size="icon" 
-              className="md:hidden"
+              className="md:hidden text-white hover:bg-white/10"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -186,13 +187,13 @@ const Navbar: React.FC = () => {
         
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t py-4">
+          <div className="md:hidden border-t border-white/20 py-4">
             <ul className="space-y-4">
               {mainMenuItems.map((item, index) => (
                 <li key={index} className="px-2">
                   <Link 
                     to={item.path} 
-                    className="block py-2 text-sm font-bold hover:text-primary transition-colors"
+                    className="block py-2 text-sm font-bold text-white hover:text-white/80 transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}
@@ -200,13 +201,13 @@ const Navbar: React.FC = () => {
                 </li>
               ))}
               <li className="px-2">
-                <div className="py-2 text-sm font-bold">COMMUNITY</div>
+                <div className="py-2 text-sm font-bold text-white">COMMUNITY</div>
                 <ul className="pl-4 space-y-2">
                   {communityItems.map((item, index) => (
                     <li key={index}>
                       <Link 
                         to={item.path} 
-                        className="block py-1 text-sm font-medium hover:text-primary transition-colors"
+                        className="block py-1 text-sm font-bold text-white/90 hover:text-white transition-colors"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         {item.name}
@@ -215,24 +216,24 @@ const Navbar: React.FC = () => {
                   ))}
                 </ul>
               </li>
-              <li className="border-t pt-2 mt-2">
-                <p className="px-2 text-xs text-muted-foreground">CATEGORIES</p>
+              <li className="border-t border-white/20 pt-2 mt-2">
+                <p className="px-2 text-xs text-white/70">CATEGORIES</p>
               </li>
               {categories.map((category, index) => (
                 <li key={`cat-${index}`} className="px-2">
                   <Link 
                     to={category.path} 
-                    className="block py-2 text-sm font-medium hover:text-primary transition-colors"
+                    className="block py-2 text-sm font-bold text-white hover:text-white/80 transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {category.name}
                   </Link>
                 </li>
               ))}
-              <li className="px-2 pt-2 border-t">
+              <li className="px-2 pt-2 border-t border-white/20">
                 <Link 
                   to="/customer-support" 
-                  className="block py-2 text-sm font-medium hover:text-primary transition-colors"
+                  className="block py-2 text-sm font-bold text-white hover:text-white/80 transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   CUSTOMER CARE

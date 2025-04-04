@@ -7,47 +7,42 @@
 
 @layer base {
   :root {
-    --background: 36 95% 97%; /* Warmer, more saturated background */
-    --foreground: 222.2 84% 4.9%;
+    --background: 210 70% 98%; 
+    --foreground: 240 33% 25%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 240 33% 25%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 240 33% 25%;
 
-    /* More saturated, vibrant primary color - brighter green */
-    --primary: 142 80% 45%; /* Increased saturation */
+    --primary: 248 47% 42%; /* #5D4EBD */
     --primary-foreground: 210 40% 98%;
 
-    /* Richer secondary color - deeper coral */
-    --secondary: 350 100% 68%; /* #ff4d6a - deeper coral */
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 349 100% 65%; /* #FF4D6D */
+    --secondary-foreground: 0 0% 100%;
 
-    /* More saturated tertiary - deeper royal blue */
-    --tertiary: 240 84% 54%; /* Increased saturation */
-    --tertiary-foreground: 210 40% 98%;
+    --tertiary: 43 100% 66%; /* #FFCD4F */
+    --tertiary-foreground: 240 33% 25%;
 
-    /* More vibrant teal for quaternary */
-    --quaternary: 187 100% 42%; /* Increased saturation and darker */
-    --quaternary-foreground: 210 40% 98%;
+    --quaternary: 174 100% 45%; /* #42D2CB */
+    --quaternary-foreground: 0 0% 100%;
 
-    /* More vibrant yellow for quinary */
-    --quinary: 45 100% 64%; /* Increased saturation */
-    --quinary-foreground: 222.2 47.4% 11.2%;
+    --quinary: 83 63% 60%; /* #B3D25A */
+    --quinary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 93%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 240 10% 40%;
 
-    --accent: 349 92% 88%; /* Slightly deeper pink accent */
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 43 100% 66%;
+    --accent-foreground: 240 33% 25%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 33% 85%; /* More defined border */
-    --input: 214.3 31.8% 91.4%;
-    --ring: 142 76% 45%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 248 47% 42%;
 
     --radius: 1rem;
 
@@ -117,7 +112,7 @@
 
   body {
     @apply bg-background text-foreground font-poppins;
-    background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2347B5FF' fill-opacity='0.2'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6h-2c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h-2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6h2c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h-2Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%235D4EBD' fill-opacity='0.2'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6h-2c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h-2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6h2c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h-2Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
   
   h1, h2, h3 {
@@ -172,7 +167,6 @@
     @apply h-full rounded-full bg-primary;
   }
   
-  /* Kid-friendly additions */
   .kid-card {
     @apply rounded-2xl border-2 shadow-lg hover:shadow-xl transition-all;
   }
@@ -189,34 +183,30 @@
     @apply bg-white rounded-2xl border-2 shadow-md p-6;
   }
 
-  /* Enhanced colorful sections */
   .colorful-section-1 {
-    @apply bg-gradient-to-r from-pink-200/50 to-sky-300/50 rounded-2xl border border-pink-300;
+    @apply bg-gradient-to-r from-[#FF4D6D]/50 to-[#FFCD4F]/50 rounded-2xl border border-[#FF4D6D];
   }
   
   .colorful-section-2 {
-    @apply bg-gradient-to-r from-amber-200/50 to-emerald-200/50 rounded-2xl border border-emerald-300;
+    @apply bg-gradient-to-r from-[#42D2CB]/50 to-[#B3D25A]/50 rounded-2xl border border-[#B3D25A];
   }
   
   .colorful-section-3 {
-    @apply bg-gradient-to-r from-purple-200/50 to-orange-200/50 rounded-2xl border border-orange-300;
+    @apply bg-gradient-to-r from-[#5D4EBD]/50 to-[#42D2CB]/50 rounded-2xl border border-[#42D2CB];
   }
 
-  /* Enhanced buttons */
   .btn-primary-gradient {
-    @apply bg-gradient-to-r from-primary to-tertiary hover:opacity-95 transition-opacity font-bold rounded-full py-2 px-6 text-white shadow-lg;
+    @apply bg-gradient-to-r from-[#5D4EBD] to-[#42D2CB] hover:opacity-95 transition-opacity font-bold rounded-full py-2 px-6 text-white shadow-lg;
   }
   
   .btn-secondary-gradient {
-    @apply bg-gradient-to-r from-secondary to-quinary hover:opacity-95 transition-opacity font-bold rounded-full py-2 px-6 text-white shadow-lg;
+    @apply bg-gradient-to-r from-[#FF4D6D] to-[#FFCD4F] hover:opacity-95 transition-opacity font-bold rounded-full py-2 px-6 text-white shadow-lg;
   }
   
-  /* Enhanced headings */
   .colorful-heading {
-    @apply bg-gradient-to-r from-tertiary via-primary to-secondary bg-clip-text text-transparent font-bold;
+    @apply bg-gradient-to-r from-[#5D4EBD] via-[#FF4D6D] to-[#B3D25A] bg-clip-text text-transparent font-bold;
   }
   
-  /* Decorative elements */
   .dot-pattern {
     background-image: radial-gradient(#9ED8DB 2px, transparent 2px);
     background-size: 20px 20px;
@@ -240,7 +230,6 @@
   }
 }
 
-/* Additional kid-friendly styles */
 .bubble {
   @apply relative inline-block;
 }
@@ -254,7 +243,6 @@
   @apply scale-x-100;
 }
 
-/* Interactive elements */
 .wiggle:hover {
   animation: wiggle 0.5s ease-in-out;
 }
@@ -273,7 +261,6 @@
   50% { transform: translateY(-10px); }
 }
 
-/* Festive elements */
 .confetti-bg {
   background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5z' fill='%23FF9E9E' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
@@ -284,7 +271,6 @@
   border-image: linear-gradient(to right, #FFB6C1, #FDFD96, #B5EAD7, #C7CEEA) 1;
 }
 
-/* Enhanced cards */
 .colorful-card {
   @apply rounded-2xl overflow-hidden border-2 border-white shadow-lg transition-all duration-300;
   background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
@@ -294,7 +280,6 @@
   @apply border-primary shadow-xl transform -translate-y-1;
 }
 
-/* Enhanced checkbox styles */
 .checkbox-wrapper {
   @apply relative inline-flex items-center cursor-pointer;
 }
@@ -320,7 +305,6 @@
   @apply scale-100;
 }
 
-/* Enhanced labels */
 .fun-label {
   @apply font-league-spartan font-bold text-quaternary relative inline-block;
 }
@@ -336,37 +320,34 @@
   transform: scaleX(1);
 }
 
-/* Rich background gradients */
 .rich-gradient-1 {
-  background: linear-gradient(225deg, #FFE29F 0%, #FFA99F 48%, #FF719A 100%);
+  background: linear-gradient(225deg, #FFCD4F 0%, #FF4D6D 100%);
 }
 
 .rich-gradient-2 {
-  background: linear-gradient(90deg, hsla(24, 100%, 83%, 1) 0%, hsla(341, 91%, 68%, 1) 100%);
+  background: linear-gradient(90deg, #5D4EBD 0%, #42D2CB 100%);
 }
 
 .rich-gradient-3 {
-  background: linear-gradient(90deg, hsla(139, 70%, 75%, 1) 0%, hsla(63, 90%, 76%, 1) 100%);
+  background: linear-gradient(90deg, #42D2CB 0%, #B3D25A 100%);
 }
 
 .rich-gradient-4 {
-  background: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
+  background: linear-gradient(to top, #5D4EBD 0%, #e7f0fd 100%);
 }
 
-/* Enhanced section backgrounds */
 .section-bg-primary {
   background: linear-gradient(109.6deg, rgba(223,234,247,1) 11.2%, rgba(244,248,252,1) 91.1%);
 }
 
 .section-bg-secondary {
-  background: linear-gradient(90deg, hsla(46, 73%, 75%, 1) 0%, hsla(176, 73%, 88%, 1) 100%);
+  background: linear-gradient(90deg, #FFCD4F 0%, #42D2CB 100%);
 }
 
 .section-bg-tertiary {
-  background: linear-gradient(90deg, hsla(277, 75%, 84%, 1) 0%, hsla(297, 50%, 51%, 1) 100%);
+  background: linear-gradient(90deg, #5D4EBD 0%, #FF4D6D 100%);
 }
 
-/* Improved kid-friendly patterns */
 .confetti-bg {
   background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5z' fill='%23FF9E9E' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E");
 }

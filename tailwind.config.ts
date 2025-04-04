@@ -1,3 +1,4 @@
+
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
@@ -65,20 +66,26 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Kid-friendly colors - enhanced with richer tones
-        "kid-blue": "#3AA0FF",
-        "kid-pink": "#FF4D6D",
-        "kid-yellow": "#FFCD4F",
-        "kid-green": "#42D778",
-        "kid-purple": "#9537FF",
-        "kid-orange": "#FF8C00",
-        // Additional vibrant colors - enhanced
+        // Logo-specific colors 
+        "happy-navy": "#5D4EBD",
+        "happy-pink": "#FF4D6D",
+        "happy-yellow": "#FFCD4F",
+        "happy-teal": "#42D2CB",
+        "happy-green": "#B3D25A",
+        // Kid-friendly colors
+        "kid-blue": "#5D4EBD", // Updated to logo navy
+        "kid-pink": "#FF4D6D", // Updated to logo pink
+        "kid-yellow": "#FFCD4F", // Updated to logo yellow
+        "kid-green": "#B3D25A", // Updated to logo green
+        "kid-purple": "#5D4EBD", // Updated to logo navy
+        "kid-orange": "#FF9F00",
+        // Additional vibrant colors
         "vibrant-coral": "#FF5A4E",
-        "vibrant-turquoise": "#00BC9A",
-        "vibrant-marigold": "#FF9F00",
-        "vibrant-violet": "#7A4EBD",
-        "vibrant-lime": "#B8D44A",
-        // Pastel colors - slightly more saturated but still soft
+        "vibrant-turquoise": "#42D2CB", // Updated to logo teal
+        "vibrant-marigold": "#FFCD4F", // Updated to logo yellow
+        "vibrant-violet": "#5D4EBD", // Updated to logo navy
+        "vibrant-lime": "#B3D25A", // Updated to logo green
+        // Pastel colors
         "pastel-peach": "#FFCBB8",
         "pastel-mint": "#C1EFEF",
         "pastel-lavender": "#DFD9FF",
@@ -141,12 +148,12 @@ const config: Config = {
         "kid-gradient-1": "linear-gradient(to right, #f9f9ff, #ffe2e4)",
         "kid-gradient-2": "linear-gradient(to right, #e4f9ff, #d9ffde)",
         "kid-gradient-3": "linear-gradient(to right, #fff9e3, #ffeaf8)",
-        "vibrant-gradient-1": "linear-gradient(to right, #FFB347, #FF6F61)",
-        "vibrant-gradient-2": "linear-gradient(to right, #00C9A7, #9ED8DB)",
-        "vibrant-gradient-3": "linear-gradient(to right, #C7CEEA, #845EC2)",
+        "vibrant-gradient-1": "linear-gradient(to right, #FFCD4F, #FF4D6D)",
+        "vibrant-gradient-2": "linear-gradient(to right, #42D2CB, #5D4EBD)",
+        "vibrant-gradient-3": "linear-gradient(to right, #5D4EBD, #B3D25A)",
         "pastel-gradient-1": "linear-gradient(to right, #FFD8CC, #FFCCCB)",
         "pastel-gradient-2": "linear-gradient(to right, #D4F0F0, #E6E6FA)",
-        "confetti-pattern": "url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23FFB347' fill-opacity='0.11' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+        "confetti-pattern": "url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23FFCD4F' fill-opacity='0.16' fill-rule='evenodd'/%3E%3C/svg%3E\")",
       },
     },
   },
