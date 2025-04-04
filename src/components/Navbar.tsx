@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Search, ShoppingCart, User, Heart, Menu, X } from 'lucide-react';
+import { Search, ShoppingCart, User, Heart, Menu, X, Gift, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Link } from 'react-router-dom';
@@ -11,7 +11,6 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 
 const Navbar: React.FC = () => {
@@ -34,11 +33,19 @@ const Navbar: React.FC = () => {
   const mainMenuItems = [
     { name: "SHOP NOW", path: "/shop-clothing", hasDropdown: true },
     { name: "HOW IT WORKS", path: "/how-it-works", hasDropdown: false },
+    { name: "STYLE QUIZ", path: "/style-quiz", hasDropdown: false },
     { name: "SOCIAL PURPOSE", path: "/social-purpose", hasDropdown: false },
+    { name: "MEMBERSHIP CLUB", path: "/membership", hasDropdown: false },
+  ];
+
+  const communityItems = [
+    { name: "BLOG", path: "/blog" },
+    { name: "EVENTS", path: "/events" },
+    { name: "DONATION PROGRAM", path: "/donation-program" },
   ];
 
   return (
-    <header className="border-b bg-white sticky top-0 z-50">
+    <header className="border-b bg-gradient-to-r from-purple-50 to-pink-50 sticky top-0 z-50 shadow-sm">
       {/* Main Header */}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
@@ -54,7 +61,7 @@ const Navbar: React.FC = () => {
           {/* Center - Navigation */}
           <nav className="hidden md:block">
             <NavigationMenu className="justify-center">
-              <NavigationMenuList className="gap-6">
+              <NavigationMenuList className="gap-4">
                 {mainMenuItems.map((item, index) => (
                   <NavigationMenuItem key={index}>
                     {item.hasDropdown ? (
@@ -84,13 +91,32 @@ const Navbar: React.FC = () => {
                     ) : (
                       <Link 
                         to={item.path} 
-                        className="text-sm font-medium hover:text-primary px-4 py-2 block transition-colors"
+                        className="text-sm font-medium hover:text-primary px-3 py-2 block transition-colors"
                       >
                         {item.name}
                       </Link>
                     )}
                   </NavigationMenuItem>
                 ))}
+                
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent">
+                    <span className="text-sm font-medium">COMMUNITY</span>
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="p-4 w-56">
+                      {communityItems.map((item, index) => (
+                        <Link 
+                          key={index}
+                          to={item.path} 
+                          className="block p-2 hover:bg-primary/10 rounded text-sm font-medium transition-colors"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
           </nav>
@@ -113,7 +139,7 @@ const Navbar: React.FC = () => {
             >
               <Search className="h-5 w-5" />
             </Button>
-            <Link to="/my-account" className="hidden md:block text-xs font-medium">
+            <Link to="/customer-support" className="hidden md:block text-xs font-medium">
               CUSTOMER CARE
             </Link>
             <Link to="/my-account">
@@ -126,10 +152,20 @@ const Navbar: React.FC = () => {
                 <Heart className="h-5 w-5" />
               </Button>
             </Link>
+            <Link to="/donation-program" className="hidden md:block">
+              <Button variant="ghost" size="icon" title="Donation Program">
+                <Gift className="h-5 w-5" />
+              </Button>
+            </Link>
+            <Link to="/membership" className="hidden md:block">
+              <Button variant="ghost" size="icon" title="Membership Club">
+                <Shield className="h-5 w-5" />
+              </Button>
+            </Link>
             <Link to="/checkout" className="relative">
               <Button variant="ghost" size="icon">
                 <ShoppingCart className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
               </Button>
             </Link>
             <Button 
@@ -158,6 +194,22 @@ const Navbar: React.FC = () => {
                   </Link>
                 </li>
               ))}
+              <li className="px-2">
+                <div className="py-2 text-sm font-bold">COMMUNITY</div>
+                <ul className="pl-4 space-y-2">
+                  {communityItems.map((item, index) => (
+                    <li key={index}>
+                      <Link 
+                        to={item.path} 
+                        className="block py-1 text-sm font-medium hover:text-primary transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
               <li className="border-t pt-2 mt-2">
                 <p className="px-2 text-xs text-muted-foreground">CATEGORIES</p>
               </li>
@@ -174,7 +226,7 @@ const Navbar: React.FC = () => {
               ))}
               <li className="px-2 pt-2 border-t">
                 <Link 
-                  to="/my-account" 
+                  to="/customer-support" 
                   className="block py-2 text-sm font-medium hover:text-primary transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >

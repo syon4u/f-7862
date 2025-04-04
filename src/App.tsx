@@ -17,6 +17,11 @@ import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
 import AdminInventory from "./pages/AdminInventory";
 import AdminBanners from "./pages/AdminBanners";
+import Membership from "./pages/Membership";
+import DonationProgram from "./pages/DonationProgram";
+import Blog from "./pages/Blog";
+import Events from "./pages/Events";
+import CustomerSupport from "./pages/CustomerSupport";
 import { ProductProvider } from "./contexts/ProductContext";
 import { BannerProvider } from "./contexts/BannerContext";
 
@@ -41,6 +46,11 @@ const App = () => (
               <Route path="/contact" element={<Contact />} />
               <Route path="/style-quiz" element={<StyleQuiz />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/membership" element={<Membership />} />
+              <Route path="/donation-program" element={<DonationProgram />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/events" element={<Events />} />
+              <Route path="/customer-support" element={<CustomerSupport />} />
               <Route path="/admin/inventory" element={<AdminInventory />} />
               <Route path="/admin/banners" element={<AdminBanners />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
