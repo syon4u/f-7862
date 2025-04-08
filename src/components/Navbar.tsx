@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <header className="border-b bg-gradient-to-r from-[#5D4EBD] to-[#45B8FF] sticky top-0 z-50 shadow-md">
+    <header className="border-b bg-kid-blue sticky top-0 z-50 shadow-md">
       {/* Main Header */}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-3">
@@ -54,12 +54,12 @@ const Navbar: React.FC = () => {
             <img 
               src="/lovable-uploads/af77dcd8-39d9-4916-9ac0-cf012692472e.png" 
               alt="Happy Kids Box Logo" 
-              className="h-16 md:h-20 object-contain"
+              className="h-20 md:h-28 object-contain"
               onError={(e) => {
                 console.error("Logo failed to load");
                 e.currentTarget.src = "/placeholder.svg";
-                e.currentTarget.style.height = "50px";
-                e.currentTarget.style.width = "200px";
+                e.currentTarget.style.height = "60px";
+                e.currentTarget.style.width = "240px";
               }}
             />
           </Link>
