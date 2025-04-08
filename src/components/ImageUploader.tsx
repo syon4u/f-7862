@@ -36,7 +36,9 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUploaded, classNam
     setIsUploading(true);
     
     try {
+      console.log('Starting image upload...');
       const imageUrl = await uploadProductImage(file);
+      console.log('Image upload successful, URL:', imageUrl);
       onImageUploaded(imageUrl);
       toast({
         title: "Image uploaded successfully",
@@ -49,10 +51,11 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUploaded, classNam
       });
     } catch (error) {
       console.error('Upload failed:', error);
-      setUploadError('Failed to upload image. Please try again.');
+      const errorMessage = error instanceof Error ? error.message : 'Failed to upload image';
+      setUploadError(`Failed to upload image: ${errorMessage}`);
       toast({
         title: "Upload failed",
-        description: "There was a problem uploading your image.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {

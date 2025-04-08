@@ -13,16 +13,17 @@ export const uploadProductImage = async (file: File): Promise<string> => {
     const fileName = `${uuidv4()}.${fileExt}`;
     const filePath = `${fileName}`;
     
+    // Upload the file to Supabase Storage
     const { data, error } = await supabase.storage
       .from('product-images')
       .upload(filePath, file, {
         cacheControl: '3600',
-        upsert: false
+        upsert: true // Changed from false to true to allow overwriting
       });
 
     if (error) {
       console.error('Error uploading image:', error);
-      throw new Error('Failed to upload image');
+      throw new Error(`Failed to upload image: ${error.message}`);
     }
 
     // Get the public URL
@@ -49,7 +50,7 @@ export const getProductImages = async (): Promise<string[]> => {
 
     if (error) {
       console.error('Error listing images:', error);
-      throw new Error('Failed to list images');
+      throw new Error(`Failed to list images: ${error.message}`);
     }
 
     // Convert to public URLs
