@@ -1,11 +1,10 @@
-
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useProducts } from '@/contexts/ProductContext';
 import { Product } from '@/types/product';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -28,21 +27,25 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Check, Trash, Edit, Plus, Upload, X } from 'lucide-react';
+import { Check, Trash, Edit, Plus, Upload, X, Image as ImageIcon } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from '@/hooks/use-toast';
+import ImageUploader from '@/components/ImageUploader';
+import { getProductImages } from '@/utils/imageUpload';
 
 const AdminInventory = () => {
   const { products, addProduct, updateProduct, deleteProduct } = useProducts();
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
+  const [availableImages, setAvailableImages] = useState<string[]>([]);
+  const [isLoadingImages, setIsLoadingImages] = useState(false);
 
   const [newProduct, setNewProduct] = useState<Partial<Product>>({
     name: '',
     description: '',
     price: 0,
-    images: ['/placeholder.svg'],
+    images: [],
     colors: [],
     sizes: [],
     rating: 4.5,
@@ -54,6 +57,27 @@ const AdminInventory = () => {
     category: 'tops',
     tags: []
   });
+
+  useEffect(() => {
+    const loadImages = async () => {
+      setIsLoadingImages(true);
+      try {
+        const images = await getProductImages();
+        setAvailableImages(images);
+      } catch (error) {
+        console.error('Failed to load images:', error);
+        toast({
+          title: "Failed to load images",
+          description: "Could not retrieve the list of available images",
+          variant: "destructive"
+        });
+      } finally {
+        setIsLoadingImages(false);
+      }
+    };
+
+    loadImages();
+  }, []);
 
   const handleAddProduct = () => {
     if (!newProduct.name || !newProduct.description || newProduct.price === 0) {
@@ -71,7 +95,7 @@ const AdminInventory = () => {
       colors: newProduct.colors || [],
       sizes: newProduct.sizes || [],
       features: newProduct.features || [],
-      images: newProduct.images || ['/placeholder.svg'],
+      images: newProduct.images && newProduct.images.length > 0 ? newProduct.images : ['/placeholder.svg'],
       rating: newProduct.rating || 4.5,
       reviewCount: newProduct.reviewCount || 0,
       inStock: newProduct.inStock !== false
@@ -82,7 +106,7 @@ const AdminInventory = () => {
       name: '',
       description: '',
       price: 0,
-      images: ['/placeholder.svg'],
+      images: [],
       colors: [],
       sizes: [],
       rating: 4.5,
@@ -211,6 +235,36 @@ const AdminInventory = () => {
       }
       e.currentTarget.value = '';
     }
+  };
+
+  const handleNewProductImageUpload = (imageUrl: string) => {
+    setNewProduct(prev => ({
+      ...prev,
+      images: [...(prev.images || []), imageUrl]
+    }));
+  };
+
+  const handleExistingProductImageUpload = (imageUrl: string) => {
+    if (!currentProduct) return;
+    setCurrentProduct(prev => ({
+      ...prev!,
+      images: [...(prev!.images || []), imageUrl]
+    }));
+  };
+
+  const removeNewProductImage = (imageUrl: string) => {
+    setNewProduct(prev => ({
+      ...prev,
+      images: prev.images?.filter(url => url !== imageUrl) || []
+    }));
+  };
+
+  const removeExistingProductImage = (imageUrl: string) => {
+    if (!currentProduct) return;
+    setCurrentProduct(prev => ({
+      ...prev!,
+      images: prev!.images?.filter(url => url !== imageUrl) || []
+    }));
   };
 
   return (
@@ -446,9 +500,7 @@ const AdminInventory = () => {
                   </SelectContent>
                 </Select>
               </div>
-            </div>
 
-            <div className="space-y-4">
               <div>
                 <Label htmlFor="productDescription">Description*</Label>
                 <Textarea
@@ -459,6 +511,49 @@ const AdminInventory = () => {
                   className="h-20"
                   required
                 />
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <Label className="block mb-2">Product Images</Label>
+                <ImageUploader onImageUploaded={handleNewProductImageUpload} />
+                
+                <div className="mt-4">
+                  <h4 className="text-sm font-medium mb-2">Current Images</h4>
+                  <div className="grid grid-cols-3 gap-2">
+                    {newProduct.images && newProduct.images.length > 0 ? (
+                      newProduct.images.map((img, idx) => (
+                        <div key={idx} className="relative group border rounded-md overflow-hidden aspect-square">
+                          <img 
+                            src={img} 
+                            alt={`Product image ${idx + 1}`} 
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.onerror = null;
+                              target.src = '/placeholder.svg';
+                            }}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => removeNewProductImage(img)}
+                            className="absolute top-1 right-1 bg-white/80 p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X className="h-4 w-4 text-red-600" />
+                          </button>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="col-span-3 flex items-center justify-center h-24 bg-gray-50 border border-dashed rounded-md">
+                        <div className="text-center">
+                          <ImageIcon className="mx-auto h-8 w-8 text-gray-400" />
+                          <p className="mt-1 text-sm text-gray-500">No images added yet</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
 
               <div>
@@ -526,19 +621,6 @@ const AdminInventory = () => {
                       </Button>
                     </div>
                   ))}
-                </div>
-              </div>
-
-              <div>
-                <Label htmlFor="productImage">Image URL</Label>
-                <Input
-                  id="productImage"
-                  placeholder="Enter image URL"
-                  value={newProduct.images?.[0] || ''}
-                  onChange={(e) => setNewProduct(prev => ({ ...prev, images: [e.target.value] }))}
-                />
-                <div className="text-xs text-muted-foreground mt-1">
-                  For now, please use a direct URL to an image
                 </div>
               </div>
             </div>
@@ -660,9 +742,7 @@ const AdminInventory = () => {
                     </SelectContent>
                   </Select>
                 </div>
-              </div>
 
-              <div className="space-y-4">
                 <div>
                   <Label htmlFor="editProductDescription">Description*</Label>
                   <Textarea
@@ -673,6 +753,49 @@ const AdminInventory = () => {
                     className="h-20"
                     required
                   />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <Label className="block mb-2">Product Images</Label>
+                  <ImageUploader onImageUploaded={handleExistingProductImageUpload} />
+                  
+                  <div className="mt-4">
+                    <h4 className="text-sm font-medium mb-2">Current Images</h4>
+                    <div className="grid grid-cols-3 gap-2">
+                      {currentProduct.images && currentProduct.images.length > 0 ? (
+                        currentProduct.images.map((img, idx) => (
+                          <div key={idx} className="relative group border rounded-md overflow-hidden aspect-square">
+                            <img 
+                              src={img} 
+                              alt={`Product image ${idx + 1}`} 
+                              className="w-full h-full object-cover"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.onerror = null;
+                                target.src = '/placeholder.svg';
+                              }}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => removeExistingProductImage(img)}
+                              className="absolute top-1 right-1 bg-white/80 p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                            >
+                              <X className="h-4 w-4 text-red-600" />
+                            </button>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="col-span-3 flex items-center justify-center h-24 bg-gray-50 border border-dashed rounded-md">
+                          <div className="text-center">
+                            <ImageIcon className="mx-auto h-8 w-8 text-gray-400" />
+                            <p className="mt-1 text-sm text-gray-500">No images added yet</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
 
                 <div>
@@ -741,19 +864,6 @@ const AdminInventory = () => {
                       </div>
                     ))}
                   </div>
-                </div>
-
-                <div>
-                  <Label htmlFor="editProductImage">Image URL</Label>
-                  <Input
-                    id="editProductImage"
-                    placeholder="Enter image URL"
-                    value={currentProduct.images?.[0] || ''}
-                    onChange={(e) => setCurrentProduct(prev => ({
-                      ...prev!,
-                      images: [e.target.value]
-                    }))}
-                  />
                 </div>
 
                 <div className="flex items-center space-x-2">
