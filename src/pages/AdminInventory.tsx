@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -27,11 +28,12 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Check, Trash, Edit, Plus, Upload, X, Image as ImageIcon } from 'lucide-react';
+import { Check, Trash, Edit, Plus, Upload, X, Image as ImageIcon, Sparkles } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from '@/hooks/use-toast';
 import ImageUploader from '@/components/ImageUploader';
 import { getProductImages } from '@/utils/imageUpload';
+import InventorySeeder from '@/components/InventorySeeder';
 
 const AdminInventory = () => {
   const { products, addProduct, updateProduct, deleteProduct } = useProducts();
@@ -274,9 +276,12 @@ const AdminInventory = () => {
       <div className="container mx-auto px-4 py-8 flex-grow">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">Inventory Management</h1>
-          <Button onClick={() => setIsAddDialogOpen(true)} className="flex items-center gap-2">
-            <Plus size={16} /> Add Product
-          </Button>
+          <div className="flex items-center gap-2">
+            <InventorySeeder />
+            <Button onClick={() => setIsAddDialogOpen(true)} className="flex items-center gap-2">
+              <Plus size={16} /> Add Product
+            </Button>
+          </div>
         </div>
         
         <Tabs defaultValue="products">
@@ -368,7 +373,10 @@ const AdminInventory = () => {
                 <div className="col-span-1 md:col-span-2 lg:col-span-3 text-center py-12 border rounded-lg">
                   <h3 className="text-xl font-semibold text-muted-foreground">No products in inventory</h3>
                   <p className="mb-4">Add products to see them here</p>
-                  <Button onClick={() => setIsAddDialogOpen(true)}>Add First Product</Button>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <InventorySeeder />
+                    <Button onClick={() => setIsAddDialogOpen(true)}>Add Product Manually</Button>
+                  </div>
                 </div>
               )}
             </div>

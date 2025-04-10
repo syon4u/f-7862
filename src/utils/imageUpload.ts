@@ -66,3 +66,46 @@ export const getProductImages = async (): Promise<string[]> => {
     throw error;
   }
 };
+
+/**
+ * Add external image URL to Supabase Storage
+ * @param imageUrl URL of the image to add
+ * @returns URL of the image in Supabase Storage
+ */
+export const addExternalImageToStorage = async (imageUrl: string): Promise<string> => {
+  try {
+    // Extract the image name from URL or create a unique name
+    const fileName = `${uuidv4()}.jpg`;
+    
+    // Fetch the image
+    const response = await fetch(imageUrl);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch image: ${response.statusText}`);
+    }
+    
+    const blob = await response.blob();
+    
+    // Upload to Supabase
+    const { data, error } = await supabase.storage
+      .from('product-images')
+      .upload(fileName, blob, {
+        cacheControl: '3600',
+        upsert: true
+      });
+      
+    if (error) {
+      console.error('Error uploading external image:', error);
+      throw new Error(`Failed to upload external image: ${error.message}`);
+    }
+    
+    // Get the public URL
+    const { data: urlData } = supabase.storage
+      .from('product-images')
+      .getPublicUrl(fileName);
+      
+    return urlData.publicUrl;
+  } catch (error) {
+    console.error('Error adding external image:', error);
+    throw error;
+  }
+};

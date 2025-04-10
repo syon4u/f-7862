@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { Product } from '@/types/product';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/components/ui/use-toast';
+import { seedInventoryWithProducts } from '@/utils/inventorySeeder';
 
 interface ProductContextType {
   products: Product[];
@@ -10,6 +11,7 @@ interface ProductContextType {
   updateProduct: (id: string, product: Product) => void;
   deleteProduct: (id: string) => void;
   loading: boolean;
+  seedInventory: () => number;
 }
 
 const ProductContext = createContext<ProductContextType | undefined>(undefined);
@@ -127,8 +129,12 @@ export function ProductProvider({ children }: ProductProviderProps) {
     });
   };
 
+  const seedInventory = () => {
+    return seedInventoryWithProducts(addProduct);
+  };
+
   return (
-    <ProductContext.Provider value={{ products, addProduct, updateProduct, deleteProduct, loading }}>
+    <ProductContext.Provider value={{ products, addProduct, updateProduct, deleteProduct, loading, seedInventory }}>
       {children}
     </ProductContext.Provider>
   );
