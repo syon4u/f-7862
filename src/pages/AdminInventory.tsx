@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -19,6 +19,61 @@ const AdminInventory = () => {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
+  
+  // Filter state
+  const [filters, setFilters] = useState({
+    search: '',
+    inStock: 'all' as 'all' | 'in-stock' | 'out-of-stock',
+    category: '',
+    gender: ''
+  });
+  
+  // Get unique categories from products
+  const categories = useMemo(() => {
+    const categorySet = new Set<string>();
+    products.forEach(product => {
+      if (product.category) {
+        categorySet.add(product.category);
+      }
+    });
+    return Array.from(categorySet);
+  }, [products]);
+  
+  // Get unique genders from products
+  const genders = useMemo(() => {
+    const genderSet = new Set<string>();
+    products.forEach(product => {
+      if (product.gender) {
+        genderSet.add(product.gender);
+      }
+    });
+    return Array.from(genderSet);
+  }, [products]);
+  
+  // Filter products based on selected filters
+  const filteredProducts = useMemo(() => {
+    return products.filter(product => {
+      // Search filter
+      const searchMatch = filters.search === '' || 
+        product.name.toLowerCase().includes(filters.search.toLowerCase()) ||
+        (product.description && product.description.toLowerCase().includes(filters.search.toLowerCase()));
+      
+      // Stock status filter
+      const stockMatch = filters.inStock === 'all' || 
+        (filters.inStock === 'in-stock' && product.inStock) ||
+        (filters.inStock === 'out-of-stock' && !product.inStock);
+      
+      // Category filter
+      const categoryMatch = filters.category === '' || 
+        product.category === filters.category;
+      
+      // Gender filter
+      const genderMatch = filters.gender === '' || 
+        product.gender === filters.gender;
+      
+      return searchMatch && stockMatch && categoryMatch && genderMatch;
+    });
+  }, [products, filters]);
 
   const handleRefresh = async () => {
     await fetchProducts();
@@ -58,6 +113,15 @@ const AdminInventory = () => {
     setCurrentProduct(product);
     setIsEditDialogOpen(true);
   };
+  
+  const handleFilter = (newFilters: {
+    search: string;
+    inStock: 'all' | 'in-stock' | 'out-of-stock';
+    category: string;
+    gender: string;
+  }) => {
+    setFilters(newFilters);
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -86,9 +150,13 @@ const AdminInventory = () => {
           <TabsContent value="products">
             <ProductsList 
               products={products} 
+              filteredProducts={filteredProducts}
               onEdit={openEditDialog} 
               onDelete={handleDeleteProduct}
               onAddClick={() => setIsAddDialogOpen(true)}
+              onFilter={handleFilter}
+              categories={categories}
+              genders={genders}
             />
           </TabsContent>
           
