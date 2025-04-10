@@ -174,6 +174,11 @@ const Navbar: React.FC = () => {
                 <span className="absolute -top-1 -right-1 bg-[#FF4D6D] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
               </Button>
             </Link>
+            <Link to="/admin/inventory" className="hidden md:block">
+              <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                Inventory
+              </Button>
+            </Link>
             <Button 
               variant="ghost" 
               size="icon" 
@@ -232,11 +237,11 @@ const Navbar: React.FC = () => {
               ))}
               <li className="px-2 pt-2 border-t border-white/20">
                 <Link 
-                  to="/customer-support" 
+                  to="/admin/inventory" 
                   className="block py-2 text-sm font-bold text-white hover:text-white/80 transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  CUSTOMER CARE
+                  INVENTORY MANAGEMENT
                 </Link>
               </li>
             </ul>

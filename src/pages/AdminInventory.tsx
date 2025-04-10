@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -28,7 +27,7 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Check, Trash, Edit, Plus, Upload, X, Image as ImageIcon, Sparkles } from 'lucide-react';
+import { Check, Trash, Edit, Plus, Upload, X, Image as ImageIcon, Sparkles, RefreshCcw } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from '@/hooks/use-toast';
 import ImageUploader from '@/components/ImageUploader';
@@ -36,7 +35,7 @@ import { getProductImages } from '@/utils/imageUpload';
 import InventorySeeder from '@/components/InventorySeeder';
 
 const AdminInventory = () => {
-  const { products, addProduct, updateProduct, deleteProduct } = useProducts();
+  const { products, addProduct, updateProduct, deleteProduct, fetchProducts } = useProducts();
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
@@ -80,6 +79,14 @@ const AdminInventory = () => {
 
     loadImages();
   }, []);
+
+  const handleRefresh = async () => {
+    await fetchProducts();
+    toast({
+      title: "Inventory refreshed",
+      description: "The product inventory has been refreshed from Supabase",
+    });
+  };
 
   const handleAddProduct = () => {
     if (!newProduct.name || !newProduct.description || newProduct.price === 0) {
@@ -277,6 +284,9 @@ const AdminInventory = () => {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">Inventory Management</h1>
           <div className="flex items-center gap-2">
+            <Button variant="outline" onClick={handleRefresh} className="flex items-center gap-2">
+              <RefreshCcw size={16} /> Refresh
+            </Button>
             <InventorySeeder />
             <Button onClick={() => setIsAddDialogOpen(true)} className="flex items-center gap-2">
               <Plus size={16} /> Add Product

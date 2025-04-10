@@ -12,6 +12,7 @@ interface ProductContextType {
   deleteProduct: (id: string) => void;
   loading: boolean;
   seedInventory: () => number;
+  fetchProducts: () => Promise<void>;
 }
 
 const ProductContext = createContext<ProductContextType | undefined>(undefined);
@@ -34,68 +35,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
   // Load initial products from localStorage and check for product images from Supabase
   useEffect(() => {
-    const loadProducts = async () => {
-      setLoading(true);
-      try {
-        // First load from localStorage for immediate display
-        const storedProducts = localStorage.getItem('inventory-products');
-        if (storedProducts) {
-          try {
-            setProducts(JSON.parse(storedProducts));
-          } catch (error) {
-            console.error('Failed to parse products from localStorage:', error);
-          }
-        }
-
-        // Check for product images from Supabase Storage
-        try {
-          const { data, error } = await supabase.storage
-            .from('product-images')
-            .list();
-
-          if (error) {
-            console.error('Error fetching product images:', error);
-          } else if (data && data.length > 0) {
-            // If we have stored products but some don't have images, assign uploaded images to them
-            if (products.length > 0) {
-              const updatedProducts = products.map(product => {
-                if (!product.images || product.images.length === 0 || (product.images.length === 1 && product.images[0] === '/placeholder.svg')) {
-                  // Pick a random image from the storage
-                  const randomIndex = Math.floor(Math.random() * data.length);
-                  const randomImage = data[randomIndex];
-                  
-                  const { data: urlData } = supabase.storage
-                    .from('product-images')
-                    .getPublicUrl(randomImage.name);
-                  
-                  return {
-                    ...product,
-                    images: [urlData.publicUrl]
-                  };
-                }
-                return product;
-              });
-              
-              setProducts(updatedProducts);
-              localStorage.setItem('inventory-products', JSON.stringify(updatedProducts));
-            }
-          }
-        } catch (storageError) {
-          console.error('Error accessing Supabase storage:', storageError);
-        }
-      } catch (error) {
-        console.error('Error loading products:', error);
-        toast({
-          title: "Error loading products",
-          description: "There was a problem loading product data",
-          variant: "destructive",
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadProducts();
+    fetchProducts();
   }, []);
 
   // Save products to localStorage whenever they change
@@ -104,6 +44,67 @@ export function ProductProvider({ children }: ProductProviderProps) {
       localStorage.setItem('inventory-products', JSON.stringify(products));
     }
   }, [products, loading]);
+
+  const fetchProducts = async () => {
+    setLoading(true);
+    try {
+      // First load from localStorage for immediate display
+      const storedProducts = localStorage.getItem('inventory-products');
+      if (storedProducts) {
+        try {
+          setProducts(JSON.parse(storedProducts));
+        } catch (error) {
+          console.error('Failed to parse products from localStorage:', error);
+        }
+      }
+
+      // Check for product images from Supabase Storage
+      try {
+        const { data, error } = await supabase.storage
+          .from('product-images')
+          .list();
+
+        if (error) {
+          console.error('Error fetching product images:', error);
+        } else if (data && data.length > 0) {
+          // If we have stored products but some don't have images, assign uploaded images to them
+          if (products.length > 0) {
+            const updatedProducts = products.map(product => {
+              if (!product.images || product.images.length === 0 || (product.images.length === 1 && product.images[0] === '/placeholder.svg')) {
+                // Pick a random image from the storage
+                const randomIndex = Math.floor(Math.random() * data.length);
+                const randomImage = data[randomIndex];
+                
+                const { data: urlData } = supabase.storage
+                  .from('product-images')
+                  .getPublicUrl(randomImage.name);
+                
+                return {
+                  ...product,
+                  images: [urlData.publicUrl]
+                };
+              }
+              return product;
+            });
+            
+            setProducts(updatedProducts);
+            localStorage.setItem('inventory-products', JSON.stringify(updatedProducts));
+          }
+        }
+      } catch (storageError) {
+        console.error('Error accessing Supabase storage:', storageError);
+      }
+    } catch (error) {
+      console.error('Error loading products:', error);
+      toast({
+        title: "Error loading products",
+        description: "There was a problem loading product data",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const addProduct = (product: Product) => {
     setProducts(prev => [...prev, product]);
@@ -136,7 +137,15 @@ export function ProductProvider({ children }: ProductProviderProps) {
   };
 
   return (
-    <ProductContext.Provider value={{ products, addProduct, updateProduct, deleteProduct, loading, seedInventory }}>
+    <ProductContext.Provider value={{ 
+      products, 
+      addProduct, 
+      updateProduct, 
+      deleteProduct, 
+      loading, 
+      seedInventory,
+      fetchProducts 
+    }}>
       {children}
     </ProductContext.Provider>
   );
