@@ -12,57 +12,65 @@ const Navbar: React.FC = () => {
   const [searchOpen, setSearchOpen] = useState(false);
 
   return (
-    <header className="border-b bg-kid-blue sticky top-0 z-50 shadow-md">
-      {/* Main Header */}
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between py-3">
-          {/* Left Section - Logo */}
-          <Link to="/" className="flex items-center">
-            <img 
-              src="/lovable-uploads/af77dcd8-39d9-4916-9ac0-cf012692472e.png" 
-              alt="Happy Kids Box Logo" 
-              className="h-20 md:h-28 object-contain"
-              onError={(e) => {
-                console.error("Logo failed to load");
-                e.currentTarget.src = "/placeholder.svg";
-                e.currentTarget.style.height = "60px";
-                e.currentTarget.style.width = "240px";
-              }}
-            />
-          </Link>
-          
-          {/* Center - Navigation */}
-          <NavigationLinks 
-            mainMenuItems={mainMenuItems} 
-            categories={categories} 
-            communityItems={communityItems} 
-          />
+    <header>
+      {/* Promotional Line */}
+      <div className="bg-[#B3D25A] text-white text-center text-sm py-1">
+        Free Shipping on Orders Over $100
+      </div>
 
-          {/* Right Section - Icons */}
-          <div className="flex items-center space-x-2">
-            <NavbarSearch 
-              searchOpen={searchOpen} 
-              setSearchOpen={setSearchOpen} 
+      {/* Main Header */}
+      <div className="bg-white border-b shadow-sm">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between py-3">
+            {/* Left Section - Logo */}
+            <Link to="/" className="flex-shrink-0 w-1/4">
+              <img 
+                src="/lovable-uploads/af77dcd8-39d9-4916-9ac0-cf012692472e.png" 
+                alt="Happy Kids Box Logo" 
+                className="h-16 md:h-20 object-contain"
+                onError={(e) => {
+                  console.error("Logo failed to load");
+                  e.currentTarget.src = "/placeholder.svg";
+                  e.currentTarget.style.height = "60px";
+                  e.currentTarget.style.width = "240px";
+                }}
+              />
+            </Link>
+            
+            {/* Center - Navigation */}
+            <NavigationLinks 
+              mainMenuItems={mainMenuItems} 
+              categories={categories} 
+              communityItems={communityItems} 
             />
-            <NavIcons 
-              mobileMenuOpen={mobileMenuOpen} 
-              setMobileMenuOpen={setMobileMenuOpen} 
-            />
+
+            {/* Right Section - Icons */}
+            <div className="flex items-center space-x-2">
+              <NavbarSearch 
+                searchOpen={searchOpen} 
+                setSearchOpen={setSearchOpen} 
+              />
+              <NavIcons 
+                mobileMenuOpen={mobileMenuOpen} 
+                setMobileMenuOpen={setMobileMenuOpen} 
+              />
+            </div>
           </div>
+          
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <MobileMenu 
+              mainMenuItems={mainMenuItems}
+              communityItems={communityItems}
+              categories={categories}
+              setMobileMenuOpen={setMobileMenuOpen}
+            />
+          )}
         </div>
-        
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <MobileMenu 
-            mainMenuItems={mainMenuItems}
-            communityItems={communityItems}
-            categories={categories}
-            setMobileMenuOpen={setMobileMenuOpen}
-          />
-        )}
       </div>
     </header>
   );
 };
 
 export default Navbar;
+

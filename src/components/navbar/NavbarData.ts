@@ -1,27 +1,24 @@
 
 export const categories = [
-  { name: "NEW IN", path: "/shop-clothing?category=new" },
-  { name: "DESIGNERS", path: "/shop-clothing?category=designers" },
+  { name: "BABY BOY", path: "/shop-clothing?category=baby-boy" },
+  { name: "BABY GIRL", path: "/shop-clothing?category=baby-girl" },
   { name: "BOYS", path: "/shop-clothing?category=boys" },
   { name: "GIRLS", path: "/shop-clothing?category=girls" },
-  { name: "BABY", path: "/shop-clothing?category=baby" },
-  { name: "SHOES", path: "/shop-clothing?category=shoes" },
-  { name: "GIFT IDEAS", path: "/shop-clothing?category=gifts" },
-  { name: "SCHOOL UNIFORM", path: "/shop-clothing?category=uniform" },
-  { name: "THE EDIT", path: "/shop-clothing?category=edit" },
-  { name: "OUTLET", path: "/shop-clothing?category=outlet" },
+  { name: "KID BOX OPTIONS", path: "/shop-clothing?category=kid-box" },
+  { name: "MEMBERSHIP CLUB", path: "/membership" },
+  { name: "SALE", path: "/shop-clothing?category=sale" },
 ];
 
 export const mainMenuItems = [
   { name: "SHOP NOW", path: "/shop-clothing", hasDropdown: true },
-  { name: "HOW IT WORKS", path: "/how-it-works", hasDropdown: false },
-  { name: "STYLE QUIZ", path: "/style-quiz", hasDropdown: false },
-  { name: "SOCIAL PURPOSE", path: "/social-purpose", hasDropdown: false },
+  { name: "KIDS BOX", path: "/how-it-works", hasDropdown: false },
+  { name: "DONATION PROGRAM", path: "/donation-program", hasDropdown: false },
   { name: "MEMBERSHIP CLUB", path: "/membership", hasDropdown: false },
+  { name: "COMMUNITY", path: "/blog", hasDropdown: false },
 ];
 
 export const communityItems = [
   { name: "BLOG", path: "/blog" },
   { name: "EVENTS", path: "/events" },
-  { name: "DONATION PROGRAM", path: "/donation-program" },
 ];
+
