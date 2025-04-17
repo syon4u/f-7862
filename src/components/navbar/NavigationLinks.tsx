@@ -7,6 +7,7 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
   NavigationMenuTrigger,
+  NavigationMenuLink,
 } from '@/components/ui/navigation-menu';
 
 interface NavigationLinksProps {
@@ -67,4 +68,3 @@ const NavigationLinks: React.FC<NavigationLinksProps> = ({
 };
 
 export default NavigationLinks;
-
