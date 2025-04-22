@@ -20,8 +20,8 @@ const Index: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const diverseImages = {
-    boys: "https://images.unsplash.com/photo-1604652716188-77c0a9908e47?q=80&w=1000",
-    girls: "https://images.unsplash.com/photo-1633966887768-64f9a867bdba?q=80&w=1000",
+    boys: "https://fowdzmkxmvocegczvbua.supabase.co/storage/v1/object/public/hkbimages//image(17).png",
+    girls: "https://fowdzmkxmvocegczvbua.supabase.co/storage/v1/object/public/hkbimages//image(33).png",
     baby: "https://images.unsplash.com/photo-1590013500472-2c2d7349dffb?q=80&w=1000",
     footwear: "https://images.unsplash.com/photo-1471039497385-b6d6ba609f9c?q=80&w=1000",
     hero: "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?q=80&w=1000"
