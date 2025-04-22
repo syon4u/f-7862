@@ -22,7 +22,7 @@ const Index: React.FC = () => {
   const diverseImages = {
     boys: "https://fowdzmkxmvocegczvbua.supabase.co/storage/v1/object/public/hkbimages//image(17).png",
     girls: "https://fowdzmkxmvocegczvbua.supabase.co/storage/v1/object/public/hkbimages//image(33).png",
-    baby: "https://fowdzmkxmvocegczvbua.supabase.co/storage/v1/object/public/hkbimages//IMG_4772.jpg",
+    baby: "https://fowdzmkxmvocegczvbua.supabase.co/storage/v1/object/public/hkbimages//Screenshot%202022-08-02%20232630.png",
     footwear: "https://images.unsplash.com/photo-1471039497385-b6d6ba609f9c?q=80&w=1000",
     hero: "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?q=80&w=1000"
   };
