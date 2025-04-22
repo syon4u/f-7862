@@ -23,23 +23,23 @@ const ProductsFilter: React.FC<ProductsFilterProps> = ({
 }) => {
   const [search, setSearch] = useState('');
   const [inStock, setInStock] = useState<'all' | 'in-stock' | 'out-of-stock'>('all');
-  const [category, setCategory] = useState('');
-  const [gender, setGender] = useState('');
+  const [category, setCategory] = useState('all');
+  const [gender, setGender] = useState('all');
 
   const handleFilter = () => {
     onFilter({
       search,
       inStock,
-      category,
-      gender
+      category: category === 'all' ? '' : category,
+      gender: gender === 'all' ? '' : gender
     });
   };
 
   const handleReset = () => {
     setSearch('');
     setInStock('all');
-    setCategory('');
-    setGender('');
+    setCategory('all');
+    setGender('all');
     
     onFilter({
       search: '',
@@ -85,7 +85,7 @@ const ProductsFilter: React.FC<ProductsFilterProps> = ({
             <SelectValue placeholder="Category" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All categories</SelectItem>
+            <SelectItem value="all">All categories</SelectItem>
             {categories.map((cat) => (
               <SelectItem key={cat} value={cat}>{cat}</SelectItem>
             ))}
@@ -100,7 +100,7 @@ const ProductsFilter: React.FC<ProductsFilterProps> = ({
             <SelectValue placeholder="Gender" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All genders</SelectItem>
+            <SelectItem value="all">All genders</SelectItem>
             {genders.map((g) => (
               <SelectItem key={g} value={g}>{g}</SelectItem>
             ))}
