@@ -20,6 +20,7 @@ interface ProductsListProps {
   filteredProducts: Product[];
   categories: string[];
   genders: string[];
+  onBulkUpload?: () => void;
 }
 
 const ProductsList: React.FC<ProductsListProps> = ({ 
@@ -30,7 +31,8 @@ const ProductsList: React.FC<ProductsListProps> = ({
   onFilter,
   filteredProducts,
   categories,
-  genders
+  genders,
+  onBulkUpload
 }) => {
   const displayProducts = filteredProducts.length > 0 ? filteredProducts : products;
   
@@ -42,6 +44,9 @@ const ProductsList: React.FC<ProductsListProps> = ({
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <InventorySeeder />
           <Button onClick={onAddClick}>Add Product Manually</Button>
+          {onBulkUpload && (
+            <Button variant="outline" onClick={onBulkUpload}>Bulk Upload</Button>
+          )}
         </div>
       </div>
     );
@@ -53,6 +58,7 @@ const ProductsList: React.FC<ProductsListProps> = ({
         onFilter={onFilter}
         categories={categories}
         genders={genders}
+        onBulkUpload={onBulkUpload}
       />
       
       {filteredProducts.length === 0 && products.length > 0 ? (

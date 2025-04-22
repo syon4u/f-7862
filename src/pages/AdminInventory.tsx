@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -7,17 +6,19 @@ import { useProducts } from '@/contexts/ProductContext';
 import { Product } from '@/types/product';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
-import { RefreshCcw, Plus } from 'lucide-react';
+import { RefreshCcw, Plus, Upload } from 'lucide-react';
 import InventorySeeder from '@/components/InventorySeeder';
 import ProductsList from '@/components/inventory/ProductsList';
 import InventoryAnalytics from '@/components/inventory/InventoryAnalytics';
 import AddProductDialog from '@/components/inventory/AddProductDialog';
 import EditProductDialog from '@/components/inventory/EditProductDialog';
+import BulkProductUploadDialog from '@/components/inventory/BulkProductUploadDialog';
 
 const AdminInventory = () => {
   const { products, addProduct, updateProduct, deleteProduct, fetchProducts } = useProducts();
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [isBulkUploadDialogOpen, setIsBulkUploadDialogOpen] = useState(false);
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
   
   // Filter state
@@ -123,6 +124,17 @@ const AdminInventory = () => {
     setFilters(newFilters);
   };
 
+  const handleBulkProductUpload = (products: Product[]) => {
+    products.forEach(product => {
+      addProduct(product);
+    });
+    
+    toast({
+      title: "Bulk upload complete",
+      description: `Successfully added ${products.length} products to inventory`,
+    });
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -135,6 +147,13 @@ const AdminInventory = () => {
               <RefreshCcw size={16} /> Refresh
             </Button>
             <InventorySeeder />
+            <Button 
+              variant="outline" 
+              onClick={() => setIsBulkUploadDialogOpen(true)} 
+              className="flex items-center gap-2"
+            >
+              <Upload size={16} /> Bulk Upload
+            </Button>
             <Button onClick={() => setIsAddDialogOpen(true)} className="flex items-center gap-2">
               <Plus size={16} /> Add Product
             </Button>
@@ -178,6 +197,12 @@ const AdminInventory = () => {
         currentProduct={currentProduct}
         onUpdateProduct={handleEditProduct}
         setCurrentProduct={setCurrentProduct}
+      />
+      
+      <BulkProductUploadDialog
+        isOpen={isBulkUploadDialogOpen}
+        onClose={() => setIsBulkUploadDialogOpen(false)}
+        onProductsUploaded={handleBulkProductUpload}
       />
       
       <Footer />

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Search, X } from 'lucide-react';
+import { Search, X, Upload } from 'lucide-react';
 
 interface ProductsFilterProps {
   onFilter: (filters: {
@@ -14,12 +14,14 @@ interface ProductsFilterProps {
   }) => void;
   categories: string[];
   genders: string[];
+  onBulkUpload?: () => void;
 }
 
 const ProductsFilter: React.FC<ProductsFilterProps> = ({ 
   onFilter,
   categories,
-  genders
+  genders,
+  onBulkUpload
 }) => {
   const [search, setSearch] = useState('');
   const [inStock, setInStock] = useState<'all' | 'in-stock' | 'out-of-stock'>('all');
@@ -51,7 +53,20 @@ const ProductsFilter: React.FC<ProductsFilterProps> = ({
 
   return (
     <div className="bg-card border rounded-lg p-4 mb-6">
-      <h3 className="font-medium mb-3">Filter Products</h3>
+      <div className="flex justify-between mb-3">
+        <h3 className="font-medium">Filter Products</h3>
+        {onBulkUpload && (
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={onBulkUpload}
+            className="flex items-center gap-1"
+          >
+            <Upload size={14} />
+            Bulk Upload
+          </Button>
+        )}
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="relative">
           <Input
