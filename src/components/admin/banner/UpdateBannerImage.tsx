@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 import { Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -6,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { BannerImage, useBanners } from '@/contexts/BannerContext';
 import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
 
 interface UpdateBannerImageProps {
   selectedBannerId: string;
@@ -41,9 +41,7 @@ const UpdateBannerImage: React.FC<UpdateBannerImageProps> = ({ selectedBannerId,
         .from('banner-images')
         .upload(filePath, file);
 
-      if (uploadError) {
-        throw uploadError;
-      }
+      if (uploadError) throw uploadError;
 
       const { data: { publicUrl } } = supabase.storage
         .from('banner-images')
