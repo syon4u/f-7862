@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Upload, Trash, Image, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -6,10 +5,12 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
 import { useBanners, BannerImage } from '@/contexts/BannerContext';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const BannerManager: React.FC = () => {
-  const { banners, addBanner, deleteBanner, setActiveBanner } = useBanners();
+  const { banners, addBanner, deleteBanner, setActiveBanner, updateBanner } = useBanners();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selectedBannerId, setSelectedBannerId] = useState<string>('');
   
   const [newBanner, setNewBanner] = useState<Partial<BannerImage>>({
     title: '',
@@ -66,7 +67,7 @@ const BannerManager: React.FC = () => {
     toast.success("Banner set as active");
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, isUpdate: boolean = false) => {
     const file = e.target.files?.[0];
     if (file) {
       // Check file type
@@ -83,13 +84,29 @@ const BannerManager: React.FC = () => {
 
       const reader = new FileReader();
       reader.onload = (event) => {
-        setNewBanner({
-          ...newBanner,
-          url: event.target?.result as string
-        });
+        const imageUrl = event.target?.result as string;
+        if (isUpdate && selectedBannerId) {
+          const bannerToUpdate = banners.find(b => b.id === selectedBannerId);
+          if (bannerToUpdate) {
+            updateBanner(selectedBannerId, {
+              ...bannerToUpdate,
+              url: imageUrl
+            });
+            toast.success("Banner image updated successfully");
+          }
+        } else {
+          setNewBanner({
+            ...newBanner,
+            url: imageUrl
+          });
+        }
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleUpdateBannerImage = () => {
+    fileInputRef.current?.click();
   };
 
   const triggerFileInput = () => {
@@ -98,6 +115,60 @@ const BannerManager: React.FC = () => {
 
   return (
     <div className="space-y-8">
+      <Card>
+        <CardHeader>
+          <CardTitle>Update Existing Banner</CardTitle>
+          <CardDescription>
+            Select a banner to update its image
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <Select 
+              value={selectedBannerId} 
+              onValueChange={setSelectedBannerId}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a banner to update" />
+              </SelectTrigger>
+              <SelectContent>
+                {banners.map((banner) => (
+                  <SelectItem key={banner.id} value={banner.id}>
+                    {banner.title}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            {selectedBannerId && (
+              <div className="space-y-4">
+                <div className="relative">
+                  <img 
+                    src={banners.find(b => b.id === selectedBannerId)?.url} 
+                    alt="Selected banner" 
+                    className="w-full h-40 object-cover rounded-md"
+                  />
+                </div>
+                <Button 
+                  onClick={() => handleImageUpload}
+                  className="w-full"
+                >
+                  <Upload className="mr-2 h-4 w-4" />
+                  Upload New Image
+                </Button>
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => handleImageUpload(e, true)}
+                  ref={fileInputRef}
+                />
+              </div>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
       <Card>
         <CardHeader>
           <CardTitle>Add New Banner</CardTitle>
