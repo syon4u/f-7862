@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { toast } from 'sonner';
 import { useBanners, BannerImage } from '@/contexts/BannerContext';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { supabase } from '@/integrations/supabase/client';
 
 const BannerManager: React.FC = () => {
   const { banners, addBanner, deleteBanner, setActiveBanner, updateBanner } = useBanners();
@@ -19,7 +20,27 @@ const BannerManager: React.FC = () => {
     buttonLink: '/shop-now',
   });
 
-  const handleAddBanner = () => {
+  const uploadImage = async (file: File): Promise<string> => {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}.${fileExt}`;
+    const filePath = `${fileName}`;
+
+    const { error: uploadError, data } = await supabase.storage
+      .from('banner-images')
+      .upload(filePath, file);
+
+    if (uploadError) {
+      throw uploadError;
+    }
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('banner-images')
+      .getPublicUrl(filePath);
+
+    return publicUrl;
+  };
+
+  const handleAddBanner = async () => {
     if (!newBanner.url) {
       toast.error("Please upload an image for the banner");
       return;
@@ -30,25 +51,26 @@ const BannerManager: React.FC = () => {
       return;
     }
     
-    const banner: BannerImage = {
-      id: Date.now().toString(),
-      url: newBanner.url,
-      title: newBanner.title || '',
-      subtitle: newBanner.subtitle,
-      buttonText: newBanner.buttonText,
-      buttonLink: newBanner.buttonLink,
-      isActive: false
-    };
-    
-    addBanner(banner);
-    setNewBanner({
-      title: '',
-      url: '',
-      buttonText: 'SHOP NOW',
-      buttonLink: '/shop-now',
-    });
-    
-    toast.success("Banner added successfully");
+    try {
+      await addBanner({
+        url: newBanner.url,
+        title: newBanner.title,
+        subtitle: newBanner.subtitle,
+        buttonText: newBanner.buttonText,
+        buttonLink: newBanner.buttonLink,
+        category: 'general'
+      });
+
+      setNewBanner({
+        title: '',
+        url: '',
+        buttonText: 'SHOP NOW',
+        buttonLink: '/shop-now',
+      });
+    } catch (error) {
+      console.error('Error adding banner:', error);
+      toast.error('Failed to add banner');
+    }
   };
 
   const handleDeleteBanner = (id: string) => {
@@ -67,42 +89,46 @@ const BannerManager: React.FC = () => {
     toast.success("Banner set as active");
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, isUpdate: boolean = false) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, isUpdate: boolean = false) => {
     const file = e.target.files?.[0];
-    if (file) {
-      // Check file type
-      if (!file.type.startsWith('image/')) {
-        toast.error("Please upload an image file");
-        return;
-      }
-      
-      // Check file size (limit to 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        toast.error("Image size should be less than 5MB");
-        return;
-      }
+    if (!file) return;
 
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const imageUrl = event.target?.result as string;
-        if (isUpdate && selectedBannerId) {
-          const bannerToUpdate = banners.find(b => b.id === selectedBannerId);
-          if (bannerToUpdate) {
-            updateBanner(selectedBannerId, {
-              ...bannerToUpdate,
-              url: imageUrl
-            });
-            toast.success("Banner image updated successfully");
-          }
-        } else {
-          setNewBanner({
-            ...newBanner,
+    // Check file type
+    if (!file.type.startsWith('image/')) {
+      toast.error("Please upload an image file");
+      return;
+    }
+    
+    // Check file size (limit to 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Image size should be less than 5MB");
+      return;
+    }
+
+    try {
+      const imageUrl = await uploadImage(file);
+
+      if (isUpdate && selectedBannerId) {
+        const bannerToUpdate = banners.find(b => b.id === selectedBannerId);
+        if (bannerToUpdate) {
+          await updateBanner(selectedBannerId, {
+            ...bannerToUpdate,
             url: imageUrl
           });
         }
-      };
-      reader.readAsDataURL(file);
+      } else {
+        setNewBanner(prev => ({
+          ...prev,
+          url: imageUrl
+        }));
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      toast.error('Failed to upload image');
     }
+
+    // Reset the input
+    e.target.value = '';
   };
 
   const handleUpdateBannerImage = () => {

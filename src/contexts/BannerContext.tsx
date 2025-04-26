@@ -1,5 +1,10 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { Database } from '@/integrations/supabase/types';
+import { toast } from 'sonner';
+
+type BannerRow = Database['public']['Tables']['banners']['Row'];
 
 export interface BannerImage {
   id: string;
@@ -8,15 +13,16 @@ export interface BannerImage {
   subtitle?: string;
   buttonText?: string;
   buttonLink?: string;
+  category: string;
   isActive: boolean;
 }
 
 interface BannerContextType {
   banners: BannerImage[];
-  addBanner: (banner: BannerImage) => void;
-  updateBanner: (id: string, banner: BannerImage) => void;
-  deleteBanner: (id: string) => void;
-  setActiveBanner: (id: string) => void;
+  addBanner: (banner: Omit<BannerImage, 'id' | 'isActive'>) => Promise<void>;
+  updateBanner: (id: string, banner: BannerImage) => Promise<void>;
+  deleteBanner: (id: string) => Promise<void>;
+  setActiveBanner: (id: string) => Promise<void>;
   loading: boolean;
 }
 
@@ -38,66 +44,170 @@ export function BannerProvider({ children }: BannerProviderProps) {
   const [banners, setBanners] = useState<BannerImage[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Load initial banners from localStorage on mount
+  // Load banners from Supabase on mount
   useEffect(() => {
-    const storedBanners = localStorage.getItem('site-banners');
-    if (storedBanners) {
-      try {
-        setBanners(JSON.parse(storedBanners));
-      } catch (error) {
-        console.error('Failed to parse banners from localStorage:', error);
-        // Initialize with a default banner if parsing fails
-        setBanners([{
-          id: '1',
-          url: 'https://images.unsplash.com/photo-1560506840-ec148e82a604?q=80&w=1000',
-          title: 'Spring Wardrobe Refresh!',
-          buttonText: 'SHOP NEW IN',
-          buttonLink: '/shop-now',
-          isActive: true
-        }]);
-      }
-    } else {
-      // Initialize with a default banner if none exists
-      setBanners([{
-        id: '1',
-        url: 'https://images.unsplash.com/photo-1560506840-ec148e82a604?q=80&w=1000',
-        title: 'Spring Wardrobe Refresh!',
-        buttonText: 'SHOP NEW IN',
-        buttonLink: '/shop-now',
-        isActive: true
-      }]);
-    }
-    setLoading(false);
+    fetchBanners();
   }, []);
 
-  // Save banners to localStorage whenever they change
-  useEffect(() => {
-    if (!loading) {
-      localStorage.setItem('site-banners', JSON.stringify(banners));
+  const fetchBanners = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('banners')
+        .select('*')
+        .order('created_at', { ascending: true });
+
+      if (error) throw error;
+
+      const formattedBanners: BannerImage[] = data.map(banner => ({
+        id: banner.id,
+        url: banner.url,
+        title: banner.title,
+        subtitle: banner.subtitle || undefined,
+        buttonText: banner.button_text || undefined,
+        buttonLink: banner.button_link || undefined,
+        category: banner.category,
+        isActive: banner.is_active || false,
+      }));
+
+      setBanners(formattedBanners);
+    } catch (error) {
+      console.error('Error fetching banners:', error);
+      toast.error('Failed to load banners');
+    } finally {
+      setLoading(false);
     }
-  }, [banners, loading]);
-
-  const addBanner = (banner: BannerImage) => {
-    setBanners(prev => [...prev, banner]);
   };
 
-  const updateBanner = (id: string, updatedBanner: BannerImage) => {
-    setBanners(prev => 
-      prev.map(banner => banner.id === id ? updatedBanner : banner)
-    );
+  const uploadImage = async (file: File): Promise<string> => {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}.${fileExt}`;
+    const filePath = `${fileName}`;
+
+    const { error: uploadError, data } = await supabase.storage
+      .from('banner-images')
+      .upload(filePath, file);
+
+    if (uploadError) {
+      throw uploadError;
+    }
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('banner-images')
+      .getPublicUrl(filePath);
+
+    return publicUrl;
   };
 
-  const deleteBanner = (id: string) => {
-    setBanners(prev => prev.filter(banner => banner.id !== id));
+  const addBanner = async (banner: Omit<BannerImage, 'id' | 'isActive'>) => {
+    try {
+      const { data, error } = await supabase
+        .from('banners')
+        .insert([{
+          title: banner.title,
+          subtitle: banner.subtitle,
+          url: banner.url,
+          button_text: banner.buttonText,
+          button_link: banner.buttonLink,
+          category: banner.category,
+          is_active: false
+        }])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      const newBanner: BannerImage = {
+        id: data.id,
+        url: data.url,
+        title: data.title,
+        subtitle: data.subtitle || undefined,
+        buttonText: data.button_text || undefined,
+        buttonLink: data.button_link || undefined,
+        category: data.category,
+        isActive: data.is_active || false,
+      };
+
+      setBanners(prev => [...prev, newBanner]);
+      toast.success('Banner added successfully');
+    } catch (error) {
+      console.error('Error adding banner:', error);
+      toast.error('Failed to add banner');
+    }
   };
 
-  const setActiveBanner = (id: string) => {
-    setBanners(prev => 
-      prev.map(banner => ({
+  const updateBanner = async (id: string, banner: BannerImage) => {
+    try {
+      const { error } = await supabase
+        .from('banners')
+        .update({
+          title: banner.title,
+          subtitle: banner.subtitle,
+          url: banner.url,
+          button_text: banner.buttonText,
+          button_link: banner.buttonLink,
+          category: banner.category,
+          is_active: banner.isActive
+        })
+        .eq('id', id);
+
+      if (error) throw error;
+
+      setBanners(prev => prev.map(b => b.id === id ? banner : b));
+      toast.success('Banner updated successfully');
+    } catch (error) {
+      console.error('Error updating banner:', error);
+      toast.error('Failed to update banner');
+    }
+  };
+
+  const deleteBanner = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('banners')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      setBanners(prev => prev.filter(banner => banner.id !== id));
+      toast.success('Banner deleted successfully');
+    } catch (error) {
+      console.error('Error deleting banner:', error);
+      toast.error('Failed to delete banner');
+    }
+  };
+
+  const setActiveBanner = async (id: string) => {
+    try {
+      // First, deactivate all banners in the same category
+      const bannerToActivate = banners.find(b => b.id === id);
+      if (!bannerToActivate) throw new Error('Banner not found');
+
+      const { error: updateError } = await supabase
+        .from('banners')
+        .update({ is_active: false })
+        .eq('category', bannerToActivate.category);
+
+      if (updateError) throw updateError;
+
+      // Then activate the selected banner
+      const { error: activateError } = await supabase
+        .from('banners')
+        .update({ is_active: true })
+        .eq('id', id);
+
+      if (activateError) throw activateError;
+
+      setBanners(prev => prev.map(banner => ({
         ...banner,
         isActive: banner.id === id
-      }))
-    );
+      })));
+
+      toast.success('Banner set as active');
+    } catch (error) {
+      console.error('Error setting active banner:', error);
+      toast.error('Failed to set active banner');
+    }
   };
 
   return (
