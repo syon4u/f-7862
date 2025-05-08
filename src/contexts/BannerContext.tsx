@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Database } from '@/integrations/supabase/types';
@@ -14,7 +15,7 @@ export interface BannerImage {
   buttonLink?: string;
   category: string;
   isActive: boolean;
-  altText?: string; // Add altText property
+  altText?: string;
 }
 
 interface BannerContextType {
@@ -67,7 +68,8 @@ export function BannerProvider({ children }: BannerProviderProps) {
         buttonLink: banner.button_link || undefined,
         category: banner.category,
         isActive: banner.is_active || false,
-        altText: banner.alt_text || undefined, // Map alt_text from database to altText in our interface
+        // Handle the alt_text property which might not exist in some records
+        altText: banner.alt_text !== undefined ? banner.alt_text : undefined,
       }));
 
       setBanners(formattedBanners);
@@ -111,7 +113,7 @@ export function BannerProvider({ children }: BannerProviderProps) {
           button_link: banner.buttonLink,
           category: banner.category,
           is_active: false,
-          alt_text: banner.altText // Map altText to alt_text in the database
+          alt_text: banner.altText // This field may not exist in older records
         }])
         .select()
         .single();
@@ -127,7 +129,8 @@ export function BannerProvider({ children }: BannerProviderProps) {
         buttonLink: data.button_link || undefined,
         category: data.category,
         isActive: data.is_active || false,
-        altText: data.alt_text || undefined,
+        // Handle the alt_text property safely
+        altText: data.alt_text !== undefined ? data.alt_text : undefined,
       };
 
       setBanners(prev => [...prev, newBanner]);
