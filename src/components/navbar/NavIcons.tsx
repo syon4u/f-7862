@@ -9,8 +9,10 @@ import {
   Menu, 
   X, 
   Gift, 
-  Shield 
+  Shield,
+  LayoutDashboard 
 } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface NavIconsProps {
   mobileMenuOpen: boolean;
@@ -18,6 +20,8 @@ interface NavIconsProps {
 }
 
 const NavIcons: React.FC<NavIconsProps> = ({ mobileMenuOpen, setMobileMenuOpen }) => {
+  const { isAuthenticated, isAdmin } = useAuth();
+
   return (
     <div className="flex items-center space-x-2">
       <Link to="/my-account">
@@ -46,11 +50,14 @@ const NavIcons: React.FC<NavIconsProps> = ({ mobileMenuOpen, setMobileMenuOpen }
           <span className="absolute -top-1 -right-1 bg-[#FF4D6D] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
         </Button>
       </Link>
-      <Link to="/admin/inventory" className="hidden md:block">
-        <Button variant="ghost" size="sm" className="text-[#5D4EBD] hover:text-primary font-poppins">
-          Inventory
-        </Button>
-      </Link>
+      {isAdmin && (
+        <Link to="/admin/dashboard" className="hidden md:block">
+          <Button variant="ghost" size="sm" className="text-[#5D4EBD] hover:text-primary font-poppins flex items-center gap-1">
+            <LayoutDashboard className="h-4 w-4" />
+            Admin
+          </Button>
+        </Link>
+      )}
       <Button 
         variant="ghost" 
         size="icon" 
@@ -64,4 +71,3 @@ const NavIcons: React.FC<NavIconsProps> = ({ mobileMenuOpen, setMobileMenuOpen }
 };
 
 export default NavIcons;
-
