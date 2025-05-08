@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Button } from '@/components/ui/button';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 interface BoxOption {
   id: string;
@@ -84,17 +85,23 @@ const ShopNow: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {boxOptions.map((box) => (
             <div key={box.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <Link to={`/box/${box.id}`} className="block aspect-square overflow-hidden">
-                <img 
-                  src={box.image} 
-                  alt={box.name}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null;
-                    target.src = "/placeholder.svg";
-                  }}
-                />
+              <Link to={`/box/${box.id}`} className="block">
+                <div className="relative">
+                  <AspectRatio ratio={1/1} className="bg-muted">
+                    <img 
+                      src={box.image} 
+                      alt={box.name}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.onerror = null;
+                        target.src = "/placeholder.svg";
+                        target.classList.remove("hover:scale-105");
+                      }}
+                    />
+                  </AspectRatio>
+                </div>
               </Link>
               <div className="p-6">
                 <Link to={`/box/${box.id}`}>
