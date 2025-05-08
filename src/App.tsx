@@ -23,53 +23,56 @@ import AdminBanners from './pages/AdminBanners';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminLogin from './pages/AdminLogin';
 import { AuthProvider } from './contexts/AuthContext';
+import { ProductProvider } from './contexts/ProductContext';
 import ProtectedRoute from './components/admin/ProtectedRoute';
 
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/shop-now" element={<ShopNow />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/shop-clothing" element={<ShopClothing />} />
-          <Route path="/social-purpose" element={<SocialPurpose />} />
-          <Route path="/box/:id" element={<BoxDetail />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/my-account" element={<MyAccount />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/customer-support" element={<CustomerSupport />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/donation-program" element={<DonationProgram />} />
-          <Route path="/membership" element={<Membership />} />
-          <Route path="/style-quiz" element={<StyleQuiz />} />
-          <Route path="/how-it-works" element={<HowItWorks />} />
+      <ProductProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/shop-now" element={<ShopNow />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/shop-clothing" element={<ShopClothing />} />
+            <Route path="/social-purpose" element={<SocialPurpose />} />
+            <Route path="/box/:id" element={<BoxDetail />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/my-account" element={<MyAccount />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/customer-support" element={<CustomerSupport />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/donation-program" element={<DonationProgram />} />
+            <Route path="/membership" element={<Membership />} />
+            <Route path="/style-quiz" element={<StyleQuiz />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
+            
+            {/* Admin Routes */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/inventory" element={
+              <ProtectedRoute>
+                <AdminInventory />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/banners" element={
+              <ProtectedRoute>
+                <AdminBanners />
+              </ProtectedRoute>
+            } />
+            
+            <Route path="*" element={<NotFound />} />
+          </Routes>
           
-          {/* Admin Routes */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={
-            <ProtectedRoute>
-              <AdminDashboard />
-            </ProtectedRoute>
-          } />
-          <Route path="/admin/inventory" element={
-            <ProtectedRoute>
-              <AdminInventory />
-            </ProtectedRoute>
-          } />
-          <Route path="/admin/banners" element={
-            <ProtectedRoute>
-              <AdminBanners />
-            </ProtectedRoute>
-          } />
-          
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        
-        <Toaster />
-        <SonnerToaster position="top-right" />
-      </Router>
+          <Toaster />
+          <SonnerToaster position="top-right" />
+        </Router>
+      </ProductProvider>
     </AuthProvider>
   );
 }
