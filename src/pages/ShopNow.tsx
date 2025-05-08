@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
@@ -25,7 +24,7 @@ const ShopNow: React.FC = () => {
       items: '6 items',
       description: 'A style mix of bottoms, tops and one-pieces',
       price: 'US$85',
-      image: '/lovable-uploads/7f1ef772-a46e-4a42-b089-8cb4abddcb34.png'
+      image: '/lovable-uploads/1603b4f5-d462-4411-a7a8-c5001b061886.png'
     },
     {
       id: '2',
@@ -34,7 +33,7 @@ const ShopNow: React.FC = () => {
       items: '6 items',
       description: 'A style mix of bottoms, tops and one-pieces',
       price: 'US$85',
-      image: '/lovable-uploads/1603b4f5-d462-4411-a7a8-c5001b061886.png'
+      image: '/lovable-uploads/d63a9b83-76c4-4d33-a915-ebef09e1b705.png'
     },
     {
       id: '3',
@@ -43,7 +42,7 @@ const ShopNow: React.FC = () => {
       items: '4 items',
       description: 'A style mix of tops and bottoms',
       price: 'US$85',
-      image: '/lovable-uploads/bc2db481-37c2-450f-a229-e25e3021907f.png'
+      image: '/lovable-uploads/157ae854-89f2-47c6-863f-683fc20b3844.png'
     },
     {
       id: '4',
@@ -52,7 +51,7 @@ const ShopNow: React.FC = () => {
       items: '6 items',
       description: 'A style mix of tops and bottoms',
       price: 'US$124',
-      image: '/lovable-uploads/c22fa864-deb4-47b1-8d7f-3f2652269156.png'
+      image: '/lovable-uploads/d8ddd0f2-7997-4712-a493-9bec696412e3.png'
     },
     {
       id: '5',
@@ -61,7 +60,7 @@ const ShopNow: React.FC = () => {
       items: '4 items',
       description: 'A style mix of tops, bottoms and one-pieces',
       price: 'US$85',
-      image: '/lovable-uploads/b29bd98b-c3d6-46b2-8679-220e3564a7cd.png'
+      image: '/lovable-uploads/d8509b88-5b24-402e-acca-64c4ee56ac29.png'
     },
     {
       id: '6',
@@ -70,7 +69,7 @@ const ShopNow: React.FC = () => {
       items: '6 items',
       description: 'A style mix of tops, bottoms and one-pieces',
       price: 'US$124',
-      image: '/lovable-uploads/6f94432e-74b3-4770-a3ff-86d48982be97.png'
+      image: '/lovable-uploads/020696c3-296c-490d-b734-72aebd5b7b5a.png'
     }
   ];
 
