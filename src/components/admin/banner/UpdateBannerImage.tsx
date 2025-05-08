@@ -65,7 +65,7 @@ const UpdateBannerImage: React.FC<UpdateBannerImageProps> = ({ selectedBannerId,
         await updateBanner(selectedBannerId, {
           ...bannerToUpdate,
           url: publicUrl,
-          alt_text: altText || bannerToUpdate.title // Use alt text or fall back to title
+          altText: altText || bannerToUpdate.title // Use alt text or fall back to title
         });
         toast.success("Banner image updated successfully");
       }
@@ -84,7 +84,7 @@ const UpdateBannerImage: React.FC<UpdateBannerImageProps> = ({ selectedBannerId,
   // When a new banner is selected, update the alt text field
   React.useEffect(() => {
     if (selectedBanner) {
-      setAltText(selectedBanner.alt_text || selectedBanner.title || '');
+      setAltText(selectedBanner.altText || selectedBanner.title || '');
     }
   }, [selectedBannerId, selectedBanner]);
 
@@ -119,7 +119,7 @@ const UpdateBannerImage: React.FC<UpdateBannerImageProps> = ({ selectedBannerId,
               <div className="relative">
                 <img 
                   src={selectedBanner?.url} 
-                  alt={selectedBanner?.alt_text || selectedBanner?.title || 'Banner image'} 
+                  alt={selectedBanner?.altText || selectedBanner?.title || 'Banner image'} 
                   className="w-full h-40 object-cover rounded-md"
                 />
               </div>
@@ -181,7 +181,7 @@ const UpdateBannerImage: React.FC<UpdateBannerImageProps> = ({ selectedBannerId,
                           <p className="mb-4 text-sm md:text-base">{selectedBanner.subtitle}</p>
                         )}
                         <button className="bg-white text-black px-6 py-2 rounded-md font-medium hover:bg-opacity-90">
-                          {selectedBanner.button_text || 'SHOP NOW'}
+                          {selectedBanner.buttonText || 'SHOP NOW'}
                         </button>
                       </div>
                     </div>

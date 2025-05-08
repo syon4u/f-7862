@@ -1,8 +1,9 @@
-
 import React from 'react';
 import AdminLayout from '../components/admin/AdminLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { BarChart, LineChart, PieChart } from '@/components/ui/chart';
+import { ChartContainer } from '@/components/ui/chart';
+import { Bar, Line, Pie } from 'recharts';
+import * as RechartsPrimitive from 'recharts';
 
 const AdminDashboard = () => {
   // Sample data for charts
@@ -48,6 +49,23 @@ const AdminDashboard = () => {
     ],
   };
 
+  // Convert the data for Recharts
+  const salesChartData = salesData.labels.map((month, index) => ({
+    name: month,
+    Sales: salesData.datasets[0].data[index],
+  }));
+
+  const userEngagementChartData = userEngagementData.labels.map((day, index) => ({
+    name: day,
+    Visits: userEngagementData.datasets[0].data[index],
+  }));
+
+  const categoryChartData = categoryData.labels.map((category, index) => ({
+    name: category,
+    value: categoryData.datasets[0].data[index],
+    fill: categoryData.datasets[0].backgroundColor[index],
+  }));
+
   const metrics = [
     { title: 'Total Sales', value: '$24,325', change: '+15%', up: true },
     { title: 'New Customers', value: '145', change: '+22%', up: true },
@@ -80,7 +98,16 @@ const AdminDashboard = () => {
             <CardDescription>Monthly sales performance</CardDescription>
           </CardHeader>
           <CardContent>
-            <BarChart data={salesData} className="aspect-[4/3] w-full" />
+            <ChartContainer config={{}} className="aspect-[4/3] w-full">
+              <Bar data={salesChartData} barSize={30}>
+                <RechartsPrimitive.XAxis dataKey="name" />
+                <RechartsPrimitive.YAxis />
+                <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />
+                <RechartsPrimitive.Tooltip />
+                <RechartsPrimitive.Legend />
+                <RechartsPrimitive.Bar dataKey="Sales" fill="rgba(93, 78, 189, 0.7)" />
+              </Bar>
+            </ChartContainer>
           </CardContent>
         </Card>
         <Card className="col-span-1">
@@ -89,7 +116,21 @@ const AdminDashboard = () => {
             <CardDescription>Daily visits</CardDescription>
           </CardHeader>
           <CardContent>
-            <LineChart data={userEngagementData} className="aspect-[4/3] w-full" />
+            <ChartContainer config={{}} className="aspect-[4/3] w-full">
+              <Line data={userEngagementChartData}>
+                <RechartsPrimitive.XAxis dataKey="name" />
+                <RechartsPrimitive.YAxis />
+                <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />
+                <RechartsPrimitive.Tooltip />
+                <RechartsPrimitive.Legend />
+                <RechartsPrimitive.Line 
+                  type="monotone" 
+                  dataKey="Visits" 
+                  stroke="rgb(255, 77, 109)" 
+                  activeDot={{ r: 8 }}
+                />
+              </Line>
+            </ChartContainer>
           </CardContent>
         </Card>
       </div>
@@ -101,7 +142,21 @@ const AdminDashboard = () => {
             <CardDescription>Product category distribution</CardDescription>
           </CardHeader>
           <CardContent>
-            <PieChart data={categoryData} className="aspect-square max-w-xs mx-auto" />
+            <ChartContainer config={{}} className="aspect-square max-w-xs mx-auto">
+              <Pie 
+                data={categoryChartData} 
+                cx="50%" 
+                cy="50%" 
+                outerRadius={80} 
+                label={({name, value}) => `${name}: ${value}%`}
+              >
+                {
+                  categoryChartData.map((entry, index) => (
+                    <RechartsPrimitive.Cell key={`cell-${index}`} fill={entry.fill} />
+                  ))
+                }
+              </Pie>
+            </ChartContainer>
           </CardContent>
         </Card>
         <Card className="lg:col-span-2">
