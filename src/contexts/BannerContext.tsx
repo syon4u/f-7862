@@ -59,18 +59,23 @@ export function BannerProvider({ children }: BannerProviderProps) {
 
       if (error) throw error;
 
-      const formattedBanners: BannerImage[] = data.map(banner => ({
-        id: banner.id,
-        url: banner.url,
-        title: banner.title,
-        subtitle: banner.subtitle || undefined,
-        buttonText: banner.button_text || undefined,
-        buttonLink: banner.button_link || undefined,
-        category: banner.category,
-        isActive: banner.is_active || false,
-        // Handle the alt_text property which might not exist in some records
-        altText: banner.alt_text !== undefined ? banner.alt_text : undefined,
-      }));
+      const formattedBanners: BannerImage[] = data.map(banner => {
+        // Type assertion to deal with potentially missing properties
+        const bannerData = banner as BannerRow & { alt_text?: string };
+        
+        return {
+          id: banner.id,
+          url: banner.url,
+          title: banner.title,
+          subtitle: banner.subtitle || undefined,
+          buttonText: banner.button_text || undefined,
+          buttonLink: banner.button_link || undefined,
+          category: banner.category,
+          isActive: banner.is_active || false,
+          // Handle alt_text safely using the type assertion
+          altText: bannerData.alt_text || undefined,
+        };
+      });
 
       setBanners(formattedBanners);
     } catch (error) {
@@ -103,23 +108,33 @@ export function BannerProvider({ children }: BannerProviderProps) {
 
   const addBanner = async (banner: Omit<BannerImage, 'id' | 'isActive'>) => {
     try {
+      // Create an object with optional alt_text property
+      const bannerData: any = {
+        title: banner.title,
+        subtitle: banner.subtitle,
+        url: banner.url,
+        button_text: banner.buttonText,
+        button_link: banner.buttonLink,
+        category: banner.category,
+        is_active: false,
+      };
+      
+      // Only add alt_text if it exists
+      if (banner.altText !== undefined) {
+        bannerData.alt_text = banner.altText;
+      }
+
       const { data, error } = await supabase
         .from('banners')
-        .insert([{
-          title: banner.title,
-          subtitle: banner.subtitle,
-          url: banner.url,
-          button_text: banner.buttonText,
-          button_link: banner.buttonLink,
-          category: banner.category,
-          is_active: false,
-          alt_text: banner.altText // This field may not exist in older records
-        }])
+        .insert([bannerData])
         .select()
         .single();
 
       if (error) throw error;
 
+      // Type assertion to deal with potentially missing properties
+      const resultData = data as BannerRow & { alt_text?: string };
+      
       const newBanner: BannerImage = {
         id: data.id,
         url: data.url,
@@ -129,8 +144,8 @@ export function BannerProvider({ children }: BannerProviderProps) {
         buttonLink: data.button_link || undefined,
         category: data.category,
         isActive: data.is_active || false,
-        // Handle the alt_text property safely
-        altText: data.alt_text !== undefined ? data.alt_text : undefined,
+        // Handle alt_text safely using the type assertion
+        altText: resultData.alt_text || undefined,
       };
 
       setBanners(prev => [...prev, newBanner]);
@@ -143,18 +158,25 @@ export function BannerProvider({ children }: BannerProviderProps) {
 
   const updateBanner = async (id: string, banner: BannerImage) => {
     try {
+      // Create an object with optional alt_text property
+      const updateData: any = {
+        title: banner.title,
+        subtitle: banner.subtitle,
+        url: banner.url,
+        button_text: banner.buttonText,
+        button_link: banner.buttonLink,
+        category: banner.category,
+        is_active: banner.isActive,
+      };
+      
+      // Only add alt_text if it exists
+      if (banner.altText !== undefined) {
+        updateData.alt_text = banner.altText;
+      }
+
       const { error } = await supabase
         .from('banners')
-        .update({
-          title: banner.title,
-          subtitle: banner.subtitle,
-          url: banner.url,
-          button_text: banner.buttonText,
-          button_link: banner.buttonLink,
-          category: banner.category,
-          is_active: banner.isActive,
-          alt_text: banner.altText // Map altText to alt_text
-        })
+        .update(updateData)
         .eq('id', id);
 
       if (error) throw error;
