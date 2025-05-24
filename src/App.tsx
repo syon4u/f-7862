@@ -21,6 +21,7 @@ import HowItWorks from './pages/HowItWorks';
 import AdminInventory from './pages/AdminInventory';
 import AdminBanners from './pages/AdminBanners';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminAnalytics from './pages/AdminAnalytics';
 import AdminLogin from './pages/AdminLogin';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProductProvider } from './contexts/ProductContext';
