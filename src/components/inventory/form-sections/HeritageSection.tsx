@@ -30,7 +30,7 @@ const HeritageSection: React.FC<HeritageSectionProps> = ({
             <SelectValue placeholder="Select island" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">None</SelectItem>
+            <SelectItem value="none">None</SelectItem>
             <SelectItem value="Jamaica">Jamaica</SelectItem>
             <SelectItem value="Trinidad">Trinidad & Tobago</SelectItem>
             <SelectItem value="Barbados">Barbados</SelectItem>
