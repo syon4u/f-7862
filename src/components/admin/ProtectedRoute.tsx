@@ -23,17 +23,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     );
   }
 
-  if (!isAuthenticated) {
-    // Redirect to login if not authenticated
-    return <Navigate to="/admin/login" replace />;
-  }
-
-  if (requireAdmin && !isAdmin) {
-    // Redirect to login if admin access is required but user is not admin
-    return <Navigate to="/admin/login" replace />;
-  }
-
-  // Render children if authenticated and has appropriate permissions
+  // In demo mode, always allow access
   return <>{children}</>;
 };
 
