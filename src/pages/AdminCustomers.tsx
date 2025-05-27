@@ -27,7 +27,20 @@ const AdminCustomers = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setCustomers(data || []);
+      
+      // Map database response to match our Customer interface
+      const mappedCustomers: Customer[] = (data || []).map(customer => ({
+        id: customer.id,
+        userId: customer.user_id,
+        firstName: customer.first_name,
+        lastName: customer.last_name,
+        email: customer.email,
+        phone: customer.phone,
+        createdAt: customer.created_at,
+        updatedAt: customer.updated_at
+      }));
+      
+      setCustomers(mappedCustomers);
     } catch (error) {
       console.error('Error fetching customers:', error);
       toast({

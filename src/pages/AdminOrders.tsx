@@ -29,7 +29,26 @@ const AdminOrders = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setOrders(data || []);
+      
+      // Map database response to match our Order interface
+      const mappedOrders: Order[] = (data || []).map(order => ({
+        id: order.id,
+        customerId: order.customer_id,
+        orderNumber: order.order_number,
+        status: order.status,
+        paymentMethod: order.payment_method,
+        subtotal: order.subtotal,
+        shippingCost: order.shipping_cost,
+        taxAmount: order.tax_amount,
+        totalAmount: order.total_amount,
+        shippingAddressId: order.shipping_address_id,
+        billingAddressId: order.billing_address_id,
+        notes: order.notes,
+        createdAt: order.created_at,
+        updatedAt: order.updated_at
+      }));
+      
+      setOrders(mappedOrders);
     } catch (error) {
       console.error('Error fetching orders:', error);
       toast({
