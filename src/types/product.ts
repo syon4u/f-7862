@@ -21,6 +21,14 @@ export interface Product {
   reviewCount?: number;
   createdAt?: string;
   updatedAt?: string;
+  // Additional fields used in forms
+  isBox?: boolean;
+  seasonality?: string;
+  careInstructions?: string;
+  islandCollection?: string;
+  culturalSignificance?: string;
+  localDesigner?: boolean;
+  sustainablySourced?: boolean;
 }
 
 export interface Box {
@@ -110,4 +118,15 @@ export interface Review {
   helpfulCount?: number;
   notHelpfulCount?: number;
   createdAt?: string;
+  // Additional fields used in components
+  author?: string;
+  date?: string;
+  helpful?: number;
+  notHelpful?: number;
+}
+
+export interface RatingDistribution {
+  rating: number;
+  count: number;
+  percentage: number;
 }

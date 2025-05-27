@@ -172,6 +172,8 @@ export const reviews: Review[] = [
     content: "These dinosaur pajamas are absolutely adorable and my 4-year-old refuses to wear anything else to bed! The material is incredibly soft, and they've held up well after multiple washes. The colors are still vibrant and the fit is perfect. Highly recommended!",
     helpful: 34,
     notHelpful: 2,
+    helpfulCount: 34,
+    notHelpfulCount: 2,
   },
   {
     id: '2',
@@ -182,6 +184,8 @@ export const reviews: Review[] = [
     content: 'The quality of these pajamas is excellent and my daughter loves the dinosaur design. My only complaint is that they run a bit small. I would recommend ordering one size up for a comfortable fit. Otherwise, these are fantastic pajamas that are worth every penny.',
     helpful: 22,
     notHelpful: 3,
+    helpfulCount: 22,
+    notHelpfulCount: 3,
   },
   {
     id: '3',
@@ -192,6 +196,8 @@ export const reviews: Review[] = [
     content: "I bought these for my twins who are obsessed with dinosaurs, and they absolutely love them! The organic cotton is so soft and gentle on their sensitive skin. They've been washed dozens of times and still look brand new. Will definitely purchase more from this brand!",
     helpful: 29,
     notHelpful: 1,
+    helpfulCount: 29,
+    notHelpfulCount: 1,
   },
 ];
 
