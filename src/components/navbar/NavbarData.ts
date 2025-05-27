@@ -21,4 +21,3 @@ export const communityItems = [
   { name: "BLOG", path: "/blog" },
   { name: "EVENTS", path: "/events" },
 ];
-

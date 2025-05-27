@@ -35,7 +35,7 @@ import { useProducts } from '@/contexts/ProductContext';
 import { Product } from '@/types/product';
 import { toast } from '@/hooks/use-toast';
 
-type Category = 'all' | 'new-in' | 'designers' | 'boys' | 'girls' | 'baby' | 'shoes';
+type Category = 'all' | 'new-in' | 'designers' | 'boys' | 'girls' | 'baby';
 
 interface ClothingItem {
   id: string;
@@ -58,8 +58,7 @@ const categoryDescriptions = {
   "designers": "Premium brands and exclusive designer collections",
   "boys": "Cool and comfortable styles for active boys",
   "girls": "Stylish and fun fashion for girls of all ages",
-  "baby": "Soft and adorable outfits for the smallest family members",
-  "shoes": "Quality footwear for growing feet"
+  "baby": "Soft and adorable outfits for the smallest family members"
 };
 
 const ShopClothing: React.FC = () => {
@@ -187,7 +186,7 @@ const ShopClothing: React.FC = () => {
     }
   });
 
-  const categories = ["tops", "bottoms", "dresses", "outerwear", "sleepwear", "swimwear", "footwear", "onesies"];
+  const categories = ["tops", "bottoms", "dresses", "outerwear", "sleepwear", "swimwear", "onesies"];
   const ages = ["0-2", "2-4", "5-7", "8-10", "11+"];
   const colors = ["black", "white", "blue", "pink", "green", "brown", "purple", "multi"];
 
@@ -217,7 +216,6 @@ const ShopClothing: React.FC = () => {
                 <TabsTrigger value="boys" className="text-sm md:text-base">Boys</TabsTrigger>
                 <TabsTrigger value="girls" className="text-sm md:text-base">Girls</TabsTrigger>
                 <TabsTrigger value="baby" className="text-sm md:text-base">Baby</TabsTrigger>
-                <TabsTrigger value="shoes" className="text-sm md:text-base">Shoes</TabsTrigger>
               </TabsList>
             </div>
             
