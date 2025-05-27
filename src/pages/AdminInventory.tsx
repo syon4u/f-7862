@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import AdminLayout from '../components/admin/AdminLayout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useProducts } from '@/contexts/ProductContext';
 import { Product } from '@/types/product';
@@ -136,12 +135,9 @@ const AdminInventory = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      
-      <div className="container mx-auto px-4 py-8 flex-grow">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">Inventory Management</h1>
+    <AdminLayout title="Inventory Management">
+      <div className="space-y-6">
+        <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Button variant="outline" onClick={handleRefresh} className="flex items-center gap-2">
               <RefreshCcw size={16} /> Refresh
@@ -204,9 +200,7 @@ const AdminInventory = () => {
         onClose={() => setIsBulkUploadDialogOpen(false)}
         onProductsUploaded={handleBulkProductUpload}
       />
-      
-      <Footer />
-    </div>
+    </AdminLayout>
   );
 };
 

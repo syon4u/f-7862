@@ -23,6 +23,9 @@ import AdminBanners from './pages/AdminBanners';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminAnalytics from './pages/AdminAnalytics';
 import AdminLogin from './pages/AdminLogin';
+import AdminCustomers from './pages/AdminCustomers';
+import AdminOrders from './pages/AdminOrders';
+import AdminSettings from './pages/AdminSettings';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProductProvider } from './contexts/ProductContext';
 import ProtectedRoute from './components/admin/ProtectedRoute';
@@ -69,6 +72,21 @@ function App() {
             <Route path="/admin/analytics" element={
               <ProtectedRoute>
                 <AdminAnalytics />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/customers" element={
+              <ProtectedRoute>
+                <AdminCustomers />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/orders" element={
+              <ProtectedRoute>
+                <AdminOrders />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/settings" element={
+              <ProtectedRoute>
+                <AdminSettings />
               </ProtectedRoute>
             } />
             
