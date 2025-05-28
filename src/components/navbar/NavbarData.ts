@@ -21,3 +21,11 @@ export const communityItems = [
   { name: "BLOG", path: "/blog" },
   { name: "EVENTS", path: "/events" },
 ];
+
+export const navbarData = [
+  { name: "Shop Now", href: "/shop-clothing" },
+  { name: "Kids Box", href: "/how-it-works" },
+  { name: "Donation Program", href: "/donation-program" },
+  { name: "Membership", href: "/membership" },
+  { name: "Community", href: "/blog" },
+];
