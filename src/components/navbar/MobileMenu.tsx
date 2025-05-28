@@ -1,74 +1,52 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { navbarData } from './NavbarData';
 
 interface MobileMenuProps {
-  mainMenuItems: Array<{ name: string; path: string; hasDropdown: boolean }>;
-  communityItems: Array<{ name: string; path: string }>;
-  categories: Array<{ name: string; path: string }>;
-  setMobileMenuOpen: (isOpen: boolean) => void;
+  isOpen: boolean;
+  onClose: () => void;
+  isAuthenticated: boolean;
+  user: any;
 }
 
-const MobileMenu: React.FC<MobileMenuProps> = ({ 
-  mainMenuItems, 
-  communityItems, 
-  categories, 
-  setMobileMenuOpen 
-}) => {
+const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, isAuthenticated, user }) => {
+  if (!isOpen) return null;
+
   return (
-    <div className="md:hidden border-t border-white/20 py-4">
-      <ul className="space-y-4">
-        {mainMenuItems.map((item, index) => (
-          <li key={index} className="px-2">
-            <Link 
-              to={item.path} 
-              className="block py-2 text-sm font-bold text-white hover:text-white/80 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
+    <div className="md:hidden bg-white border-t shadow-lg">
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex flex-col space-y-3">
+          {navbarData.map((item) => (
+            <Link
+              key={item.name}
+              to={item.href}
+              className="text-gray-600 hover:text-kid-purple py-2 transition-colors"
+              onClick={onClose}
             >
               {item.name}
             </Link>
-          </li>
-        ))}
-        <li className="px-2">
-          <div className="py-2 text-sm font-bold text-white">COMMUNITY</div>
-          <ul className="pl-4 space-y-2">
-            {communityItems.map((item, index) => (
-              <li key={index}>
-                <Link 
-                  to={item.path} 
-                  className="block py-1 text-sm font-bold text-white/90 hover:text-white transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </li>
-        <li className="border-t border-white/20 pt-2 mt-2">
-          <p className="px-2 text-xs text-white/70">CATEGORIES</p>
-        </li>
-        {categories.map((category, index) => (
-          <li key={`cat-${index}`} className="px-2">
-            <Link 
-              to={category.path} 
-              className="block py-2 text-sm font-bold text-white hover:text-white/80 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              {category.name}
-            </Link>
-          </li>
-        ))}
-        <li className="px-2 pt-2 border-t border-white/20">
-          <Link 
-            to="/admin/inventory" 
-            className="block py-2 text-sm font-bold text-white hover:text-white/80 transition-colors"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            INVENTORY MANAGEMENT
-          </Link>
-        </li>
-      </ul>
+          ))}
+          
+          <div className="border-t pt-3 mt-3">
+            {isAuthenticated ? (
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">
+                  Hi, {user?.profile?.first_name || 'User'}
+                </p>
+                <Button asChild variant="outline" className="w-full" onClick={onClose}>
+                  <Link to="/my-account">My Account</Link>
+                </Button>
+              </div>
+            ) : (
+              <Button asChild className="w-full" onClick={onClose}>
+                <Link to="/auth">Sign In</Link>
+              </Button>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -18,6 +18,7 @@ import DonationProgram from './pages/DonationProgram';
 import Membership from './pages/Membership';
 import StyleQuiz from './pages/StyleQuiz';
 import HowItWorks from './pages/HowItWorks';
+import Auth from './pages/Auth';
 import AdminInventory from './pages/AdminInventory';
 import AdminBanners from './pages/AdminBanners';
 import AdminDashboard from './pages/AdminDashboard';
@@ -37,6 +38,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/auth" element={<Auth />} />
             <Route path="/shop-now" element={<ShopNow />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/shop-clothing" element={<ShopClothing />} />
