@@ -7,7 +7,6 @@ import NavigationLinks from './navbar/NavigationLinks';
 import MobileMenu from './navbar/MobileMenu';
 import NavbarSearch from './navbar/NavbarSearch';
 import NavIcons from './navbar/NavIcons';
-import { mainMenuItems, categories, communityItems } from './navbar/NavbarData';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,23 +24,13 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex">
-            <NavigationLinks 
-              mainMenuItems={mainMenuItems}
-              categories={categories}
-              communityItems={communityItems}
-            />
+            <NavigationLinks />
           </div>
 
           {/* Right side icons and auth */}
           <div className="flex items-center space-x-4">
-            <NavbarSearch 
-              searchOpen={isSearchOpen} 
-              setSearchOpen={setIsSearchOpen} 
-            />
-            <NavIcons 
-              mobileMenuOpen={isOpen}
-              setMobileMenuOpen={setIsOpen}
-            />
+            <NavbarSearch isOpen={isSearchOpen} onToggle={() => setIsSearchOpen(!isSearchOpen)} />
+            <NavIcons />
             
             {/* Authentication */}
             <div className="hidden md:flex items-center space-x-2">
@@ -60,16 +49,25 @@ const Navbar = () => {
                 </Button>
               )}
             </div>
+
+            {/* Mobile menu button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="md:hidden"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </Button>
           </div>
         </div>
 
         {/* Mobile Search */}
         {isSearchOpen && (
           <div className="md:hidden py-2 border-t">
-            <NavbarSearch 
-              searchOpen={true} 
-              setSearchOpen={() => setIsSearchOpen(false)} 
-            />
+            <NavbarSearch isOpen={true} onToggle={() => setIsSearchOpen(false)} />
           </div>
         )}
       </div>
