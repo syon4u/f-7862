@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -18,7 +17,7 @@ import {
 import { useProducts } from '@/contexts/ProductContext';
 import { toast } from '@/hooks/use-toast';
 
-type Category = 'all' | 'new-in' | 'designers' | 'boys' | 'girls' | 'baby';
+type Category = 'all' | 'boys' | 'girls' | 'baby';
 
 interface ClothingItem {
   id: string;
@@ -60,7 +59,7 @@ const ShopClothing: React.FC = () => {
         category: product.category?.toLowerCase() || 'tops',
         subcategory: (product.gender === 'boy' ? 'boys' : 
                      product.gender === 'girl' ? 'girls' : 
-                     product.gender === 'unisex' && product.ageRange?.includes('0-') ? 'baby' : 'new-in') as Category,
+                     product.gender === 'unisex' && product.ageRange?.includes('0-') ? 'baby' : 'all') as Category,
         age: product.ageRange || '5-7',
         color: product.colors && product.colors.length > 0 ? product.colors[0].name.toLowerCase() : 'multi',
         rating: product.rating || 4.5,
