@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { navbarData } from './NavbarData';
+import { mainMenuItems } from './NavbarData';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -18,10 +18,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, isAuthenticate
     <div className="md:hidden bg-white border-t shadow-lg">
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-col space-y-3">
-          {navbarData.map((item) => (
+          {mainMenuItems.map((item) => (
             <Link
               key={item.name}
-              to={item.href}
+              to={item.path}
               className="text-gray-600 hover:text-kid-purple py-2 transition-colors"
               onClick={onClose}
             >

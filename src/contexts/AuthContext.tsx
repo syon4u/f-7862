@@ -21,6 +21,7 @@ interface AuthContextType {
   loading: boolean;
   signUp: (email: string, password: string, firstName?: string, lastName?: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   isAuthenticated: boolean;
   isAdmin: boolean;
@@ -136,6 +137,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  // Add login method as alias to signIn for compatibility
+  const login = async (email: string, password: string) => {
+    return signIn(email, password);
+  };
+
   const signOut = async () => {
     try {
       setLoading(true);
@@ -156,6 +162,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     loading,
     signUp,
     signIn,
+    login,
     signOut,
     isAuthenticated: !!user,
     isAdmin: user?.role === 'admin'

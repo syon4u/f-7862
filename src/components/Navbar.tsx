@@ -7,6 +7,7 @@ import NavigationLinks from './navbar/NavigationLinks';
 import MobileMenu from './navbar/MobileMenu';
 import NavbarSearch from './navbar/NavbarSearch';
 import NavIcons from './navbar/NavIcons';
+import { mainMenuItems, categories, communityItems } from './navbar/NavbarData';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,13 +25,23 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex">
-            <NavigationLinks />
+            <NavigationLinks 
+              mainMenuItems={mainMenuItems}
+              categories={categories}
+              communityItems={communityItems}
+            />
           </div>
 
           {/* Right side icons and auth */}
           <div className="flex items-center space-x-4">
-            <NavbarSearch isOpen={isSearchOpen} onToggle={() => setIsSearchOpen(!isSearchOpen)} />
-            <NavIcons />
+            <NavbarSearch 
+              searchOpen={isSearchOpen} 
+              setSearchOpen={setIsSearchOpen} 
+            />
+            <NavIcons 
+              mobileMenuOpen={isOpen}
+              setMobileMenuOpen={setIsOpen}
+            />
             
             {/* Authentication */}
             <div className="hidden md:flex items-center space-x-2">
@@ -67,7 +78,10 @@ const Navbar = () => {
         {/* Mobile Search */}
         {isSearchOpen && (
           <div className="md:hidden py-2 border-t">
-            <NavbarSearch isOpen={true} onToggle={() => setIsSearchOpen(false)} />
+            <NavbarSearch 
+              searchOpen={true} 
+              setSearchOpen={() => setIsSearchOpen(false)} 
+            />
           </div>
         )}
       </div>
