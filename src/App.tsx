@@ -29,13 +29,15 @@ import AdminOrders from './pages/AdminOrders';
 import AdminSettings from './pages/AdminSettings';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProductProvider } from './contexts/ProductContext';
+import { CartProvider } from './contexts/CartContext';
 import ProtectedRoute from './components/admin/ProtectedRoute';
 
 function App() {
   return (
     <AuthProvider>
-      <ProductProvider>
-        <Router>
+      <CartProvider>
+        <ProductProvider>
+          <Router>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
@@ -98,7 +100,8 @@ function App() {
           <Toaster />
           <SonnerToaster position="top-right" />
         </Router>
-      </ProductProvider>
+        </ProductProvider>
+      </CartProvider>
     </AuthProvider>
   );
 }

@@ -2,29 +2,33 @@
 import React, { useState } from 'react';
 import { Star, ShoppingCart, Check, Heart, Gift } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { toast } from '@/components/ui/use-toast';
+import { toast } from '@/hooks/use-toast';
 import { Product } from '../types/product';
+import { useCart } from '@/contexts/CartContext';
 
 interface ProductInfoProps {
   product: Product;
 }
 
 const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
+  const [selectedColor, setSelectedColor] = useState(product.colors?.[0] || { name: 'Default', value: '#000000' });
+  const [selectedSize, setSelectedSize] = useState(product.sizes?.[0] || 'S');
   const [quantity, setQuantity] = useState(1);
+  const { addToCart, loading } = useCart();
 
-  const handleAddToCart = () => {
-    toast({
-      title: "Yay! Added to cart",
-      description: `${quantity} × ${product.name} (${selectedColor.name}, ${selectedSize}) added to your cart.`,
-      action: (
-        <div className="flex items-center space-x-1">
-          <Check className="h-4 w-4 text-kid-green" />
-          <span>Success!</span>
-        </div>
-      ),
-    });
+  const handleAddToCart = async () => {
+    try {
+      const price = product.discountPrice || product.price;
+      await addToCart(
+        product.id,
+        quantity,
+        selectedSize,
+        selectedColor.name,
+        price
+      );
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+    }
   };
 
   return (
@@ -67,40 +71,44 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
       <p className="text-muted-foreground">{product.description}</p>
 
       <div className="space-y-4">
-        <div>
-          <h3 className="text-sm font-semibold mb-2">Color: {selectedColor.name}</h3>
-          <div className="flex gap-3">
-            {product.colors.map((color) => (
-              <button
-                key={color.name}
-                className={`color-option ${
-                  color.name === selectedColor.name ? "color-active" : ""
-                }`}
-                style={{ backgroundColor: color.value }}
-                onClick={() => setSelectedColor(color)}
-                aria-label={`Select color: ${color.name}`}
-                title={color.name}
-              />
-            ))}
+        {product.colors && product.colors.length > 0 && (
+          <div>
+            <h3 className="text-sm font-semibold mb-2">Color: {selectedColor.name}</h3>
+            <div className="flex gap-3">
+              {product.colors.map((color) => (
+                <button
+                  key={color.name}
+                  className={`color-option ${
+                    color.name === selectedColor.name ? "color-active" : ""
+                  }`}
+                  style={{ backgroundColor: color.value }}
+                  onClick={() => setSelectedColor(color)}
+                  aria-label={`Select color: ${color.name}`}
+                  title={color.name}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
-        <div>
-          <h3 className="text-sm font-semibold mb-2">Size: {selectedSize}</h3>
-          <div className="flex flex-wrap gap-2">
-            {product.sizes.map((size) => (
-              <button
-                key={size}
-                className={`size-option ${
-                  size === selectedSize ? "size-active" : ""
-                }`}
-                onClick={() => setSelectedSize(size)}
-              >
-                {size}
-              </button>
-            ))}
+        {product.sizes && product.sizes.length > 0 && (
+          <div>
+            <h3 className="text-sm font-semibold mb-2">Size: {selectedSize}</h3>
+            <div className="flex flex-wrap gap-2">
+              {product.sizes.map((size) => (
+                <button
+                  key={size}
+                  className={`size-option ${
+                    size === selectedSize ? "size-active" : ""
+                  }`}
+                  onClick={() => setSelectedSize(size)}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <div>
           <h3 className="text-sm font-semibold mb-2">Quantity</h3>
@@ -128,10 +136,10 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
         <Button
           onClick={handleAddToCart}
           className="w-full py-6 text-lg rounded-full shadow-md hover:shadow-lg transition-all"
-          disabled={!product.inStock}
+          disabled={!product.inStock || loading}
         >
           <ShoppingCart className="h-5 w-5 mr-2 animate-bounce-slight" />
-          {product.inStock ? "Add to Cart" : "Out of Stock"}
+          {loading ? "Adding..." : product.inStock ? "Add to Cart" : "Out of Stock"}
         </Button>
         <Button
           variant="outline"
@@ -144,14 +152,14 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
       <div className="space-y-4 pt-4">
         <h3 className="text-lg font-league-spartan font-semibold">Features</h3>
         <ul className="space-y-4">
-          {product.features.map((feature, index) => (
+          {product.features?.map((feature, index) => (
             <li key={index} className="flex items-start">
               <div className="bg-kid-green/20 p-1 rounded-full mr-3 mt-0.5">
                 <Check className="h-4 w-4 text-green-600" />
               </div>
               <span>{feature}</span>
             </li>
-          ))}
+          )) || <li>No features listed</li>}
         </ul>
       </div>
     </div>
